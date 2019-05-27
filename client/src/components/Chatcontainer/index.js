@@ -3,6 +3,11 @@ import styles from './ChatContainer.module.scss';
 import ChatWindow from './ChatWindow';
 import ChatInput from './ChatInput';
 
+const mockMSG = {user: "0x00000000000",
+msg: "Hello Worlds!",
+timestamp: 2345432}
+const mockChats = [mockMSG,mockMSG,mockMSG];
+
 export default class ChatContainer extends Component {
 
 
@@ -10,7 +15,7 @@ export default class ChatContainer extends Component {
     //const { networkId, accounts, balance, isMetaMask } = this.props;
     return (
       <div className={styles.chatContainer}>
-        <ChatWindow/>
+        <ChatWindow messages={mockChats}/>
         <ChatInput/>
       </div>
     );
