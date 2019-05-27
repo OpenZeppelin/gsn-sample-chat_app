@@ -13,7 +13,7 @@ const mockChats = [mockMSG, mockMSG, mockMSG];
 export default class ChatContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [] };
+    this.state = { messages: mockChats };
     this.handleAddMsg = this.handleAddMsg.bind(this);
   }
 
