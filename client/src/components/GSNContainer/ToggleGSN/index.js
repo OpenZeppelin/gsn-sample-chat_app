@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button } from "rimble-ui";
-import styles from "./ChatInput.module.scss";
+import styles from "./ToggleGSN.module.scss";
 
-export default class ChatInput extends Component {
+export default class ToggleGSN extends Component {
   constructor(props) {
     super(props);
     this.state = { validated: false };
