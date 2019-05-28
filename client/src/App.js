@@ -4,14 +4,13 @@ import { Loader } from 'rimble-ui';
 
 import ChatContainer from './components/Chatcontainer/index';
 import styles from './App.module.scss';
-//import { zeppelinSolidityHotLoaderOptions } from '../config/webpack';
+import { zeppelinSolidityHotLoaderOptions } from '../config/webpack';
 
 class App extends Component {
   state = {
     storageValue: 0,
     web3: null,
     accounts: null,
-    contract: null,
     route: window.location.pathname.replace("/","")
   };
 
@@ -26,11 +25,11 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    //const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
+    const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
-      console.log(ChatApp);
+      //console.log(ChatApp);
     } catch (e) {
       console.log(e);
     }
@@ -51,10 +50,10 @@ class App extends Component {
         balance = web3.utils.fromWei(balance, 'ether');
         let instance = null;
         let deployedNetwork = null;
-        
+        //console.log("Chat App: ", ChatApp);
         if (ChatApp.networks) {
           deployedNetwork = ChatApp.networks[networkId.toString()];
-          console.log("Deployed Network: ", deployedNetwork);
+          //console.log("Deployed Network: ", deployedNetwork);
           if (deployedNetwork) {
             instance = new web3.eth.Contract(
               ChatApp.abi,
@@ -73,6 +72,8 @@ class App extends Component {
       console.error(error);
     }
   };
+
+  
 
   componentWillUnmount() {
     if (this.interval) {

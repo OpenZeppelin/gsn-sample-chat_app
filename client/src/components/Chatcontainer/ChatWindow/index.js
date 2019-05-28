@@ -18,7 +18,7 @@ const ChatWindow = props => {
     scale: 3,
     spotcolor: '#000',
   }}
-/></div>{msg.msg}
+/></div>{msg.message}
     </div>
   ));
 

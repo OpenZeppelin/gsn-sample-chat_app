@@ -1,0 +1,35 @@
+{
+  "contracts": {
+    "ChatApp": {
+      "address": "0x568ee6dbADC1A1DcC16eb911919872fE6de2a529",
+      "constructorCode": "608060405234801561001057600080fd5b50610215806100206000396000f3fe",
+      "bodyBytecodeHash": "499fef9c8efe5b2122eff18b0ca2afe83301a563cb6391f2c0213d1c360389ea",
+      "localBytecodeHash": "47f5ebb8a1a308c95150aebccf30ffa188dd9d30df043a72eab3de34807b2df1",
+      "deployedBytecodeHash": "47f5ebb8a1a308c95150aebccf30ffa188dd9d30df043a72eab3de34807b2df1",
+      "types": {},
+      "storage": [],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "ChatApp/ChatApp": [
+      {
+        "address": "0x7Dc9C371f33D71Ee7564218a5adb92e45a69e0F1",
+        "version": "0.1.0",
+        "implementation": "0x568ee6dbADC1A1DcC16eb911919872fE6de2a529"
+      }
+    ]
+  },
+  "zosversion": "2.2",
+  "version": "0.1.0",
+  "proxyAdmin": {
+    "address": "0xa3Faa9b4bA1C8785ec12E18d52A8828C36422209"
+  }
+}
