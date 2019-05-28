@@ -127,6 +127,21 @@
         "address": "0xF805079deBF2D1458a636D5db0734E2211B745FB",
         "version": "0.1.0",
         "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
+      },
+      {
+        "address": "0x747dc66EF2ac910C36c5763602C55BE84BE1dA28",
+        "version": "0.1.0",
+        "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
+      },
+      {
+        "address": "0x7018320b4e3daeD6Ecb38717ff3AF2F1b5C78905",
+        "version": "0.1.0",
+        "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
+      },
+      {
+        "address": "0x4590C123B1Aa977CB8f07f92895c4E59D9335C38",
+        "version": "0.1.0",
+        "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
       }
     ]
   },

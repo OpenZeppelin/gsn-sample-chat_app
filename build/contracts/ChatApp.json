@@ -3722,9 +3722,16 @@
     "name": "solc",
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1558810374227": {
+      "links": {},
+      "events": {},
+      "address": "0x4590C123B1Aa977CB8f07f92895c4E59D9335C38",
+      "updated_at": 1559008534847
+    }
+  },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-05-28T01:47:44.378Z",
+  "updatedAt": "2019-05-28T01:57:32.004Z",
   "devdoc": {
     "methods": {}
   },

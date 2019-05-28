@@ -30,7 +30,7 @@ class App extends Component {
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
-      //console.log(ChatApp);
+      console.log(ChatApp);
     } catch (e) {
       console.log(e);
     }
@@ -54,7 +54,7 @@ class App extends Component {
         
         if (ChatApp.networks) {
           deployedNetwork = ChatApp.networks[networkId.toString()];
-          //console.log("Deployed Network: ", deployedNetwork);
+          console.log("Deployed Network: ", deployedNetwork);
           if (deployedNetwork) {
             instance = new web3.eth.Contract(
               ChatApp.abi,
