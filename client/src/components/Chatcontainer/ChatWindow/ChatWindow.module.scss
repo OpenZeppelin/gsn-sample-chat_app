@@ -1,14 +1,22 @@
 @import "../../../layout/variables.scss";
 
 .chatWindow {
-  padding: 40px 0;
   height: auto;
-  padding: 40px 20px;
+  padding: 10px 20px;
   border: 1px solid #ccc;
   box-shadow: 0px 2px 2px #ccc;
-  border-radius: 25px;
+  border-radius: 20px;
   margin-bottom: 10px;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+
+  singleMessage{
+    margin: 10px;
+  }
+
   h3 {
     border-bottom: 1px dotted #ffbe44;
     padding-bottom: 5px;

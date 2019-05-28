@@ -13,7 +13,8 @@ const mockChats = [mockMSG, mockMSG, mockMSG];
 export default class ChatContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { messages: mockChats };
+    this.state = { messages: mockChats, ...props };
+    
     this.handleAddMsg = this.handleAddMsg.bind(this);
   }
 
@@ -25,14 +26,21 @@ export default class ChatContainer extends Component {
       return { messages: messages };
     });
   };
+  
+
+  subscribeToEvents = () => {
+
+  }
+
+
 
   render() {
     //const { networkId, accounts, balance, isMetaMask } = this.props;
-   //console.log(this.state);
+   console.log(this.state);
     return (
       <div className={styles.chatContainer}>
-        <ChatWindow messages={this.state.messages} />
-        <ChatInput submitMessage={this.handleAddMsg} />
+        <ChatWindow messages={this.state.messages} {...this.props}/>
+        <ChatInput submitMessage={this.handleAddMsg} {...this.props}/>
       </div>
     );
   }
