@@ -25,6 +25,14 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+    const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
+    let ChatApp = {};
+    try {
+      ChatApp = require("../../contracts/ChatApp.sol");
+    } catch (e) {
+      console.log(e);
+    }
+
     try {
       const isProd = process.env.NODE_ENV === 'production';
       if (!isProd) {
