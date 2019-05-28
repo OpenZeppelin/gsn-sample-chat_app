@@ -5,25 +5,38 @@ import styles from "./ChatInput.module.scss";
 export default class ChatInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { validated: false, value: '' };
+    this.state = { validated: false, value: "", instance: {} };
+
+    this.accounts = this.props.accounts;
   }
 
-  handleSubmit = e => {
+  componentDidMount = async () => {
+    if (this.props.instance) {
+      const instance = this.props.instance.methods;
+      console.log("The instance: ". instance);
+      this.setState({instance});
+    }
+  };
+
+  handleSubmit = async e => {
     e.preventDefault();
     e.target.parentNode.classList.add("was-validated");
-    this.setState({ validated: true,
-    value: '' });
+    this.setState({ validated: true, value: "" });
     this.props.submitMessage(this.state.value);
+    const tx = await this.state.instance
+      .postMessage(this.state.value, 0)
+      .send({ from: this.accounts[0] });
+    console.log(tx);
   };
 
   handleValidation = e => {
     e.target.parentNode.classList.add("was-validated");
-    this.setState({value: e.target.value});
-
+    this.setState({ value: e.target.value });
   };
 
   render() {
-    
+    console.log("The props!", this.props);
+    // const { instance } = this.props;
     return (
       <div className={styles.chatInput}>
         <Form onSubmit={this.handleSubmit}>

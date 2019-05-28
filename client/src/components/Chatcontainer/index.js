@@ -36,7 +36,7 @@ export default class ChatContainer extends Component {
 
   render() {
     //const { networkId, accounts, balance, isMetaMask } = this.props;
-   console.log(this.state);
+   //console.log(this.state);
     return (
       <div className={styles.chatContainer}>
         <ChatWindow messages={this.state.messages} {...this.props}/>

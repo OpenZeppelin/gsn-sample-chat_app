@@ -4,6 +4,7 @@ import { Loader } from 'rimble-ui';
 
 import ChatContainer from './components/Chatcontainer/index';
 import styles from './App.module.scss';
+//import { zeppelinSolidityHotLoaderOptions } from '../config/webpack';
 
 class App extends Component {
   state = {
@@ -25,10 +26,11 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
+    //const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
+      //console.log(ChatApp);
     } catch (e) {
       console.log(e);
     }
@@ -43,10 +45,25 @@ class App extends Component {
         const accounts = await web3.eth.getAccounts();
         // Get the contract instance.
         const networkId = await web3.eth.net.getId();
+        const networkType = await web3.eth.net.getNetworkType();
         const isMetaMask = web3.currentProvider.isMetaMask;
         let balance = accounts.length > 0 ? await web3.eth.getBalance(accounts[0]): web3.utils.toWei('0');
         balance = web3.utils.fromWei(balance, 'ether');
-        this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask });
+        let instance = null;
+        let deployedNetwork = null;
+        
+        if (ChatApp.networks) {
+          deployedNetwork = ChatApp.networks[networkId.toString()];
+          //console.log("Deployed Network: ", deployedNetwork);
+          if (deployedNetwork) {
+            instance = new web3.eth.Contract(
+              ChatApp.abi,
+              deployedNetwork && deployedNetwork.address,
+            );
+          }
+        }
+
+        this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType });
       }
     } catch (error) {
       // Catch any errors for any of the above operations.

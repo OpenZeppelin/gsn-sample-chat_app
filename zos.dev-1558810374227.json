@@ -122,6 +122,11 @@
         "address": "0xe7b0c7D50481e4e3e30135410271CE6573ba568f",
         "version": "0.1.0",
         "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
+      },
+      {
+        "address": "0xF805079deBF2D1458a636D5db0734E2211B745FB",
+        "version": "0.1.0",
+        "implementation": "0xDEcAd3f5c6649e1dcbd64830733Fc92f4113B2Ea"
       }
     ]
   },
