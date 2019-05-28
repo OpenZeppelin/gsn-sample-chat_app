@@ -15,33 +15,22 @@ export default class ChatContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { messages: [], ...props };
-
-    this.handleAddMsg = this.handleAddMsg.bind(this);
   }
 
-  handleAddMsg = e => {
-    let mockMSG2 = {
-      user: "0x00000000000",
-      msg: e,
-      timestamp: 2345432,
-      mined: false
-    };
-    let messages = [...this.state.messages, mockMSG2];
-
-    this.setState((state, props) => {
-      return { messages: messages };
-    });
-  };
-
   componentDidMount = async () => {
-    const messages = await this.getAllMesages();
-    this.setState((state, props) => {
-      return { messages: messages };
-    });
+    await this.getAllMesages();
+    const subscription = await this.subscribeToEvents();
   };
 
-  subscribeToEvents = () => {
-    const { accounts, instance, web3 } = this.props; 
+  subscribeToEvents = async () => {
+    const { accounts, instance, web3 } = this.props;
+    let messages = [];
+
+    const subscription = await instance.events.message().on("data", event => {
+      this.getAllMesages();
+    });
+
+    return subscription;
   };
 
   getAllMesages = async (count = 10) => {
@@ -53,21 +42,21 @@ export default class ChatContainer extends Component {
     });
 
     logs.forEach(el => {
-      const {message, timestamp, user} = el.returnValues;
-      messages.push({message, timestamp, user});
+      const { message, timestamp, user } = el.returnValues;
+      messages.push({ message, timestamp, user });
     });
 
-    return messages;
+    this.setState((state, props) => {
+      return { messages: messages };
+    });
   };
 
-
   render() {
-    //const { networkId, accounts, balance, isMetaMask } = this.props;
-    console.log(this.state);
+   // console.log(this.state);
     return (
       <div className={styles.chatContainer}>
         <ChatWindow messages={this.state.messages} {...this.props} />
-        <ChatInput submitMessage={this.handleAddMsg} {...this.props} />
+        <ChatInput {...this.props} />
       </div>
     );
   }

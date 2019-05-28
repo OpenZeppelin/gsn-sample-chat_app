@@ -14,7 +14,7 @@ const ChatWindow = props => {
     seed: msg.user,
     color: '#dfe',
     bgcolor: '#a71',
-    size: 15,
+    size: 5,
     scale: 3,
     spotcolor: '#000',
   }}

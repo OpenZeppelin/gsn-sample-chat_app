@@ -15,7 +15,6 @@ export default class ChatInput extends Component {
     e.target.parentNode.classList.add("was-validated");
     this.setState({ validated: true,
     value: '' });
-    this.props.submitMessage(this.state.value);
     const tx = await this.instance.postMessage(this.state.value).send({from: this.accounts[0]});
     console.log(tx)
   };
