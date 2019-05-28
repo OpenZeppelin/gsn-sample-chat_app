@@ -29,7 +29,7 @@ class App extends Component {
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
-      console.log("Chat app: ", ChatApp);
+      //console.log("Chat app: ", ChatApp);
     } catch (e) {
       console.log(e);
     }
@@ -50,10 +50,10 @@ class App extends Component {
         balance = web3.utils.fromWei(balance, 'ether');
         let instance = null;
         let deployedNetwork = null;
-        console.log("Chat App: ", ChatApp);
+        //console.log("Chat App: ", ChatApp);
         if (ChatApp.networks) {
           deployedNetwork = ChatApp.networks[networkId.toString()];
-          console.log("Deployed Network: ", deployedNetwork);
+          //console.log("Deployed Network: ", deployedNetwork);
           if (deployedNetwork) {
             instance = new web3.eth.Contract(
               ChatApp.abi,
@@ -62,7 +62,7 @@ class App extends Component {
           }
         }
 
-        this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType });
+        this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType, ChatApp });
         useRelayer(this.state.web3);
       }
     } catch (error) {

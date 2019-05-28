@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./ChatContainer.module.scss";
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
+import Web3 from "web3";
 
 export default class ChatContainer extends Component {
   constructor(props) {
@@ -12,18 +13,44 @@ export default class ChatContainer extends Component {
   unsubscribe = null;
 
   componentDidMount = async () => {
+    console.log("Mounting!");
+    const {instance} = this.props;
     await this.getAllMsg();
-    this.unsubscribe = await this.subscribeToMessages();
+    const subscription = await this.subscribeLogEvent(instance, "message");
+    console.log("This is the subscription: ", subscription);
+    //this.unsubscribe = await this.subscribeToMessages();
   };
 
-  subscribeToMessages = async () => {
-    const { instance } = this.props;
-    const subscription = await instance.events.message().on("data", event => {
-      this.getAllMsg();
-    });
-
-    return subscription;
-  };
+  subscribeLogEvent = async (instance, eventName) => {
+    
+    const web3 = new Web3(window.ethereum);
+    console.log("HERE!!!");
+    const eventJsonInterface = web3.utils._.find(
+      instance._jsonInterface,
+      o => o.name === eventName && o.type === 'event',
+    );
+    
+    const subscription = web3.eth.subscribe('logs', {
+      address: instance.options.address,
+      topics: [eventJsonInterface.signature]
+    }, (error, result) => {
+      if (!error) {
+        const eventObj = web3.eth.abi.decodeLog(
+          eventJsonInterface.inputs,
+          result.data,
+          result.topics.slice(1)
+        )
+        console.log(`New ${eventName}!`, eventObj)
+        const {message, timestamp, user} = eventObj;
+        const msg = {message, timestamp, user};
+        this.setState(() => {
+          return { ...this.state, messages: [...this.state.messages, msg]  };
+        });
+      }
+    })
+    console.log("The Subscription is: ", subscription);
+  return subscription;
+  }
 
   getAllMsg = async () => {
     const { instance } = this.props;
