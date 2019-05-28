@@ -27,12 +27,12 @@ export default class ChatInput extends Component {
   };
 
   render() {
-    console.log("The props!" , this.props)
+    //console.log("The props!" , this.props)
     // const { instance } = this.props;
     return (
       <div className={styles.chatInput}>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Field label="Chat Message" width={1}>
+          <Form.Field label="Chat Message" width={1} validated={this.state.validated}>
             <Form.Input
               type="text"
               required

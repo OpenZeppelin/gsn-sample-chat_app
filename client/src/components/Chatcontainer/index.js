@@ -4,9 +4,10 @@ import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 
 const mockMSG = {
-  user: "0x00000000000",
+  user: "0xc9b6628b0C44fe39170CFFCc3bd2cbECf15F7B5e",
   msg: "Hello Worlds!",
-  timestamp: 2345432
+  timestamp: 2345432,
+  mined: true
 };
 const mockChats = [mockMSG, mockMSG, mockMSG];
 
@@ -19,7 +20,7 @@ export default class ChatContainer extends Component {
   }
 
   handleAddMsg = e => {
-    let mockMSG2 = { user: "0x00000000000", msg: e, timestamp: 2345432 };
+    let mockMSG2 = { user: "0x00000000000", msg: e, timestamp: 2345432, mined: false };
     let messages = [...this.state.messages, mockMSG2];
 
     this.setState((state, props) => {

@@ -13,8 +13,14 @@
   justify-content: flex-end;
   text-align: left;
 
-  singleMessage{
+  .singleMessage{
     margin: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .blockie{
+    border-radius: 25px;
   }
 
   h3 {
