@@ -18,7 +18,18 @@ const relayHubAddress = '0x9C57C0F1965D225951FE1B2618C92Eefd687654F'
 const relayHubInstance = new web3.eth.Contract(relayHubArtifact.abi, relayHubAddress)
 
 console.log(`RelayHub Address: ${relayHubAddress}`);
+console.log(relayHubInstance.methods);
+
+const txDeposit = await relayHubInstance.methods.depositFor(chatAppAddress).send({from: accounts[0], gas: 5000000, value: 1e18});
+console.log(txDeposit);
+
+const txInit = await chatAppInstance.methods.init_hub(relayHubAddress).send({from: accounts[0], gas: 5000000});
+console.log(txInit);
+
+console.log("READY!");
 }
+
+
 
 
 app();
