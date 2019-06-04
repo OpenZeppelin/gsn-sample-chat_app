@@ -150,6 +150,7 @@
       "type": "function"
     }
   ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"get_hub_addr\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"relay\",\"type\":\"address\"},{\"name\":\"from\",\"type\":\"address\"},{\"name\":\"encoded_function\",\"type\":\"bytes\"},{\"name\":\"success\",\"type\":\"bool\"},{\"name\":\"used_gas\",\"type\":\"uint256\"},{\"name\":\"transaction_fee\",\"type\":\"uint256\"}],\"name\":\"post_relayed_call\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"relay\",\"type\":\"address\"},{\"name\":\"from\",\"type\":\"address\"},{\"name\":\"encoded_function\",\"type\":\"bytes\"},{\"name\":\"gas_price\",\"type\":\"uint256\"},{\"name\":\"transaction_fee\",\"type\":\"uint256\"}],\"name\":\"accept_relayed_call\",\"outputs\":[{\"name\":\"\",\"type\":\"uint32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get_message_data\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get_sender\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"orig_sender\",\"type\":\"address\"},{\"name\":\"msg_data\",\"type\":\"bytes\"}],\"name\":\"get_sender_from_data\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get_recipient_balance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"get_recipient_balance()\":{\"notice\":\"return the balance of this contract. Note that this method will revert on configuration error (invalid relay address)\"},\"post_relayed_call(address,address,bytes,bool,uint256,uint256)\":{\"notice\":\"This method is called after the relayed call. It may be used to record the transaction (e.g. charge the caller by some contract logic) for this call. the method is given all parameters of accept_relayed_call, and also the success/failure status and actual used gas. - success - true if the relayed call succeeded, false if it reverted - used_gas - gas used up to this point. Note that gas calculation (for the purpose of compensation  to the relay) is done after this method returns.\"}}}},\"settings\":{\"compilationTarget\":{\"tabookey-gasless/contracts/RelayRecipient.sol\":\"RelayRecipient\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"tabookey-gasless/contracts/RLPReader.sol\":{\"keccak256\":\"0xdf8f33ad798ed9f8f28330d71bdfc5bed5a49d27a9433c409b3bcec5c908e966\",\"urls\":[\"bzzr://4862de4c929819d0a50a7382a250ee62ced2d075810cc2be0068e87ea9c91de4\"]},\"tabookey-gasless/contracts/RelayHub.sol\":{\"keccak256\":\"0x00df62d3649a77d82f72cabdcd6f9edf8a66a72782d39b3a71553edcbacf0f02\",\"urls\":[\"bzzr://090ab25ec025ecfa71f5f69fc9c9066203b75d972cdab037f7d28016e139a6b7\"]},\"tabookey-gasless/contracts/RelayHubApi.sol\":{\"keccak256\":\"0x23bfd14003342d61072616c67056de0d3b06dbd320cd4f41ec88d8f2f77a9600\",\"urls\":[\"bzzr://1a8b3d97484b58a35952c4113b5800b5c72b44f32a997170aeb3ce26c67c9e88\"]},\"tabookey-gasless/contracts/RelayRecipient.sol\":{\"keccak256\":\"0xe777e265b0fc9c2dab772f890a739a27725e73681b5ace43f2f399dc871c2539\",\"urls\":[\"bzzr://094d74464d848094cf8b16f243c140bcc72282d2eff926f944963babaf43b434\"]},\"tabookey-gasless/contracts/RelayRecipientApi.sol\":{\"keccak256\":\"0x3675dc42f107248392ab8cffff162633c891c9c5d5c43d80eb156a71a8e0e0c5\",\"urls\":[\"bzzr://143f0c8ebc4a2bc09a1082a5a7b6db80e803a4116342badc690a9f291c3d21e6\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -896,7 +897,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2326,
+                            "referencedDeclaration": 2327,
                             "src": "2201:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_RelayRecipient_$2221",
@@ -3108,7 +3109,7 @@
                   "id": 2218,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    addr := mload(add(b, 20))\n}",
-                  "src": "5415:63:4"
+                  "src": "5415:57:4"
                 }
               ]
             },
@@ -3939,7 +3940,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2326,
+                            "referencedDeclaration": 2327,
                             "src": "2201:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_RelayRecipient_$2221",
@@ -6151,7 +6152,7 @@
                   "id": 2218,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    addr := mload(add(b, 20))\n}",
-                  "src": "5415:63:4"
+                  "src": "5415:57:4"
                 }
               ]
             },
@@ -6244,11 +6245,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.1",
-  "updatedAt": "2019-05-29T22:05:25.956Z",
+  "schemaVersion": "3.0.10",
+  "updatedAt": "2019-06-04T18:37:46.751Z",
   "devdoc": {
     "methods": {}
   },

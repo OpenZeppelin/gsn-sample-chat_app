@@ -1,11 +1,11 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0xE34B08f5D66603C8129815dAE4977C7FEE55a8E6",
-      "constructorCode": "608060405234801561001057600080fd5b50610d75806100206000396000f3fe",
-      "bodyBytecodeHash": "ba1c63cd1967044e044ebbaeb04d028c56a0029fdca8f8c37bf44dd2aa2e9a6c",
-      "localBytecodeHash": "491d660ac98d07e9dcaaaa272141cd01c59b8a44f755a82cbdc1ebcd969b6886",
-      "deployedBytecodeHash": "491d660ac98d07e9dcaaaa272141cd01c59b8a44f755a82cbdc1ebcd969b6886",
+      "address": "0xD979220f1eE1368C039e9FA55743059DD4363CD9",
+      "constructorCode": "608060405234801561001057600080fd5b50610c31806100206000396000f3fe",
+      "bodyBytecodeHash": "8c93596d3d9a582126a257254db3ef0fe3f629c0abce2cf61eba133073eff1fb",
+      "localBytecodeHash": "aa277641a32eaade9961fbcb866ed18f6aa404c8b364249fa61b7e93f7a1fa31",
+      "deployedBytecodeHash": "aa277641a32eaade9961fbcb866ed18f6aa404c8b364249fa61b7e93f7a1fa31",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -77,15 +77,15 @@
   "proxies": {
     "ChatApp/ChatApp": [
       {
-        "address": "0x9971316441D63e998b1d3cA042bd575Fafed2d29",
+        "address": "0x283FF5669f288343352F063d5A131c5DB8271Ed8",
         "version": "0.1.0",
-        "implementation": "0xE34B08f5D66603C8129815dAE4977C7FEE55a8E6"
+        "implementation": "0xD979220f1eE1368C039e9FA55743059DD4363CD9"
       }
     ]
   },
   "zosversion": "2.2",
   "version": "0.1.0",
   "proxyAdmin": {
-    "address": "0xd4d9D8794Dace2BaDE19c733785637feacB4eCbc"
+    "address": "0x9623Cd15f21e1FdFa0b45f0E4c4f2d401dc4B17A"
   }
 }
