@@ -30,7 +30,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"get_hub_addr\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"get_recipient_balance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"get_hub_addr()\":{\"notice\":\"return the relayHub of this contract.\"},\"get_recipient_balance()\":{\"notice\":\"return the contract's balance on the RelayHub. can be used to determine if the contract can pay for incoming calls, before making any.\"}}}},\"settings\":{\"compilationTarget\":{\"tabookey-gasless/contracts/RelayRecipientApi.sol\":\"RelayRecipientApi\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"tabookey-gasless/contracts/RelayRecipientApi.sol\":{\"keccak256\":\"0x3675dc42f107248392ab8cffff162633c891c9c5d5c43d80eb156a71a8e0e0c5\",\"urls\":[\"bzzr://143f0c8ebc4a2bc09a1082a5a7b6db80e803a4116342badc690a9f291c3d21e6\"]}},\"version\":1}",
+  "metadata": "",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -345,11 +345,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.0.10",
-  "updatedAt": "2019-06-04T18:37:46.753Z",
+  "updatedAt": "2019-06-07T22:29:59.017Z",
   "devdoc": {
     "methods": {}
   },

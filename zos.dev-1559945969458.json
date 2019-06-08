@@ -1,11 +1,11 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0xD979220f1eE1368C039e9FA55743059DD4363CD9",
-      "constructorCode": "608060405234801561001057600080fd5b50610c31806100206000396000f3fe",
-      "bodyBytecodeHash": "8c93596d3d9a582126a257254db3ef0fe3f629c0abce2cf61eba133073eff1fb",
-      "localBytecodeHash": "aa277641a32eaade9961fbcb866ed18f6aa404c8b364249fa61b7e93f7a1fa31",
-      "deployedBytecodeHash": "aa277641a32eaade9961fbcb866ed18f6aa404c8b364249fa61b7e93f7a1fa31",
+      "address": "0xB68fE0AA3428914473714EbfBeAa85CEEd0525A3",
+      "constructorCode": "608060405234801561001057600080fd5b50610cf5806100206000396000f3fe",
+      "bodyBytecodeHash": "f2ad369d519f5814189c407fa805160a0975eac9863211426875174ce08f206c",
+      "localBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
+      "deployedBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -69,7 +69,9 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
@@ -77,15 +79,21 @@
   "proxies": {
     "ChatApp/ChatApp": [
       {
-        "address": "0x283FF5669f288343352F063d5A131c5DB8271Ed8",
+        "address": "0x7d7070064a703BaD68681763a4ca5Fd96d0683aa",
         "version": "0.1.0",
-        "implementation": "0xD979220f1eE1368C039e9FA55743059DD4363CD9"
+        "implementation": "0xB68fE0AA3428914473714EbfBeAa85CEEd0525A3"
+      },
+      {
+        "address": "0xcC84a55972a4151f3c13E42D77e8f5107E868EF5",
+        "version": "0.1.0",
+        "implementation": "0xB68fE0AA3428914473714EbfBeAa85CEEd0525A3",
+        "admin": "0x9C43c2cFDE01FA2655751Bdf880451403261d056"
       }
     ]
   },
   "zosversion": "2.2",
   "version": "0.1.0",
   "proxyAdmin": {
-    "address": "0x9623Cd15f21e1FdFa0b45f0E4c4f2d401dc4B17A"
+    "address": "0x9C43c2cFDE01FA2655751Bdf880451403261d056"
   }
 }
