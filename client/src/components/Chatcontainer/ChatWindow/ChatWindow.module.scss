@@ -1,18 +1,25 @@
 @import "../../../layout/variables.scss";
 
 .chatWindow {
-  height: auto;
-  padding: 10px 10px;
   border: 1px solid #ccc;
   box-shadow: 0px 2px 2px #ccc;
   border-radius: 20px;
   margin-bottom: 10px;
   margin: 20px;
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   text-align: left;
-  background: rgb(246, 248, 250);
+  background: #f6f8fa;
+  max-height: 250px;
+  vertical-align: top;
+  display: block;
+  padding: 0;
+  height: 95vh;
+  overflow: auto;
+  box-sizing: border-box;
+  background-color: #eee;
+
+  
 
   .singleMessage{
     margin: 10px;
