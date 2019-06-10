@@ -12,19 +12,25 @@ export default class ChatInput extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+   
     e.target.parentNode.classList.add("was-validated");
     this.setState({ validated: true,
     value: '' });
     const tx = await this.instance.postMessage(this.state.value).send({from: this.accounts[0]});
     const txHash = tx.transactionHash;
     console.log("The Returned Transactions: ", txHash);
+    
   };
+
+  
 
   handleValidation = e => {
     e.target.parentNode.classList.add("was-validated");
     this.setState({value: e.target.value});
 
   };
+
+
 
   render() {
     //console.log("The props!" , this.props)

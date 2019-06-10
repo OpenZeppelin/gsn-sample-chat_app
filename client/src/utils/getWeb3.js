@@ -55,6 +55,7 @@ const useRelayer = web3 => {
   const RelayProvider = tabookey.RelayProvider;
   var provider = new RelayProvider(web3.currentProvider, {
     txfee: 12,
+    // verbose:true,
     force_gasLimit: 500000
   });
   web3.setProvider(provider);
