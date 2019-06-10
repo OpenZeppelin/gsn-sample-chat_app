@@ -2,6 +2,7 @@ import Web3 from "web3";
 const FALLBACK_WEB3_PROVIDER =
   process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
 const tabookey = require("tabookey-gasless");
+const cookies = require("browser-cookies");
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -60,5 +61,19 @@ const useRelayer = web3 => {
   console.log("USING RELAYER");
 };
 
+const useEphermeralRelay = web3 => {
+  const RelayProvider = tabookey.RelayProvider;
+  var provider = new RelayProvider(web3.currentProvider, {
+    txfee: 12,
+    force_gasLimit: 500000
+  });
+  web3.setProvider(provider);
+  console.log("USING RELAYER");
+
+  let relayclient = provider.relayClient;
+  let keypair = relayclient.newEphemeralKeypair();
+  relayclient.useKeypairForSigning(keypair);
+};
+
 export default getWeb3;
-export { getGanacheWeb3, useRelayer };
+export { getGanacheWeb3, useRelayer, useEphermeralRelay };

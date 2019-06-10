@@ -1996,15 +1996,15 @@
     "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
   },
   "networks": {
-    "1559945969458": {
+    "1560198057182": {
       "links": {},
       "events": {},
-      "address": "0xcC84a55972a4151f3c13E42D77e8f5107E868EF5",
-      "updated_at": 1559946199310
+      "address": "0xB3Ca66DFa317BBc3d6312d39feb5085B36927014",
+      "updated_at": 1560198911112
     }
   },
   "schemaVersion": "3.0.10",
-  "updatedAt": "2019-06-07T22:29:58.969Z",
+  "updatedAt": "2019-06-10T20:35:47.187Z",
   "devdoc": {
     "methods": {}
   },

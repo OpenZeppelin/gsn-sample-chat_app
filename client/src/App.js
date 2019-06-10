@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import getWeb3, { getGanacheWeb3, useRelayer } from "./utils/getWeb3";
+import getWeb3, { getGanacheWeb3, useRelayer, useEphermeralRelay } from "./utils/getWeb3";
 import { Loader } from 'rimble-ui';
 
 import ChatContainer from './components/Chatcontainer/index';
 import styles from './App.module.scss';
 import { zeppelinSolidityHotLoaderOptions } from '../config/webpack';
 
+console.log("React VErsion: ", React.version);
 class App extends Component {
   state = {
     storageValue: 0,
@@ -64,6 +65,7 @@ class App extends Component {
 
         this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType, ChatApp });
         useRelayer(this.state.web3);
+        //useEphermeralRelay(this.state.web3);
       }
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -101,7 +103,6 @@ class App extends Component {
         <h1>GSN Chat APP</h1>
         <p></p>
         <ChatContainer {...this.state}/>
-       
       </div>
     );
   }
