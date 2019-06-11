@@ -1,4 +1,4 @@
-@import '../../layout/variables.scss';
+@import "../../layout/variables.scss";
 
 .chatContainer {
   padding: 40px 0;
@@ -9,11 +9,13 @@
   height: auto;
   padding: 20px 20px;
   border: 1px solid #ccc;
-
-
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255);
+  -webkit-box-shadow: -1px 5px 35px 8px rgba(0,0,0,0.28); 
+  box-shadow: -1px 5px 35px 8px rgba(0,0,0,0.28);
 
   h3 {
-    border-bottom: 1px dotted #FFBE44;
+    border-bottom: 1px dotted #ffbe44;
     padding-bottom: 5px;
   }
 

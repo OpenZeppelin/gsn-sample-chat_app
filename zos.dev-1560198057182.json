@@ -1,0 +1,91 @@
+{
+  "contracts": {
+    "ChatApp": {
+      "address": "0x976422792d7DBf3bdD6ce6aE700F0f0a9a7CF603",
+      "constructorCode": "608060405234801561001057600080fd5b50610cf5806100206000396000f3fe",
+      "bodyBytecodeHash": "f2ad369d519f5814189c407fa805160a0975eac9863211426875174ce08f206c",
+      "localBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
+      "deployedBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
+      "types": {
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        }
+      },
+      "storage": [
+        {
+          "contract": "RelayRecipient",
+          "path": "tabookey-gasless/contracts/RelayRecipient.sol",
+          "label": "relay_hub",
+          "astId": 1989,
+          "type": "t_address",
+          "src": "763:26:4"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 2238,
+          "type": "t_bool",
+          "src": "757:24:6"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 2240,
+          "type": "t_bool",
+          "src": "876:25:6"
+        },
+        {
+          "contract": "Initializable",
+          "path": "zos-lib/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 2289,
+          "type": "t_array:50<t_uint256>",
+          "src": "1891:29:6"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "ChatApp/ChatApp": [
+      {
+        "address": "0xB3Ca66DFa317BBc3d6312d39feb5085B36927014",
+        "version": "0.1.0",
+        "implementation": "0x976422792d7DBf3bdD6ce6aE700F0f0a9a7CF603"
+      }
+    ]
+  },
+  "zosversion": "2.2",
+  "version": "0.1.0",
+  "proxyAdmin": {
+    "address": "0xF76FE703E57f2265d971B60a4143b928A146b1F5"
+  }
+}

@@ -8,18 +8,18 @@ import { Blockie } from 'rimble-ui';
 const ChatWindow = props => {
   const { messages, web3 } = props;
 
-  const listMsg = messages.map(msg => (
-    <div className={styleMedia.singleMessage} key={web3.utils.randomHex(2)}>
-       <div className={styles.blockie}><Blockie opts={{
+  const listMsg = messages.map(msg => (<div >
+    <div className={styles.singleMessage} key={web3.utils.randomHex(2)}>
+       <div className={styles.blockie}><Blockie className={styles.blockie} opts={{
     seed: msg.user,
     color: '#dfe',
     bgcolor: '#a71',
     size: 5,
-    scale: 3,
+    scale: 5,
     spotcolor: '#000',
   }}
 /></div>{msg.message}
-    </div>
+    </div></div>
   ));
 
   return <div className={styles.chatWindow}>{listMsg}</div>;

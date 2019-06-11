@@ -1,0 +1,366 @@
+{
+  "contractName": "RelayRecipientApi",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "get_hub_addr",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "get_recipient_balance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity >=0.4.0 <0.6.0;\n\ncontract RelayRecipientApi {\n\n    /**\n     * return the relayHub of this contract.\n     */\n    function get_hub_addr() public view returns (address);\n\n    /**\n     * return the contract's balance on the RelayHub.\n     * can be used to determine if the contract can pay for incoming calls,\n     * before making any.\n     */\n    function get_recipient_balance() public view returns (uint);\n}\n",
+  "sourcePath": "tabookey-gasless/contracts/RelayRecipientApi.sol",
+  "ast": {
+    "absolutePath": "tabookey-gasless/contracts/RelayRecipientApi.sol",
+    "exportedSymbols": {
+      "RelayRecipientApi": [
+        2234
+      ]
+    },
+    "id": 2235,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2223,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".0",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:31:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2234,
+        "linearizedBaseContracts": [
+          2234
+        ],
+        "name": "RelayRecipientApi",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "return the relayHub of this contract.",
+            "id": 2228,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get_hub_addr",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2224,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "149:2:5"
+            },
+            "returnParameters": {
+              "id": 2227,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2226,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2228,
+                  "src": "173:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2225,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "173:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "172:9:5"
+            },
+            "scope": 2234,
+            "src": "128:54:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "return the contract's balance on the RelayHub.\ncan be used to determine if the contract can pay for incoming calls,\nbefore making any.",
+            "id": 2233,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get_recipient_balance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2229,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "390:2:5"
+            },
+            "returnParameters": {
+              "id": 2232,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2231,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2233,
+                  "src": "414:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2230,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "414:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "413:6:5"
+            },
+            "scope": 2234,
+            "src": "360:60:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2235,
+        "src": "33:389:5"
+      }
+    ],
+    "src": "0:423:5"
+  },
+  "legacyAST": {
+    "absolutePath": "tabookey-gasless/contracts/RelayRecipientApi.sol",
+    "exportedSymbols": {
+      "RelayRecipientApi": [
+        2234
+      ]
+    },
+    "id": 2235,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2223,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".0",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:31:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2234,
+        "linearizedBaseContracts": [
+          2234
+        ],
+        "name": "RelayRecipientApi",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "return the relayHub of this contract.",
+            "id": 2228,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get_hub_addr",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2224,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "149:2:5"
+            },
+            "returnParameters": {
+              "id": 2227,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2226,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2228,
+                  "src": "173:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2225,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "173:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "172:9:5"
+            },
+            "scope": 2234,
+            "src": "128:54:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "return the contract's balance on the RelayHub.\ncan be used to determine if the contract can pay for incoming calls,\nbefore making any.",
+            "id": 2233,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get_recipient_balance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2229,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "390:2:5"
+            },
+            "returnParameters": {
+              "id": 2232,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2231,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2233,
+                  "src": "414:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2230,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "414:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "413:6:5"
+            },
+            "scope": 2234,
+            "src": "360:60:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2235,
+        "src": "33:389:5"
+      }
+    ],
+    "src": "0:423:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.10",
+  "updatedAt": "2019-06-11T16:12:12.252Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {
+      "get_hub_addr()": {
+        "notice": "return the relayHub of this contract."
+      },
+      "get_recipient_balance()": {
+        "notice": "return the contract's balance on the RelayHub. can be used to determine if the contract can pay for incoming calls, before making any."
+      }
+    }
+  }
+}

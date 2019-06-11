@@ -6,10 +6,12 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  background-color: rgb(245, 245, 245);
+  height: 100vh;
 }
 
 code {
-  background: #fefefe;
+  background: #413e66;
   box-shadow: 0 1px 1px 2px #ccc;
   padding: 10px;
   font-size: 14px;

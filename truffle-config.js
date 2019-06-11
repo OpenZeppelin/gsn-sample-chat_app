@@ -14,6 +14,11 @@ module.exports = {
       port: 8545,
       network_id: "*",
     },
+    local: {
+      host: "127.0.0.1",
+      port: 9545,
+      network_id: "*",
+    },
     ropsten: {
       provider: function() {
         return new HDWalletProvider(mnemonic, 'https://ropsten.infura.io/v3/' + process.env.INFURA_API_KEY)
@@ -43,5 +48,10 @@ module.exports = {
       gas: 3000000,
       gasPrice: 10000000000
     }
-  }
+  },
+  compilers: {
+    solc: {
+      version: "0.5.4" 
+    }
+ },
 };

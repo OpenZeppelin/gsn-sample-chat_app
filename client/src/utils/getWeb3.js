@@ -1,5 +1,8 @@
 import Web3 from "web3";
-const FALLBACK_WEB3_PROVIDER = process.env.REACT_APP_NETWORK || 'http://0.0.0.0:8545';
+const FALLBACK_WEB3_PROVIDER =
+  process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
+const tabookey = require("tabookey-gasless");
+const cookies = require("browser-cookies");
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -37,17 +40,41 @@ const getWeb3 = () =>
   });
 
 const getGanacheWeb3 = () => {
-  const isProd = process.env.NODE_ENV === 'production';
+  const isProd = process.env.NODE_ENV === "production";
   if (isProd) {
     return null;
   }
-  const provider = new Web3.providers.HttpProvider(
-    'http://0.0.0.0:8545'
-  );
+  const provider = new Web3.providers.HttpProvider("http://0.0.0.0:8545");
   const web3 = new Web3(provider);
   console.log("No local ganache found.");
   return web3;
-}
+};
+
+//From @github Kyrrui
+const useRelayer = web3 => {
+  const RelayProvider = tabookey.RelayProvider;
+  var provider = new RelayProvider(web3.currentProvider, {
+    txfee: 12,
+    // verbose:true,
+    force_gasLimit: 500000
+  });
+  web3.setProvider(provider);
+  console.log("USING RELAYER");
+};
+
+const useEphermeralRelay = web3 => {
+  const RelayProvider = tabookey.RelayProvider;
+  var provider = new RelayProvider(web3.currentProvider, {
+    txfee: 12,
+    force_gasLimit: 500000
+  });
+  web3.setProvider(provider);
+  console.log("USING RELAYER");
+
+  let relayclient = provider.relayClient;
+  let keypair = relayclient.newEphemeralKeypair();
+  relayclient.useKeypairForSigning(keypair);
+};
 
 export default getWeb3;
-export { getGanacheWeb3 };
+export { getGanacheWeb3, useRelayer, useEphermeralRelay };
