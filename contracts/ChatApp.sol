@@ -5,10 +5,10 @@ import "zos-lib/contracts/Initializable.sol";
 
 contract ChatApp is RelayRecipient, Initializable{
     
-    event message(string message, address user, uint timestamp);
+    event message(string message, address user, uint timestamp, bytes32 uuid);
 
     function postMessage(string memory _msg) public {
-        emit message(_msg, msg.sender, now);
+        emit message(_msg, get_sender(), now, keccak256(abi.encodePacked(_msg, now, get_sender())));
     }
 
     function init_hub(RelayHub hub_addr) public {

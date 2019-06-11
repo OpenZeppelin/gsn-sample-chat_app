@@ -1,11 +1,11 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x09b2baa4beF778D8b7940E673D00A0Ab78991380",
-      "constructorCode": "608060405234801561001057600080fd5b50610cf5806100206000396000f3fe",
-      "bodyBytecodeHash": "f2ad369d519f5814189c407fa805160a0975eac9863211426875174ce08f206c",
-      "localBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
-      "deployedBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
+      "address": "0x04084168d27CA613157d13B1698A69898EEd0A72",
+      "constructorCode": "608060405234801561001057600080fd5b50610dc9806100206000396000f3fe",
+      "bodyBytecodeHash": "f90caec99f8734bf9a2d00d9a731b78e2defeee85317be032f8b7f51fc18cb54",
+      "localBytecodeHash": "81d0c1f023e21de89304bc99e13e5809ccfbdb4dd69ebfe6ecfdb8852f6e4845",
+      "deployedBytecodeHash": "81d0c1f023e21de89304bc99e13e5809ccfbdb4dd69ebfe6ecfdb8852f6e4845",
       "types": {
         "t_address": {
           "id": "t_address",
@@ -35,7 +35,7 @@
           "contract": "RelayRecipient",
           "path": "tabookey-gasless/contracts/RelayRecipient.sol",
           "label": "relay_hub",
-          "astId": 1989,
+          "astId": 2000,
           "type": "t_address",
           "src": "763:26:4"
         },
@@ -43,7 +43,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 2238,
+          "astId": 2249,
           "type": "t_bool",
           "src": "757:24:6"
         },
@@ -51,7 +51,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 2240,
+          "astId": 2251,
           "type": "t_bool",
           "src": "876:25:6"
         },
@@ -59,7 +59,7 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 2289,
+          "astId": 2300,
           "type": "t_array:50<t_uint256>",
           "src": "1891:29:6"
         }
@@ -69,7 +69,9 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
@@ -79,7 +81,7 @@
       {
         "address": "0x8c6D1797e3ED97808585E092faAb140ECbd88E6B",
         "version": "1.0.0",
-        "implementation": "0x09b2baa4beF778D8b7940E673D00A0Ab78991380"
+        "implementation": "0x04084168d27CA613157d13B1698A69898EEd0A72"
       }
     ]
   },
