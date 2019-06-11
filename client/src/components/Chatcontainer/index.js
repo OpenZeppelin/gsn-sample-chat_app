@@ -3,6 +3,7 @@ import styles from "./ChatContainer.module.scss";
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 import Web3 from "web3";
+import GSNContainer from "../GSNContainer";
 
 export default class ChatContainer extends Component {
   constructor(props) {
@@ -102,6 +103,7 @@ export default class ChatContainer extends Component {
       <div className={styles.chatContainer}>
         <ChatWindow messages={this.state.messages} {...this.props} />
         <ChatInput {...this.props} />
+        <GSNContainer {...this.props}/>
       </div>
     );
   }

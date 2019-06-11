@@ -19,33 +19,14 @@ export default class GSNContainer extends Component {
 
   render() {
     return (
-      <div className={styles.chatInput}>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field label="Chat Message" width={1}>
-            <Form.Input
-              type="text"
-              required
-              width={1}
-              onChange={this.handleValidation}
-            />
-          </Form.Field>
-          {/* <Form.Field validated={this.state.validated} label="Password" width={1}>
-          <Form.Input
-            type="password"
-            required
-            width={1}
-            onChange={this.handleValidation}
-          />
-        </Form.Field>
-        <Form.Check
-          label="Remember me?"
-          mb={3}
-          onChange={this.handleValidation}
-        /> */}
-          <Button type="submit" width={1}>
-            send
-          </Button>
-        </Form>
+      <div className={styles.button}>
+<Button size="small">
+  MetaMask
+</Button><Button size="small">
+  MM Signer
+</Button><Button size="small">
+  Ephemeral
+</Button>
       </div>
     );
   }

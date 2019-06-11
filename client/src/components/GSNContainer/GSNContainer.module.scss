@@ -1,6 +1,8 @@
-@import '../../../layout/variables.scss';
 
-.chatInput {
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   padding: 40px 0;
   height: auto;
   padding: 10px 20px;
