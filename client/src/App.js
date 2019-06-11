@@ -18,6 +18,7 @@ class App extends Component {
     this.state = {
       storageValue: 0,
       web3: null,
+      ganacheWeb3: null,
       accounts: null,
       route: window.location.pathname.replace("/", ""),
       metaTxSigner: "MetaMask",
@@ -45,6 +46,7 @@ class App extends Component {
         await getWeb3();
     }
   };
+
   getGanacheAddresses = async () => {
     if (!this.ganacheProvider) {
       this.ganacheProvider = getGanacheWeb3();
@@ -52,6 +54,7 @@ class App extends Component {
     if (this.ganacheProvider) {
       return await this.ganacheProvider.eth.getAccounts();
     }
+
     return [];
   };
 
@@ -71,6 +74,7 @@ class App extends Component {
         // Get network provider and web3 instance.
         const web3 = await getWeb3();
         const ganacheAccounts = await this.getGanacheAddresses();
+        const ganacheWeb3 = await getGanacheWeb3();
         // Use web3 to get the user's accounts.
         const accounts = await web3.eth.getAccounts();
         // Get the contract instance.
@@ -106,7 +110,8 @@ class App extends Component {
           instance,
           networkType,
           ChatApp, 
-          setProvider: this.setMetaTxSigner
+          setProvider: this.setMetaTxSigner,
+          ganacheWeb3
         });
         //useRelayer(this.state.web3);
         //useEphermeralRelay(this.state.web3);
