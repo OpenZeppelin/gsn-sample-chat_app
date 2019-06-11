@@ -1,7 +1,7 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x976422792d7DBf3bdD6ce6aE700F0f0a9a7CF603",
+      "address": "0x09b2baa4beF778D8b7940E673D00A0Ab78991380",
       "constructorCode": "608060405234801561001057600080fd5b50610cf5806100206000396000f3fe",
       "bodyBytecodeHash": "f2ad369d519f5814189c407fa805160a0975eac9863211426875174ce08f206c",
       "localBytecodeHash": "a0e2e4323538535774b012c36fb1bd6e52f856488762d2c06c00bb7e31c7cdb9",
@@ -77,15 +77,15 @@
   "proxies": {
     "ChatApp/ChatApp": [
       {
-        "address": "0xB3Ca66DFa317BBc3d6312d39feb5085B36927014",
-        "version": "0.1.0",
-        "implementation": "0x976422792d7DBf3bdD6ce6aE700F0f0a9a7CF603"
+        "address": "0x8c6D1797e3ED97808585E092faAb140ECbd88E6B",
+        "version": "1.0.0",
+        "implementation": "0x09b2baa4beF778D8b7940E673D00A0Ab78991380"
       }
     ]
   },
   "zosversion": "2.2",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0xF76FE703E57f2265d971B60a4143b928A146b1F5"
+    "address": "0x13a934eb20bfE6D88609662ba398B72B697f1Ec7"
   }
 }
