@@ -59,8 +59,9 @@ export default class ChatContainer extends Component {
             result.topics.slice(1)
           );
           //console.log(`New ${eventName}!`, eventObj)
-          const { message, timestamp, user } = eventObj;
-          const msg = { message, timestamp, user };
+          const { message, timestamp, user, uuid } = eventObj;
+          console.log("UUID: ", uuid);
+          const msg = { message, timestamp, user , uuid};
           this.setState(() => {
             return { ...this.state, messages: [...this.state.messages, msg] };
           });
@@ -81,8 +82,8 @@ export default class ChatContainer extends Component {
     });
 
     logs.forEach(el => {
-      const { message, timestamp, user } = el.returnValues;
-      messages.push({ message, timestamp, user });
+      const { message, timestamp, user, uuid } = el.returnValues;
+      messages.push({ message, timestamp, user, uuid });
     });
 
     this.setState(() => {
