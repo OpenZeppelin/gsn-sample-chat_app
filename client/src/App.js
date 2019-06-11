@@ -1,20 +1,50 @@
 import React, { Component } from "react";
-import getWeb3, { getGanacheWeb3, useRelayer, useEphermeralRelay } from "./utils/getWeb3";
-import { Loader } from 'rimble-ui';
+import getWeb3, {
+  getGanacheWeb3,
+  useRelayer,
+  useEphermeralRelay,
+  useInjectedWeb3
+} from "./utils/getWeb3";
+import { Loader } from "rimble-ui";
 
-import ChatContainer from './components/Chatcontainer/index';
-import styles from './App.module.scss';
-import { zeppelinSolidityHotLoaderOptions } from '../config/webpack';
+import ChatContainer from "./components/Chatcontainer/index";
+import styles from "./App.module.scss";
+import { zeppelinSolidityHotLoaderOptions } from "../config/webpack";
 
 console.log("React VErsion: ", React.version);
 class App extends Component {
-  state = {
-    storageValue: 0,
-    web3: null,
-    accounts: null,
-    route: window.location.pathname.replace("/","")
-  };
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      storageValue: 0,
+      web3: null,
+      accounts: null,
+      route: window.location.pathname.replace("/", ""),
+      metaTxSigner: "MetaMask",
+      setProvider: null
+    };
 
+    this.setMetaTxSigner = this.setMetaTxSigner.bind(this);
+  }
+
+  setMetaTxSigner = async signer => {
+    switch (signer) {
+      case "MetaMask":
+        await useInjectedWeb3(this.state.web3);
+        console.log("Using regular transaction flow");
+        break;
+      case "MMSigner":
+        await useRelayer(this.state.web3);
+        console.log("Using Metamask to sign");
+        break;
+      case "Ephemeral":
+        await useEphermeralRelay(this.state.web3);
+        console.log("Using Ephemeral KeyPair");
+        break;
+      default:
+        await getWeb3();
+    }
+  };
   getGanacheAddresses = async () => {
     if (!this.ganacheProvider) {
       this.ganacheProvider = getGanacheWeb3();
@@ -23,7 +53,7 @@ class App extends Component {
       return await this.ganacheProvider.eth.getAccounts();
     }
     return [];
-  }
+  };
 
   componentDidMount = async () => {
     const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
@@ -36,7 +66,7 @@ class App extends Component {
     }
 
     try {
-      const isProd = process.env.NODE_ENV === 'production';
+      const isProd = process.env.NODE_ENV === "production";
       if (!isProd) {
         // Get network provider and web3 instance.
         const web3 = await getWeb3();
@@ -47,8 +77,11 @@ class App extends Component {
         const networkId = await web3.eth.net.getId();
         const networkType = await web3.eth.net.getNetworkType();
         const isMetaMask = web3.currentProvider.isMetaMask;
-        let balance = accounts.length > 0 ? await web3.eth.getBalance(accounts[0]): web3.utils.toWei('0');
-        balance = web3.utils.fromWei(balance, 'ether');
+        let balance =
+          accounts.length > 0
+            ? await web3.eth.getBalance(accounts[0])
+            : web3.utils.toWei("0");
+        balance = web3.utils.fromWei(balance, "ether");
         let instance = null;
         let deployedNetwork = null;
         //console.log("Chat App: ", ChatApp);
@@ -58,25 +91,34 @@ class App extends Component {
           if (deployedNetwork) {
             instance = new web3.eth.Contract(
               ChatApp.abi,
-              deployedNetwork && deployedNetwork.address,
+              deployedNetwork && deployedNetwork.address
             );
           }
         }
 
-        this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType, ChatApp });
-        useRelayer(this.state.web3);
+        this.setState({
+          web3,
+          ganacheAccounts,
+          accounts,
+          balance,
+          networkId,
+          isMetaMask,
+          instance,
+          networkType,
+          ChatApp, 
+          setProvider: this.setMetaTxSigner
+        });
+        //useRelayer(this.state.web3);
         //useEphermeralRelay(this.state.web3);
       }
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
+        `Failed to load web3, accounts, or contract. Check console for details.`
       );
       console.error(error);
     }
   };
-
-  
 
   componentWillUnmount() {
     if (this.interval) {
@@ -101,8 +143,8 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <h1>GSN Chat APP</h1>
-        <p></p>
-        <ChatContainer {...this.state}/>
+        <p />
+        <ChatContainer {...this.state} {...this.setMetaTxSigner} />
       </div>
     );
   }

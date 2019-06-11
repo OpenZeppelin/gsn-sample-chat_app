@@ -31,7 +31,7 @@ const app = async () => {
       
         const txDeposit = await relayHubInstance.methods
           .depositFor(chatAppAddress)
-          .send({ from: accounts[0], gas: 5000000, value: 1e18 });
+          .send({ from: accounts[0], gas: 5000000, value: 10e18 });
         console.log(txDeposit);
       
         const txInit = await chatAppInstance.methods

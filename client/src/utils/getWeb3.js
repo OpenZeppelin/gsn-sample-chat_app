@@ -59,7 +59,13 @@ const useRelayer = web3 => {
     force_gasLimit: 500000
   });
   web3.setProvider(provider);
-  console.log("USING RELAYER");
+  console.log("USING Normal RELAYER");
+};
+
+const useInjectedWeb3 = web3 => {
+
+  web3.setProvider(window.ethereum);
+  console.log("USING Injected Web3");
 };
 
 const useEphermeralRelay = web3 => {
@@ -69,7 +75,7 @@ const useEphermeralRelay = web3 => {
     force_gasLimit: 500000
   });
   web3.setProvider(provider);
-  console.log("USING RELAYER");
+  console.log("USING Emphermeral RELAYER");
 
   let relayclient = provider.relayClient;
   let keypair = relayclient.newEphemeralKeypair();
@@ -77,4 +83,4 @@ const useEphermeralRelay = web3 => {
 };
 
 export default getWeb3;
-export { getGanacheWeb3, useRelayer, useEphermeralRelay };
+export { getGanacheWeb3, useRelayer, useEphermeralRelay, useInjectedWeb3 };

@@ -20,27 +20,11 @@ export default class ChatContainer extends Component {
     const { instance, web3 } = this.props;
     await this.getAllMsg();
     this.unsubscribe = await this.subscribeLogEvent(instance, "message");
-    
-    // const sub = this.subWeb3.eth.subscribe('newBlockHeaders')
-    // sub.subscribe((err, result) => {
-    //   if(err)console.log(err);
-    // }).on('data', async (txHash) => {
-    //   console.log("DATA FIRED!!!", txHash);
-    // })
-
-
-    //console.log("Subscription is: ", sub);
-    //console.log("This is the subscription: ", subscription);
-    //this.unsubscribe = await this.subscribeToMessages();
   };
 
-  waitForMinedTransaction = txHash => {
-
-
-  };
+  waitForMinedTransaction = txHash => {};
 
   subscribeLogEvent = async (instance, eventName) => {
-    
     const eventJsonInterface = this.subWeb3.utils._.find(
       instance._jsonInterface,
       o => o.name === eventName && o.type === "event"
@@ -62,7 +46,7 @@ export default class ChatContainer extends Component {
           //console.log(`New ${eventName}!`, eventObj)
           const { message, timestamp, user, uuid } = eventObj;
           console.log("UUID: ", uuid);
-          const msg = { message, timestamp, user , uuid};
+          const msg = { message, timestamp, user, uuid };
           this.setState(() => {
             return { ...this.state, messages: [...this.state.messages, msg] };
           });
@@ -103,7 +87,7 @@ export default class ChatContainer extends Component {
       <div className={styles.chatContainer}>
         <ChatWindow messages={this.state.messages} {...this.props} />
         <ChatInput {...this.props} />
-        <GSNContainer {...this.props}/>
+        <GSNContainer {...this.props} />
       </div>
     );
   }

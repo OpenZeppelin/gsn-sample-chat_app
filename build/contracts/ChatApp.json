@@ -2374,10 +2374,16 @@
       "events": {},
       "address": "0x8c6D1797e3ED97808585E092faAb140ECbd88E6B",
       "updated_at": 1560272308982
+    },
+    "1560284953422": {
+      "links": {},
+      "events": {},
+      "address": "0x6AFABda75A4E69ac5Be594403704CFA9146932f6",
+      "updated_at": 1560285006605
     }
   },
   "schemaVersion": "3.0.10",
-  "updatedAt": "2019-06-11T17:21:01.093Z",
+  "updatedAt": "2019-06-11T20:30:02.840Z",
   "devdoc": {
     "methods": {}
   },
