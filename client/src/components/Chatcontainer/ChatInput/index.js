@@ -5,7 +5,7 @@ import styles from "./ChatInput.module.scss";
 export default class ChatInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { validated: false, value: '' };
+    this.state = { validated: false, value: '', fetching: false };
     this.instance = this.props.instance.methods;
     this.accounts = this.props.accounts;
   }
@@ -18,11 +18,17 @@ export default class ChatInput extends Component {
     value: '' });
     const tx = await this.instance.postMessage(this.state.value).send({from: this.accounts[0]});
     const txHash = tx.transactionHash;
+
     console.log("The Returned Transactions: ", txHash);
     
   };
 
-  
+  pollfortx = tx => {
+
+    
+
+  }
+
 
   handleValidation = e => {
     e.target.parentNode.classList.add("was-validated");

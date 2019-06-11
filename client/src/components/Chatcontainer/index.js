@@ -28,7 +28,7 @@ export default class ChatContainer extends Component {
     // })
 
 
-    console.log("Subscription is: ", sub);
+    //console.log("Subscription is: ", sub);
     //console.log("This is the subscription: ", subscription);
     //this.unsubscribe = await this.subscribeToMessages();
   };

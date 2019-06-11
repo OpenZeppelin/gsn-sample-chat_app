@@ -64,8 +64,8 @@ class App extends Component {
         }
 
         this.setState({ web3, ganacheAccounts, accounts, balance, networkId, isMetaMask, instance, networkType, ChatApp });
-        useRelayer(this.state.web3);
-        //useEphermeralRelay(this.state.web3);
+        //useRelayer(this.state.web3);
+        useEphermeralRelay(this.state.web3);
       }
     } catch (error) {
       // Catch any errors for any of the above operations.
