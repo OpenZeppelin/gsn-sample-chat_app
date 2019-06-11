@@ -16,6 +16,7 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      signingAccount: null,
       storageValue: 0,
       web3: null,
       ganacheWeb3: null,
@@ -29,18 +30,25 @@ class App extends Component {
   }
 
   setMetaTxSigner = async signer => {
+    let signingAccount;
     switch (signer) {
       case "MetaMask":
         await useInjectedWeb3(this.state.web3);
+        signingAccount = this.state.accounts[0];
+        this.setState({});
         console.log("Using regular transaction flow");
+        this.setState({ signingAccount });
         break;
       case "MMSigner":
         await useRelayer(this.state.web3);
+        signingAccount = this.state.accounts[0];
         console.log("Using Metamask to sign");
+        this.setState({ signingAccount });
         break;
       case "Ephemeral":
-        await useEphermeralRelay(this.state.web3);
-        console.log("Using Ephemeral KeyPair");
+        signingAccount = await useEphermeralRelay(this.state.web3);
+        console.log("Using Ephemeral KeyPair: ", signingAccount);
+        this.setState({ signingAccount });
         break;
       default:
         await getWeb3();
@@ -77,6 +85,7 @@ class App extends Component {
         const ganacheWeb3 = await getGanacheWeb3();
         // Use web3 to get the user's accounts.
         const accounts = await web3.eth.getAccounts();
+        const signingAccount = accounts[0];
         // Get the contract instance.
         const networkId = await web3.eth.net.getId();
         const networkType = await web3.eth.net.getNetworkType();
@@ -103,13 +112,14 @@ class App extends Component {
         this.setState({
           web3,
           ganacheAccounts,
+          signingAccount,
           accounts,
           balance,
           networkId,
           isMetaMask,
           instance,
           networkType,
-          ChatApp, 
+          ChatApp,
           setProvider: this.setMetaTxSigner,
           ganacheWeb3
         });

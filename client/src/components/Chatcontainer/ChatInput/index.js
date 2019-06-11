@@ -8,14 +8,16 @@ export default class ChatInput extends Component {
     this.state = { validated: false, value: "", fetching: false };
     this.instance = this.props.instance.methods;
     this.accounts = this.props.accounts;
+    
   }
 
   handleSubmit = async e => {
     e.preventDefault();
-
-    const tx = await this.instance
+    const {signingAccount, instance} = this.props;
+    console.log("singing trasnaction with: ", signingAccount);
+    const tx = await instance.methods
       .postMessage(this.state.value)
-      .send({ from: this.accounts[0] });
+      .send({ from: signingAccount});
     const txHash = tx.transactionHash;
 
     this.setState({ validated: false, value: "" });

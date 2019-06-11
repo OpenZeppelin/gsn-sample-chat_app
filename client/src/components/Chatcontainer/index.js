@@ -4,6 +4,7 @@ import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
+import FundMetaMask from "../fundMetaMask/index";
 
 export default class ChatContainer extends Component {
   constructor(props) {
@@ -88,6 +89,7 @@ export default class ChatContainer extends Component {
         <ChatWindow messages={this.state.messages} {...this.props} />
         <ChatInput {...this.props} />
         <GSNContainer {...this.props} />
+        <FundMetaMask {...this.props}/>
       </div>
     );
   }

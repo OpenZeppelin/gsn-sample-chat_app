@@ -63,7 +63,6 @@ const useRelayer = web3 => {
 };
 
 const useInjectedWeb3 = web3 => {
-
   web3.setProvider(window.ethereum);
   console.log("USING Injected Web3");
 };
@@ -80,6 +79,8 @@ const useEphermeralRelay = web3 => {
   let relayclient = provider.relayClient;
   let keypair = relayclient.newEphemeralKeypair();
   relayclient.useKeypairForSigning(keypair);
+  let account = keypair.address;
+  return account;
 };
 
 export default getWeb3;
