@@ -14,7 +14,6 @@ export default class ChatInput extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const {signingAccount, instance} = this.props;
-    console.log("singing trasnaction with: ", signingAccount);
     const tx = await instance.methods
       .postMessage(this.state.value)
       .send({ from: signingAccount});

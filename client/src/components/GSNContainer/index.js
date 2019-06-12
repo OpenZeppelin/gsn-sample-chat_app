@@ -9,10 +9,6 @@ export default class GSNContainer extends Component {
     this.setProvider = this.props.setProvider;
   }
 
-  componentDidMount = () => {
-    console.log("Props", this.props);
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     this.setState({ validated: true });

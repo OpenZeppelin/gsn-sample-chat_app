@@ -7,7 +7,6 @@ import { Blockie } from 'rimble-ui';
 //from props and map through them.
 const ChatWindow = props => {
   const { messages, web3 } = props;
-  console.log("Messages: ", messages)
   const listMsg = messages.map(msg => (
     <div className={styles.singleMessage} key={msg.uuid}>
        <div className={styles.blockie}><Blockie className={styles.blockie} opts={{

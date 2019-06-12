@@ -11,7 +11,6 @@ export default class FundMetaMask extends Component {
   fund = async () => {
     const {ganacheAccounts, accounts, ganacheWeb3} = this.props;
     const tx = await ganacheWeb3.eth.sendTransaction({from: ganacheAccounts[0], to: accounts[0], value: 2e18});
-    console.log(`Funding Metamask Transaction: ${tx}`);
   }
 
   render()  {

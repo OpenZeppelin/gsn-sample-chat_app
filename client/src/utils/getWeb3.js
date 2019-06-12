@@ -74,7 +74,7 @@ const useEphermeralRelay = web3 => {
     force_gasLimit: 500000
   });
   web3.setProvider(provider);
-  console.log("USING Emphermeral RELAYER");
+console.log("USING Emphermeral RELAYER");
 
   let relayclient = provider.relayClient;
   let keypair = relayclient.newEphemeralKeypair();

@@ -44,9 +44,7 @@ export default class ChatContainer extends Component {
             result.data,
             result.topics.slice(1)
           );
-          //console.log(`New ${eventName}!`, eventObj)
           const { message, timestamp, user, uuid } = eventObj;
-          console.log("UUID: ", uuid);
           const msg = { message, timestamp, user, uuid };
           this.setState(() => {
             return { ...this.state, messages: [...this.state.messages, msg] };
@@ -54,7 +52,6 @@ export default class ChatContainer extends Component {
         }
       }
     );
-    //console.log("The Subscription is: ", subscription);
     return subscription;
   };
 

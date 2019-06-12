@@ -12,7 +12,6 @@ import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import { zeppelinSolidityHotLoaderOptions } from "../config/webpack";
 
-console.log("React VErsion: ", React.version);
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -72,7 +71,6 @@ class App extends Component {
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
-      //console.log("Chat app: ", ChatApp);
     } catch (e) {
       console.log(e);
     }
@@ -98,10 +96,10 @@ class App extends Component {
         balance = web3.utils.fromWei(balance, "ether");
         let instance = null;
         let deployedNetwork = null;
-        //console.log("Chat App: ", ChatApp);
+
         if (ChatApp.networks) {
           deployedNetwork = ChatApp.networks[networkId.toString()];
-          //console.log("Deployed Network: ", deployedNetwork);
+
           if (deployedNetwork) {
             instance = new web3.eth.Contract(
               ChatApp.abi,
