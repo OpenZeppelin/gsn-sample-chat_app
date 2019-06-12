@@ -23,11 +23,18 @@ class App extends Component {
       accounts: null,
       route: window.location.pathname.replace("/", ""),
       metaTxSigner: "MetaMask",
-      setProvider: null
+      setProvider: null,
+      fetching: false,
+      setFetchStatus: null,
     };
 
     this.setMetaTxSigner = this.setMetaTxSigner.bind(this);
+    this.setFetchStatus = this.setFetchStatus.bind(this);
   }
+
+  setFetchStatus = status => {
+    this.setState({ fetching: status });
+  };
 
   setMetaTxSigner = async signer => {
     let signingAccount;
@@ -67,7 +74,7 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
-    const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
+    //const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
     let ChatApp = {};
     try {
       ChatApp = require("../../contracts/ChatApp.sol");
@@ -120,6 +127,7 @@ class App extends Component {
           networkType,
           ChatApp,
           setProvider: this.setMetaTxSigner,
+          setFetchStatus: this.setFetchStatus,
           ganacheWeb3,
           chatAppAddress: deployedNetwork.address
         });
