@@ -14,8 +14,8 @@ export default class ChatInput extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const {signingAccount, instance, setFetchStatus} = this.props;
-    if(setFetchStatus){
+    const {signingAccount, instance, fetching, setFetchStatus} = this.props;
+    if(!fetching){
     setFetchStatus(true);
     const tx = await instance.methods
       .postMessage(this.state.value)
