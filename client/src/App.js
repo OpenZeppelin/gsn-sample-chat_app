@@ -6,6 +6,7 @@ import getWeb3, {
   useInjectedWeb3
 } from "./utils/getWeb3";
 import { Loader } from "rimble-ui";
+import RelayContainer from "./components/RelayContainer";
 
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
@@ -121,7 +122,8 @@ class App extends Component {
           networkType,
           ChatApp,
           setProvider: this.setMetaTxSigner,
-          ganacheWeb3
+          ganacheWeb3,
+          chatAppAddress: deployedNetwork.address
         });
         //useRelayer(this.state.web3);
         //useEphermeralRelay(this.state.web3);
@@ -160,6 +162,7 @@ class App extends Component {
         <h1>GSN Chat APP</h1>
         <p />
         <ChatContainer {...this.state} {...this.setMetaTxSigner} />
+        <RelayContainer {...this.state} />
       </div>
     );
   }
