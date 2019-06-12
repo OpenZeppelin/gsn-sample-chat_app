@@ -16,9 +16,8 @@ export default class ChatContainer extends Component {
   unsubscribe = null;
 
   componentDidMount = async () => {
-
     this.subWeb3 = new Web3(window.ethereum);
-    const { instance, web3 } = this.props;
+    const { instance } = this.props;
     await this.getAllMsg();
     this.unsubscribe = await this.subscribeLogEvent(instance, "message");
   };
@@ -86,7 +85,7 @@ export default class ChatContainer extends Component {
         <ChatWindow messages={this.state.messages} {...this.props} />
         <ChatInput {...this.props} />
         <GSNContainer {...this.props} />
-        <FundMetaMask {...this.props}/>
+        <FundMetaMask {...this.props} />
       </div>
     );
   }

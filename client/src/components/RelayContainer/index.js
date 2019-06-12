@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Form, Button } from "rimble-ui";
-import styles from "./RelayContainer.module.scss";
 
 export default class RelayContainer extends Component {
   constructor(props) {
@@ -24,6 +22,7 @@ export default class RelayContainer extends Component {
     if (web3) {
       const networkId = await web3.eth.net.getId();
       const networkType = await web3.eth.net.getNetworkType();
+
       relayInstance = new web3.eth.Contract(
         relayHub.abi,
         "0x9C57C0F1965D225951FE1B2618C92Eefd687654F"
@@ -35,7 +34,7 @@ export default class RelayContainer extends Component {
     newBlocks.on("data", this.getRelayBalance);
 
     this.subscription = newBlocks;
-    this.getRelayBalance();
+    await this.getRelayBalance();
   };
 
   componentWillUnmount = async () => {
