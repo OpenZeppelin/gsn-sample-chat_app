@@ -5,6 +5,7 @@ import ChatInput from "./ChatInput";
 import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
+import Filter from "bad-words";
 
 export default class ChatContainer extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ export default class ChatContainer extends Component {
   };
 
   getAllMsg = async () => {
+    const filter = new Filter();
     const { instance } = this.props;
     let messages = [];
 
@@ -65,7 +67,7 @@ export default class ChatContainer extends Component {
 
     logs.forEach(el => {
       const { message, timestamp, user, uuid } = el.returnValues;
-      messages.push({ message, timestamp, user, uuid });
+      messages.push({ message: filter.clean(message), timestamp, user, uuid });
     });
 
     this.setState(() => {

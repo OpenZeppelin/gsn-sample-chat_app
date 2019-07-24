@@ -34,7 +34,6 @@ export default class ChatInput extends Component {
 
 
     const checkBlock = async () => {
-      console.log("NEW TCX HAPPENED")
       const included = await web3.eth.getTransaction(tx);
       if(included){
         newBlock.unsubscribe();
