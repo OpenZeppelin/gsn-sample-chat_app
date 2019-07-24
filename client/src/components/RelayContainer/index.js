@@ -14,7 +14,7 @@ export default class RelayContainer extends Component {
     let relayInstance = {};
     let relayHub = {};
     try {
-      relayHub = require("../../../../build/contracts/RelayHub.json");
+      relayHub = require("../../../../build/contracts/IRelayHub.json");
     } catch (error) {
       console.log(error);
     }
