@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getRelayBalance } from "../../utils/getWeb3";
+const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
 
 export default class RelayContainer extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class RelayContainer extends Component {
     let relayInstance = {};
     let relayHub = {};
     let balance = 0;
+
     try {
       relayHub = require("../../../../build/contracts/IRelayHub.json");
     } catch (error) {
@@ -24,8 +26,9 @@ export default class RelayContainer extends Component {
     if (web3) {
       relayInstance = await new web3.eth.Contract(
         relayHub.abi,
-        "0x9C57C0F1965D225951FE1B2618C92Eefd687654F"
+        relayHubAddress
       );
+      
       balance = await getRelayBalance(web3, chatAppAddress, relayInstance);
       this.setState({ relayInstance, relayBalance: balance });
     }

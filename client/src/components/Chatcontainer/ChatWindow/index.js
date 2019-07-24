@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./ChatWindow.module.scss";
-
 import { Blockie } from "rimble-ui";
 
-//We use a functional component here to peel off the messages
-//from props and map through them.
 const ChatWindow = props => {
   const { messages } = props;
   const listMsg = messages.map(msg => (
@@ -25,7 +22,6 @@ const ChatWindow = props => {
       {msg.message}
     </div>
   ));
-
   return <div className={styles.chatWindow}>{listMsg}</div>;
 };
 

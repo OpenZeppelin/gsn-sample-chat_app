@@ -1,17 +1,13 @@
-import React from 'react';
-import styles from "./Message.module.scss";
+// import React from "react";
 
+// function Message(props) {
+//   const { message, user, timestamp } = props;
+//   return (
+//     <div class="singleMessage">
+//       {message}
+//       By: {user} At: {timestamp}
+//     </div>
+//   );
+// }
 
-function Message(props) {
-  // Declare a new state variable, which we'll call "count"
-
-  const {message, user, timestamp} = props;
-  return (
-    <div class="singleMessage">
-       {message}
-       By: {user} At: {timestamp}
-    </div>
-  );
-}
-
-export default Message;
+// export default Message;
