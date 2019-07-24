@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getRelayBalance } from "../../utils/getWeb3";
 
 export default class RelayContainer extends Component {
   constructor(props) {
@@ -9,10 +10,11 @@ export default class RelayContainer extends Component {
   }
 
   componentDidMount = async () => {
-    const { web3 } = this.props;
+    const { web3, chatAppAddress } = this.props;
 
     let relayInstance = {};
     let relayHub = {};
+    let balance = 0;
     try {
       relayHub = require("../../../../build/contracts/IRelayHub.json");
     } catch (error) {
@@ -20,40 +22,23 @@ export default class RelayContainer extends Component {
     }
 
     if (web3) {
-      const networkId = await web3.eth.net.getId();
-      const networkType = await web3.eth.net.getNetworkType();
-
-      relayInstance = new web3.eth.Contract(
+      relayInstance = await new web3.eth.Contract(
         relayHub.abi,
         "0x9C57C0F1965D225951FE1B2618C92Eefd687654F"
       );
-      this.setState({ relayInstance });
+      balance = await getRelayBalance(web3, chatAppAddress, relayInstance);
+      this.setState({ relayInstance, relayBalance: balance });
     }
 
     const newBlocks = web3.eth.subscribe("newBlockHeaders");
     newBlocks.on("data", this.getRelayBalance);
 
     this.subscription = newBlocks;
-    await this.getRelayBalance();
   };
 
   componentWillUnmount = async () => {
     if (this.subscription) {
       this.subscription.unSubscribe();
-    }
-  };
-
-  getRelayBalance = async () => {
-    const { web3, chatAppAddress } = this.props;
-    const { relayInstance } = this.state;
-    try {
-      let balance = await relayInstance.methods
-        .balanceOf(chatAppAddress)
-        .call();
-      balance = web3.utils.fromWei(balance, "ether");
-      this.setState({ relayBalance: balance });
-    } catch (e) {
-      console.log(e);
     }
   };
 

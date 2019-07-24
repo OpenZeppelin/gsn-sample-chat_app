@@ -2,7 +2,6 @@ import Web3 from "web3";
 const FALLBACK_WEB3_PROVIDER =
   process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
 const tabookey = require("tabookey-gasless");
-const cookies = require("browser-cookies");
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -49,16 +48,14 @@ const getGanacheWeb3 = () => {
   return web3;
 };
 
-//From @github Kyrrui
 const useRelayer = web3 => {
   const RelayProvider = tabookey.RelayProvider;
   var provider = new RelayProvider(web3.currentProvider, {
     txfee: 12,
-    // verbose:true,
     force_gasLimit: 500000
   });
   web3.setProvider(provider);
-  console.log("USING Normal RELAYER");
+  console.log("USING GSN RELAYER");
 };
 
 const useInjectedWeb3 = web3 => {
@@ -66,16 +63,31 @@ const useInjectedWeb3 = web3 => {
   console.log("USING Injected Web3");
 };
 
-
-
 const useEphermeralRelay = web3 => {
   useRelayer(web3);
   const ephemeralKeypair = tabookey.RelayClient.newEphemeralKeypair();
   web3.currentProvider.relayClient.useKeypairForSigning(ephemeralKeypair);
   return ephemeralKeypair.address;
-}
+};
 
+const getRelayBalance = async (web3, appAddress, relayInstance) => {
+  let balance;
 
+  try {
+    balance = await relayInstance.methods.balanceOf(appAddress).call();
+    balance = web3.utils.fromWei(balance, "ether");
+  } catch (e) {
+    console.log(e);
+  }
+
+  return balance;
+};
 
 export default getWeb3;
-export { getGanacheWeb3, useRelayer, useEphermeralRelay, useInjectedWeb3 };
+export {
+  getRelayBalance,
+  getGanacheWeb3,
+  useRelayer,
+  useEphermeralRelay,
+  useInjectedWeb3
+};

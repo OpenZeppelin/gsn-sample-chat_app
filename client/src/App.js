@@ -10,7 +10,6 @@ import RelayContainer from "./components/RelayContainer";
 
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
-import { zeppelinSolidityHotLoaderOptions } from "../config/webpack";
 
 
 class App extends Component {
