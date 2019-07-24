@@ -12,11 +12,13 @@ import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import { zeppelinSolidityHotLoaderOptions } from "../config/webpack";
 
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       signingAccount: null,
+      celebration: false,
       storageValue: 0,
       web3: null,
       ganacheWeb3: null,
@@ -55,7 +57,7 @@ class App extends Component {
       case "Ephemeral":
         signingAccount = await useEphermeralRelay(this.state.web3);
         console.log("Using Ephemeral KeyPair: ", signingAccount);
-        this.setState({ signingAccount });
+        this.setState({ signingAccount, celebration: true });
         break;
       default:
         await getWeb3();

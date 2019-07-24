@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button } from "rimble-ui";
 import styles from "./ChatInput.module.scss";
 import { Loader } from 'rimble-ui';
+import { emojisplosion } from "emojisplosion";
 
 export default class ChatInput extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class ChatInput extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const {signingAccount, instance, fetching, setFetchStatus} = this.props;
+    const {signingAccount, instance, fetching, setFetchStatus, celebration} = this.props;
     if(!fetching){
     setFetchStatus(true);
     const tx = await instance.methods
@@ -24,6 +25,16 @@ export default class ChatInput extends Component {
     this.pollfortx(txHash);
     this.setState({ validated: false, value: ""});
     }
+    
+    // if(celebration){
+    //   emojisplosion({
+    //     emojiCount: () => Math.random() * 100 + 100,
+    //     position: () => ({
+    //       x: window.innerWidth/2,
+    //       y: window.innerHeight/2,
+    //   }),
+    // });
+    // }
 
   };
 
