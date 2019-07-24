@@ -66,30 +66,16 @@ const useInjectedWeb3 = web3 => {
   console.log("USING Injected Web3");
 };
 
-// const useEphermeralRelay = web3 => {
-//   const RelayClient = tabookey.RelayClient;
-//   var provider = new RelayClient(web3, {
-//     txfee: 12,
-//     force_gasLimit: 500000
-//   });
-//   web3.setProvider(provider);
-//   console.log("USING Emphermeral RELAYER");
 
-//   console.log("The provider: ", provider);
-//   let keypair = RelayClient.newEphemeralKeypair();
-//   provider.useKeypairForSigning(keypair);
-//   let account = keypair.address;
-//   return account;
-// };
 
 const useEphermeralRelay = web3 => {
-  let rc = new tabookey.RelayClient(web3);
-  let ephemeralKeypair = tabookey.RelayClient.newEphemeralKeypair();
-  rc.useKeypairForSigning(ephemeralKeypair)
-  console.log("Keypaid: ", rc);
-  web3.setProvider(rc);
+  useRelayer(web3);
+  const ephemeralKeypair = tabookey.RelayClient.newEphemeralKeypair();
+  web3.currentProvider.relayClient.useKeypairForSigning(ephemeralKeypair);
   return ephemeralKeypair.address;
 }
+
+
 
 export default getWeb3;
 export { getGanacheWeb3, useRelayer, useEphermeralRelay, useInjectedWeb3 };
