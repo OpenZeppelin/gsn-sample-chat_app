@@ -28,7 +28,7 @@ export default class RelayContainer extends Component {
         relayHub.abi,
         relayHubAddress
       );
-      
+
       balance = await getRelayBalance(web3, chatAppAddress, relayInstance);
       this.setState({ relayInstance, relayBalance: balance });
     }
