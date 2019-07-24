@@ -1,5 +1,8 @@
 @import './layout/variables.scss';
 
+.body {
+  background-image: url("./images/bg_sdk_full.svg")
+}
 .App {
   text-align: center;
   display: flex;
@@ -8,6 +11,7 @@
   align-items: center;
   background-color: rgb(245, 245, 245);
   height: 100vh;
+  background-image: url("./images/bg_sdk_full.svg");
 }
 
 code {
