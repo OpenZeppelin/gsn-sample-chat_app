@@ -10,7 +10,7 @@ const app = async () => {
         console.log("The Accounts: ", accounts);
       
         console.log(`Network ID: ${networkId}`);
-        const chatAppArtifact = require("./build/contracts/ChatApp.json");
+        const chatAppArtifact = require("./../build/contracts/ChatApp.json");
         const chatAppAddress = chatAppArtifact.networks[networkId].address;
         const chatAppInstance = new web3.eth.Contract(
           chatAppArtifact.abi,
@@ -19,7 +19,7 @@ const app = async () => {
       
         console.log(`ChatApp Address: ${chatAppAddress}`);
       
-        const relayHubArtifact = require("./build/contracts/RelayHub.json");
+        const relayHubArtifact = require("./../build/contracts/IRelayHub.json");
         const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
         const relayHubInstance = new web3.eth.Contract(
           relayHubArtifact.abi,
@@ -31,13 +31,13 @@ const app = async () => {
       
         const txDeposit = await relayHubInstance.methods
           .depositFor(chatAppAddress)
-          .send({ from: accounts[0], gas: 5000000, value: 32e18 });
+          .send({ from: accounts[0], gas: 5000000, value: 1e18 });
         console.log(txDeposit);
       
-        const txInit = await chatAppInstance.methods
-          .init_hub(relayHubAddress)
-          .send({ from: accounts[0], gas: 5000000 });
-        console.log(txInit);
+        // const txInit = await chatAppInstance.methods
+        //   .init_hub(relayHubAddress)
+        //   .send({ from: accounts[0], gas: 5000000 });
+        // console.log(txInit);
       
         console.log("READY!");
     } catch (error) {
