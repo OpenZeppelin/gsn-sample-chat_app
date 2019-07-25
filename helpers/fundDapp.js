@@ -44,7 +44,6 @@ const app = async () => {
         console.log(error);
     }
 
-    process.exit();
-  };
+};
 
 app();
