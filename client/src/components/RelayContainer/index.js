@@ -54,3 +54,4 @@ export default class RelayContainer extends Component {
     return <div>Relay Balance: {this.state.relayBalance} Eth</div>;
   }
 }
+  
