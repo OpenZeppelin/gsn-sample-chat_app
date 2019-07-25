@@ -1,16 +1,9 @@
 Meta transaction enabled Chat App: 
 
-MetaTransactions are the soludion to the Ethereum onboarding problem. By allowing users to interact with contracts without having ETH means that users can start using your application right out of the box. 
-
-To demo the power of MetaTransactions we have created this demo Chat Application, powered by the Gas Stations Network. 
-
-This example shows an Ethereum powered Chat room, you are given the choice of using three different transaction flows- Normal Transaction signing in Metamask, MetaTransactions using MetaMask as a signer, and then finally, MetaTransactions using a in-browser generated keypair to sign messages to the Gas Stations Network Relay. 
-
-
 Requirements: 
 
 Docker
-OpenZeppelin-SDK
+ZOS  (ZeppelinOS)
 Truffle
 Ganache-cli
 

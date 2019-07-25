@@ -34,10 +34,10 @@ const app = async () => {
           .send({ from: accounts[0], gas: 5000000, value: 1e18 });
         //console.log(txDeposit);
       
-        const txInit = await chatAppInstance.methods
-          .init(relayHubAddress)
-          .send({ from: accounts[0], gas: 5000000 });
-        console.log(txInit);
+        // const txInit = await chatAppInstance.methods
+        //   .init_hub(relayHubAddress)
+        //   .send({ from: accounts[0], gas: 5000000 });
+        // console.log(txInit);
       
         console.log("READY!");
     } catch (error) {

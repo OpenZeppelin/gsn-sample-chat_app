@@ -1,23 +1,21 @@
 import React, { Component } from "react";
-import { getRelayBalance, getDappBalance } from "../../utils/getWeb3";
+import { getRelayBalance } from "../../utils/getWeb3";
 const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
 
 export default class RelayContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { validated: false, relayBalance: null, dappBalance: null, relayInstance: null };
+    this.state = { validated: false, relayBalance: null, relayInstance: null };
     this.setProvider = this.props.setProvider;
     this.subscription = null;
   }
 
   componentDidMount = async () => {
-    const { web3, chatAppAddress, instance } = this.props;
-    console.log("The Props: ", this.props);
+    const { web3, chatAppAddress } = this.props;
 
     let relayInstance = {};
     let relayHub = {};
-    let relayBalance = null;
-    let dappBalance = null;
+    let balance = 0;
 
     try {
       relayHub = require("../../../../build/contracts/IRelayHub.json");
@@ -31,11 +29,8 @@ export default class RelayContainer extends Component {
         relayHubAddress
       );
 
-      relayBalance = await getRelayBalance(web3, chatAppAddress, relayInstance);
-      dappBalance = await getDappBalance(web3, instance);
-      console.log("DappBalance: ", dappBalance);
-      this.setState({ relayInstance, relayBalance, dappBalance });
-
+      balance = await getRelayBalance(web3, chatAppAddress, relayInstance);
+      this.setState({ relayInstance, relayBalance: balance });
     }
 
     const newBlocks = web3.eth.subscribe("newBlockHeaders");
