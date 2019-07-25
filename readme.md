@@ -26,11 +26,11 @@ New Terminal Window, top of project:
  
 New Terminal window, top of project: (To start fresh delete build folder, zos.<<network>>.json files)- if you delete zos.json you will need to do zos add ChatApp first. 
 
-`zos push`
+`oz create`
 
-`zos create ChatApp`
+Follow the prompts to deloy "ChatApp"
 
-Now fund the Relay, run the script: 
+Now fund the Relay, run the script in the Helper folder: 
 
 `node fundRelay.js`
 

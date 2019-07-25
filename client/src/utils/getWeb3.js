@@ -55,8 +55,10 @@ const useRelayer = async web3 => {
   console.log("Gas price: ", gasPrice);
   let relay_client_config = {
     txfee: 12,
-    force_gasPrice: gasPrice,			//override requested gas price
-    force_gasLimit: 400000029,		//override requested gas limit.
+    //force_gasPrice: gasPrice,			//override requested gas price
+    gasPrice: gasPrice,			//override requested gas price
+    //force_gasLimit: 400000029,		//override requested gas limit.
+    gasLimit: 400000029,		//override requested gas limit.
     verbose: true
 }
 
