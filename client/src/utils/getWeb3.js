@@ -48,12 +48,20 @@ const getGanacheWeb3 = () => {
   return web3;
 };
 
-const useRelayer = web3 => {
-  const RelayProvider = tabookey.RelayProvider;
-  var provider = new RelayProvider(web3.currentProvider, {
+const useRelayer = async web3 => {
+  const gasPricePercent = 20;
+
+  let gasPrice = ( await web3.eth.getGasPrice() ) * (100  + gasPricePercent)/10;
+  console.log("Gas price: ", gasPrice);
+  let relay_client_config = {
     txfee: 12,
-    force_gasLimit: 500000
-  });
+    force_gasPrice: gasPrice,			//override requested gas price
+    force_gasLimit: 400000029,		//override requested gas limit.
+    verbose: true
+}
+
+  const RelayProvider = tabookey.RelayProvider;
+  var provider = new RelayProvider(web3.currentProvider, relay_client_config);
   web3.setProvider(provider);
   console.log("USING GSN RELAYER");
 };
@@ -63,8 +71,8 @@ const useInjectedWeb3 = web3 => {
   console.log("USING Injected Web3");
 };
 
-const useEphermeralRelay = web3 => {
-  useRelayer(web3);
+const useEphermeralRelay = async web3 => {
+  await useRelayer(web3);
   const ephemeralKeypair = tabookey.RelayClient.newEphemeralKeypair();
   web3.currentProvider.relayClient.useKeypairForSigning(ephemeralKeypair);
   return ephemeralKeypair.address;

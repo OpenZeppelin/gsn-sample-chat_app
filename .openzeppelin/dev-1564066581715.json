@@ -1,7 +1,7 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x7dBD478Daa4e9bD884f06dbba215A058f7F85131",
+      "address": "0x52c7B7519A47d202f9B70d1460302DF089AdC674",
       "constructorCode": "60806040525b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a35b6100c9565b611962806100d86000396000f3fe",
       "bodyBytecodeHash": "a2d80e0f26bca23b40ce9047ca33f00ce2a42e0f4e12eb525712e3f3bf40a557",
       "localBytecodeHash": "b2f969faa67a0f27320739dd56bb82b760197db56b8ed0ded2bb2902309632ee",
@@ -97,19 +97,19 @@
   },
   "solidityLibs": {},
   "proxies": {
-    "ChatApp/ChatApp": [
+    "chatApp/ChatApp": [
       {
-        "address": "0x1b1aAE86473B5E3EE37A9D225b0cfd6A592F7ABF",
-        "version": "2.0.0",
-        "implementation": "0x7dBD478Daa4e9bD884f06dbba215A058f7F85131",
-        "admin": "0x954638cfb89D160dAce6247fF898334ebfC6E0f3",
+        "address": "0xd76A3cF39d3030ee6ce1f03551Ac649f2B55390a",
+        "version": "1.0.0",
+        "implementation": "0x52c7B7519A47d202f9B70d1460302DF089AdC674",
+        "admin": "0xC30F56985f59bf6F0115cB51A2183527AB48Ae41",
         "kind": "Upgradeable"
       }
     ]
   },
   "manifestVersion": "2.2",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0x954638cfb89D160dAce6247fF898334ebfC6E0f3"
+    "address": "0xC30F56985f59bf6F0115cB51A2183527AB48Ae41"
   }
 }

@@ -19,13 +19,10 @@ Get it:
 
 `npm install`
 
-In a new Terminal window: 
-
-`ganache-cli --deterministic`
-
 New Terminal Window, top of project:
 
-`npm explore tabookey-gasless npm run gsn-dock-relay`
+
+`npx gsn-dock-relay-ganache`
  
 New Terminal window, top of project: (To start fresh delete build folder, zos.<<network>>.json files)- if you delete zos.json you will need to do zos add ChatApp first. 
 
