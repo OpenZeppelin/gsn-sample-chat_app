@@ -1,3 +1,5 @@
+This readme is a work in progress. 
+
 Meta transaction enabled Chat App: 
 
 Requirements: 
@@ -19,28 +21,41 @@ Get it:
 
 `npm install`
 
-In a new Terminal window: 
-
-`ganache-cli --deterministic`
 
 New Terminal Window, top of project:
 
-`npm explore tabookey-gasless npm run gsn-dock-relay`
+npx gsn-dock-relay-ganache
+
+(This runs it's own ganache)
  
-New Terminal window, top of project: (To start fresh delete build folder, zos.<<network>>.json files)- if you delete zos.json you will need to do zos add ChatApp first. 
+New terminal window: top of project: 
 
-`zos push`
+`oz create`
 
-`zos create ChatApp`
+Select `ChatApp`
 
-Now fund the Relay, run the script: 
+Network `development`
 
-`node fundRelay.js`
+Select "yes" to run a function. Choose the init function. You need to enter the address of your relay hub here. You will find this at the deployment part of the docker instance. It should be: `0x9C57C0F1965D225951FE1B2618C92Eefd687654F`
 
-New Terminal Window: 
+Now you need to fund you dApp: 
 
-`cd client`
+`oz send-tx --value 100000000000000000`
 
-`npm run start`
+Select `ChatApp`
 
-You may need to refresh your MetaMask. 
+Network `development`
+
+Select `getRecipientBalance()`
+
+Your dapp should be funded and the relay running. 
+
+In a new terminal window: 
+
+cd client
+
+npm run start
+
+Follow along from your browser!!!!
+
+(If you have a problem you might need to toggle networks or reset metamask)
