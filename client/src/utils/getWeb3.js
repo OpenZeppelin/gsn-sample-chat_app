@@ -51,16 +51,17 @@ const getGanacheWeb3 = () => {
 const useRelayer = async web3 => {
   const gasPricePercent = 20;
 
-  let gasPrice = ( await web3.eth.getGasPrice() ) * (100  + gasPricePercent)/10;
+  let gasPrice =
+    ((await web3.eth.getGasPrice()) * (100 + gasPricePercent)) / 10;
   console.log("Gas price: ", gasPrice);
   let relay_client_config = {
     txfee: 12,
     //force_gasPrice: gasPrice,			//override requested gas price
-    gasPrice: gasPrice,			//override requested gas price
+    gasPrice: gasPrice, //override requested gas price
     //force_gasLimit: 400000029,		//override requested gas limit.
-    gasLimit: 400000029,		//override requested gas limit.
+    gasLimit: 400000029, //override requested gas limit.
     verbose: true
-}
+  };
 
   const RelayProvider = tabookey.RelayProvider;
   var provider = new RelayProvider(web3.currentProvider, relay_client_config);
@@ -81,21 +82,37 @@ const useEphermeralRelay = async web3 => {
 };
 
 const getRelayBalance = async (web3, appAddress, relayInstance) => {
-  let balance;
+  let relayBalance = "0";
 
   try {
-    balance = await relayInstance.methods.balanceOf(appAddress).call();
-    balance = web3.utils.fromWei(balance, "ether");
+    relayBalance = await relayInstance.methods.balanceOf(appAddress).call();
+    relayBalance = web3.utils.fromWei(relayBalance, "ether");
   } catch (e) {
     console.log(e);
   }
 
-  return balance;
+  return relayBalance;
+};
+
+const getDappBalance = async (web3, dappInstance) => {
+  let dappBalance = "0";
+
+  try {
+    dappBalance = await dappInstance.methods.getRecipientBalance().call();
+
+    dappBalance = web3.utils.fromWei(dappBalance, "ether");
+
+    console.log("The balance is: ", dappBalance);
+  } catch (error) {
+    console.log("Loading dapp dappBalance failed: ", error);
+  }
+  return dappBalance;
 };
 
 export default getWeb3;
 export {
   getRelayBalance,
+  getDappBalance,
   getGanacheWeb3,
   useRelayer,
   useEphermeralRelay,

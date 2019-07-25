@@ -1,7 +1,7 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x52c7B7519A47d202f9B70d1460302DF089AdC674",
+      "address": "0x5d4764a5b35bdE21d3a8CF501E40C573Ed791875",
       "constructorCode": "60806040525b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a35b6100c9565b611962806100d86000396000f3fe",
       "bodyBytecodeHash": "a2d80e0f26bca23b40ce9047ca33f00ce2a42e0f4e12eb525712e3f3bf40a557",
       "localBytecodeHash": "b2f969faa67a0f27320739dd56bb82b760197db56b8ed0ded2bb2902309632ee",
@@ -99,10 +99,10 @@
   "proxies": {
     "chatApp/ChatApp": [
       {
-        "address": "0xd76A3cF39d3030ee6ce1f03551Ac649f2B55390a",
+        "address": "0xbC07D967CA05a2946F77B97f293bBEeA876b8DA6",
         "version": "1.0.0",
-        "implementation": "0x52c7B7519A47d202f9B70d1460302DF089AdC674",
-        "admin": "0xC30F56985f59bf6F0115cB51A2183527AB48Ae41",
+        "implementation": "0x5d4764a5b35bdE21d3a8CF501E40C573Ed791875",
+        "admin": "0x416C812119fF11F7D9ec46E44F829b2b6A4A9559",
         "kind": "Upgradeable"
       }
     ]
@@ -110,6 +110,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0xC30F56985f59bf6F0115cB51A2183527AB48Ae41"
+    "address": "0x416C812119fF11F7D9ec46E44F829b2b6A4A9559"
   }
 }
