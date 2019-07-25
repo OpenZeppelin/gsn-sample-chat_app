@@ -83,8 +83,20 @@ const getRelayBalance = async (web3, appAddress, relayInstance) => {
   return balance;
 };
 
+const getDappBalance = async (web3, dappInstance) => {
+  let balance;
+  try {
+    balance = await dappInstance.methods.getRecipientBalance().call();
+    balance = web3.utils.fromWei(balance, "ether");
+  } catch (error)  {
+    console.log(error)
+  }
+  return balance;
+}
+
 export default getWeb3;
 export {
+  getDappBalance,
   getRelayBalance,
   getGanacheWeb3,
   useRelayer,

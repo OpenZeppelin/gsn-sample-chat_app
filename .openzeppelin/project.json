@@ -4,11 +4,10 @@
     "ChatApp": "ChatApp"
   },
   "dependencies": {},
-  "name": "ChatApp",
-  "version": "2.0.0",
+  "name": "zepkit",
+  "version": "1.0.0",
   "compiler": {
-    "manager": "openzeppelin",
-    "solcVersion": "0.5.10",
+    "manager": "truffle",
     "compilerSettings": {
       "optimizer": {}
     }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getRelayBalance } from "../../utils/getWeb3";
+import { getDappBalance } from "../../utils/getWeb3";
 const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
 
 export default class RelayContainer extends Component {
@@ -11,7 +11,7 @@ export default class RelayContainer extends Component {
   }
 
   componentDidMount = async () => {
-    const { web3, chatAppAddress } = this.props;
+    const { web3, instance } = this.props;
 
     let relayInstance = {};
     let relayHub = {};
@@ -29,7 +29,7 @@ export default class RelayContainer extends Component {
         relayHubAddress
       );
 
-      balance = await getRelayBalance(web3, chatAppAddress, relayInstance);
+      balance = await getDappBalance(web3, instance);
       this.setState({ relayInstance, relayBalance: balance });
     }
 
