@@ -16,17 +16,12 @@ export default class ChatInput extends Component {
     const { signingAccount, instance, fetching, setFetchStatus } = this.props;
     if (!fetching) {
       setFetchStatus(true);
-      try {
-        const tx = await instance.methods
-          .postMessage(this.state.value)
-          .send({ from: signingAccount });
-        const txHash = tx.transactionHash;
-        console.log("Transaction Hash: ", txHash);
-        this.pollfortx(txHash);
-        this.setState({ validated: false, value: "" });
-      } catch (error) {
-        console.log("Error in Sending Transaction: ", error);
-      }
+      const tx = await instance.methods
+        .postMessage(this.state.value)
+        .send({ from: signingAccount });
+      const txHash = tx.transactionHash;
+      this.pollfortx(txHash);
+      this.setState({ validated: false, value: "" });
     }
   };
 

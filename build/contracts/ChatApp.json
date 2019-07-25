@@ -2880,36 +2880,6 @@
       "events": {},
       "address": "0x1b1aAE86473B5E3EE37A9D225b0cfd6A592F7ABF",
       "updated_at": 1563992798689
-    },
-    "1564066381470": {
-      "links": {},
-      "events": {},
-      "address": "0xdCD065ed2E9fFB79Fa9dEf7Cff7feA4bc6bbD858",
-      "updated_at": 1564066425835
-    },
-    "1564066581715": {
-      "links": {},
-      "events": {},
-      "address": "0xd76A3cF39d3030ee6ce1f03551Ac649f2B55390a",
-      "updated_at": 1564066782855
-    },
-    "1564067067608": {
-      "links": {},
-      "events": {},
-      "address": "0xc3d55214C80A61910fb5aae96Ee9Cb0E53897772",
-      "updated_at": 1564067092575
-    },
-    "1564067757061": {
-      "links": {},
-      "events": {},
-      "address": "0xaB8dcfD1f32cf4Ae8E4d3160B02f0e2890702078",
-      "updated_at": 1564067778492
-    },
-    "1564068961470": {
-      "links": {},
-      "events": {},
-      "address": "0x68b060804ff79531Fc53F014873620dfd805C426",
-      "updated_at": 1564068977112
     }
   }
 }
