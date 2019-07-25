@@ -7,20 +7,14 @@ export default class GSNContainer extends Component {
     super(props);
     this.state = { validated: false };
     this.setProvider = this.props.setProvider;
+    console.log(this.props);
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setState({ validated: true });
-  };
-
-  handleValidation = e => {
-    e.target.parentNode.classList.add("was-validated");
-  };
-
+  
   render() {
-    return (
+    return (<div>
       <div className={styles.button}>
+        
         <Tooltip
           message="Sign your transaction inside MetaMask in the traditional way."
           placement="top"
@@ -45,6 +39,8 @@ export default class GSNContainer extends Component {
             Ephemeral
           </Button>
         </Tooltip>
+      </div>
+      <div>{this.props.metaTxSigner}</div>
       </div>
     );
   }

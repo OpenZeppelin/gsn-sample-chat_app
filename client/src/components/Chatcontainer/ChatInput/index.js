@@ -70,7 +70,7 @@ export default class ChatInput extends Component {
             />
           </Form.Field>
           <Button type="submit" width={1}>
-            {this.props.fetching ? <Loader color="red" /> : this.state.message}
+            {this.props.fetching ? <Loader color="white" /> : this.state.message}
           </Button>
         </Form>
       </div>

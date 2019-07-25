@@ -16,13 +16,12 @@ class App extends Component {
     super(props, context);
     this.state = {
       signingAccount: null,
-      celebration: false,
       storageValue: 0,
       web3: null,
       ganacheWeb3: null,
       accounts: null,
       route: window.location.pathname.replace("/", ""),
-      metaTxSigner: "MetaMask",
+      metaTxSigner: "MetaMask Signing + Sending",
       setProvider: null,
       fetching: false,
       setFetchStatus: null
@@ -44,18 +43,18 @@ class App extends Component {
         signingAccount = this.state.accounts[0];
         this.setState({});
         console.log("Using regular transaction flow");
-        this.setState({ signingAccount });
+        this.setState({ signingAccount, metaTxSigner: "MetaMask Signing + Sending" });
         break;
       case "MMSigner":
         await useRelayer(this.state.web3);
         signingAccount = this.state.accounts[0];
         console.log("Using Metamask to sign");
-        this.setState({ signingAccount });
+        this.setState({ signingAccount, metaTxSigner: "MetaMask KeyPair + Relayer" });
         break;
       case "Ephemeral":
         signingAccount = await useEphermeralRelay(this.state.web3);
         console.log("Using Ephemeral KeyPair: ", signingAccount);
-        this.setState({ signingAccount, celebration: true });
+        this.setState({ signingAccount, metaTxSigner: "Ephemeral KeyPair + Relayer"});
         break;
       default:
         await getWeb3();
