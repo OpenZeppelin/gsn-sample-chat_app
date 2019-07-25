@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Form, Button } from "rimble-ui";
 import styles from "./ChatInput.module.scss";
-import { Loader } from "rimble-ui";
+import { Loader, Flash } from "rimble-ui";
 
 export default class ChatInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { validated: false, value: "", message: "Send" };
+    this.state = { validated: false, value: "", message: "Send", error: false };
     this.instance = this.props.instance.methods;
     this.accounts = this.props.accounts;
   }
@@ -16,12 +16,19 @@ export default class ChatInput extends Component {
     const { signingAccount, instance, fetching, setFetchStatus } = this.props;
     if (!fetching) {
       setFetchStatus(true);
-      const tx = await instance.methods
+      try {
+        const tx = await instance.methods
         .postMessage(this.state.value)
         .send({ from: signingAccount });
       const txHash = tx.transactionHash;
       this.pollfortx(txHash);
       this.setState({ validated: false, value: "" });
+      } catch (error) {
+        console.log("THE ERROR: ", error)
+        this.setState({error: true})
+        setFetchStatus(false);
+      }
+ 
     }
   };
 
@@ -39,7 +46,9 @@ export default class ChatInput extends Component {
         const blockNumber = await web3.eth.getBlockNumber();
         if (blockNumber - currentBlock > 5) {
           newBlock.unsubscribe();
+          setFetchStatus(false);
           this.setState({ message: "ERROR" });
+          
         }
       }
     };
@@ -73,6 +82,11 @@ export default class ChatInput extends Component {
             {this.props.fetching ? <Loader color="white" /> : this.state.message}
           </Button>
         </Form>
+        <div>
+          {this.state.error ? <div><Flash my={3} variant="danger" onClick={()=> this.setState({error: false})}>
+Error: Check console for details. Click to dismiss. 
+</Flash></div> : <div></div>}
+        </div>
       </div>
     );
   }
