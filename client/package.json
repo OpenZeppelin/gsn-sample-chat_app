@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bad-words": "^3.0.2",
     "browser-cookies": "^1.2.0",
     "classnames": "^2.2.6",
     "json-loader": "^0.5.7",

@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/zeppelinos/zepkit/blob/stable/README.md",
   "dependencies": {
-    "bad-words": "^3.0.2",
     "dotenv": "^6.2.0",
     "emojisplosion": "^1.1.2",
     "openzeppelin-eth": "^2.1.3",
