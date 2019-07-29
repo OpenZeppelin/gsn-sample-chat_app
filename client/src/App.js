@@ -75,9 +75,9 @@ class App extends Component {
   componentDidMount = async () => {
     let ChatApp = {};
     try {
-      ChatApp = require("../../contracts/ChatApp.sol");
+      ChatApp = require("../../build/contracts/ChatApp.json");
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     try {
