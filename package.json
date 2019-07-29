@@ -24,6 +24,7 @@
   "homepage": "https://github.com/zeppelinos/zepkit/blob/stable/README.md",
   "dependencies": {
     "@openzeppelin/contracts-ethereum-package": "^2.2.1",
+    "@openzeppelin/network": "github:frangio/openzeppelin-network.js#gsn",
     "@openzeppelin/upgrades": "^2.5.1",
     "bad-words": "^3.0.2",
     "dotenv": "^6.2.0",

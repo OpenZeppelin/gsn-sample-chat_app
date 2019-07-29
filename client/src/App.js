@@ -10,7 +10,7 @@ import RelayContainer from "./components/RelayContainer";
 
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
-import { useWeb3Injected, useWeb3Network } from "@openzeppelin/network";
+import { useWeb3Injected, useWeb3Network, fromInjected } from "@openzeppelin/network";
 
 const App = (props, context) => {
   const initialAppState = {
@@ -33,8 +33,8 @@ const App = (props, context) => {
   let localContext = useWeb3Network("http://127.0.0.1:8545");
 
 
-  useEffect((web3Context) => {
-
+  useEffect(() => {
+    console.log("Web3Context: ", web3Context);
     const load = async () => {
       await web3Context.requestAuth();
       
@@ -99,10 +99,11 @@ const App = (props, context) => {
       }
     };
 
-
+    if(web3Context){
       load();
+    }
     
-  }, []);
+  }, [web3Context]);
 
   const setFetchStatus = status => {
     setAppState({ fetching: status });

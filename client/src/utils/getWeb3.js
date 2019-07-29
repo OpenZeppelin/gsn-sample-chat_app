@@ -1,4 +1,6 @@
 import Web3 from "web3";
+import { useWeb3Injected, useWeb3Network, fromInjected } from "@openzeppelin/network";
+
 const FALLBACK_WEB3_PROVIDER =
   process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
 const tabookey = require("tabookey-gasless");
@@ -48,13 +50,14 @@ const getGanacheWeb3 = () => {
   return web3;
 };
 
-const useRelayer = web3 => {
+const useRelayer = async web3 => {
   console.log("The web3 is: ", web3)
+
   const RelayProvider = tabookey.RelayProvider;
   var provider = new RelayProvider(web3.currentProvider, {
     txfee: 12,
     force_gasLimit: 500000
-  });
+  }); 
   web3.setProvider(provider);
   console.log("USING GSN RELAYER");
 };
