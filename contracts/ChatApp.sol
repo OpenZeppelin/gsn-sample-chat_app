@@ -3,11 +3,11 @@ pragma solidity ^0.5.0;
 import "tabookey-gasless/contracts/GsnUtils.sol";
 import "tabookey-gasless/contracts/IRelayHub.sol";
 import "tabookey-gasless/contracts/RelayRecipient.sol";
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-import "openzeppelin-solidity/contracts/cryptography/ECDSA.sol";
-import "zos-lib/contracts/Initializable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/cryptography/ECDSA.sol";
+import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
-contract ChatApp is RelayRecipient, Ownable, Initializable{
+contract ChatApp is RelayRecipient, Ownable {
     using ECDSA for bytes32;
 
     event message(string message, address user, uint timestamp, bytes32 uuid);

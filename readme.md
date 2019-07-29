@@ -46,7 +46,7 @@ Select `ChatApp`
 
 Network `development`
 
-Select `getRecipientBalance()`
+Select `deposit()`
 
 Your dapp should be funded and the relay running. 
 
