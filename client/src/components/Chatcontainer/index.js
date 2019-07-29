@@ -7,6 +7,8 @@ import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
 
 export default class ChatContainer extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = { messages: [], ...props };
@@ -16,6 +18,8 @@ export default class ChatContainer extends Component {
   unsubscribe = null;
 
   componentDidMount = async () => {
+    this._isMounted = true;
+
     this.subWeb3 = new Web3(window.ethereum);
     const { instance } = this.props;
     await this.getAllMsg();
@@ -45,7 +49,7 @@ export default class ChatContainer extends Component {
           );
           const { message, timestamp, user, uuid } = eventObj;
           const msg = { message, timestamp, user, uuid };
-          this.setState(() => {
+          if(this._isMounted) this.setState(() => {
             return { ...this.state, messages: [...this.state.messages, msg] };
           });
         }
@@ -68,7 +72,7 @@ export default class ChatContainer extends Component {
       messages.push({ message: message, timestamp, user, uuid });
     });
 
-    this.setState(() => {
+    if(this._isMounted) this.setState(() => {
       return { messages: messages };
     });
   };
@@ -77,6 +81,7 @@ export default class ChatContainer extends Component {
     if (this.unsubscribe) {
       this.unsubscribe.unsubscribe();
     }
+    this._isMounted = false;
   };
 
   render() {

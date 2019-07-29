@@ -1,13 +1,12 @@
-import React, { Component, useEffect, useState } from "react";
-import getWeb3, {
-  getGanacheWeb3,
+import React, { useEffect, useState } from "react";
+import {
   useRelayer,
   useEphermeralRelay,
   useInjectedWeb3
 } from "./utils/getWeb3";
 import { Loader } from "rimble-ui";
 import RelayContainer from "./components/RelayContainer";
-import { isMobile } from "react-device-detect";
+//import { isMobile } from "react-device-detect";
 
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
@@ -24,64 +23,25 @@ const App = (props, context) => {
     metaTxSigner: "MetaMask Signing + Sending",
     setProvider: null,
     fetching: false,
-    setFetchStatus: null, 
-    ganacheProvider: null,
+    setFetchStatus: null,
+    ganacheProvider: null
   };
 
   const [appState, setAppState] = useState(initialAppState);
 
-  const setFetchStatus = status => {
-    setAppState({ fetching: status });
-  };
+  let web3Context = useWeb3Injected();
+  let localContext = useWeb3Network("http://127.0.0.1:8545");
 
-  const setMetaTxSigner = async signer => {
-    let signingAccount;
-    switch (signer) {
-      case "MetaMask":
-        await useInjectedWeb3(this.state.web3);
-        signingAccount = this.state.accounts[0];
-        setAppState({});
-        console.log("Using regular transaction flow");
-        setAppState({
-          signingAccount,
-          metaTxSigner: "MetaMask Signing + Sending"
-        });
-        break;
-      case "MMSigner":
-        await useRelayer(this.state.web3);
-        signingAccount = this.state.accounts[0];
-        console.log("Using Metamask to sign");
-        setAppState({
-          signingAccount,
-          metaTxSigner: "MetaMask KeyPair + Relayer"
-        });
-        break;
-      case "Ephemeral":
-        signingAccount = await useEphermeralRelay(this.state.web3);
-        console.log("Using Ephemeral KeyPair: ", signingAccount);
-        setAppState({
-          signingAccount,
-          metaTxSigner: "Ephemeral KeyPair + Relayer"
-        });
-        break;
-      default:
-        await getWeb3();
-    }
-  };
 
-  const getGanacheAddresses = async () => {
-    if (!appState.ganacheProvider) {
-      appState.ganacheProvider = getGanacheWeb3();
-    }
-    if (appState.ganacheProvider) {
-      return await appState.ganacheProvider.eth.getAccounts();
-    }
+  useEffect((web3Context) => {
 
-    return [];
-  };
-
-  useEffect(() => {
     const load = async () => {
+      await web3Context.requestAuth();
+      
+      console.log("Here")
+      const { accounts, networkId, networkName, providerName } = web3Context;
+      const { ganacheAccounts } = localContext;
+      
       let ChatApp = {};
       try {
         ChatApp = require("../../contracts/ChatApp.sol");
@@ -91,15 +51,8 @@ const App = (props, context) => {
 
       try {
         const isProd = process.env.NODE_ENV === "production";
-        if (!isProd) {
-          const web3 = await getWeb3();
-          const ganacheAccounts = await getGanacheAddresses();
-          const ganacheWeb3 = await getGanacheWeb3();
-          const accounts = await web3.eth.getAccounts();
-          const signingAccount = accounts[0];
-          const networkId = await web3.eth.net.getId();
-          const networkType = await web3.eth.net.getNetworkType();
-          const isMetaMask = web3.currentProvider.isMetaMask;
+        if (!isProd && web3Context) {
+          const web3 = web3Context.lib;
 
           let balance =
             accounts.length > 0
@@ -124,17 +77,17 @@ const App = (props, context) => {
           setAppState({
             web3,
             ganacheAccounts,
-            signingAccount,
+            signingAccount: accounts[0],
             accounts,
             balance,
             networkId,
-            isMetaMask,
+            isMetaMask: providerName == "metamask",
             instance,
-            networkType,
+            networkName,
             ChatApp,
             setProvider: setMetaTxSigner,
             setFetchStatus: setFetchStatus,
-            ganacheWeb3,
+            ganacheWeb3: localContext.lib,
             chatAppAddress: deployedNetwork.address
           });
         }
@@ -146,8 +99,54 @@ const App = (props, context) => {
       }
     };
 
-    load();
+
+      load();
+    
   }, []);
+
+  const setFetchStatus = status => {
+    setAppState({ fetching: status });
+  };
+
+  const setMetaTxSigner = async signer => {
+    const { accounts, networkId, networkName, providerName, lib } = web3Context;
+    let signingAccount;
+    switch (signer) {
+      case "MetaMask":
+        await useInjectedWeb3(appState.web3);
+        signingAccount = accounts[0];
+        console.log("Using regular transaction flow");
+        setAppState({
+          signingAccount,
+          metaTxSigner: "MetaMask Signing + Sending"
+        });
+        break;
+      case "MMSigner":
+        await useRelayer(appState.web3);
+        signingAccount = accounts[0];
+        console.log("Using Metamask to sign");
+        setAppState({
+          signingAccount,
+          metaTxSigner: "MetaMask KeyPair + Relayer"
+        });
+        break;
+      case "Ephemeral":
+        console.log("The appstate web3: ", appState.web3)
+        signingAccount = await useEphermeralRelay(appState.web3);
+        console.log("Using Ephemeral KeyPair: ", signingAccount);
+        setAppState({
+          signingAccount,
+          metaTxSigner: "Ephemeral KeyPair + Relayer"
+        });
+        break;
+      default:
+        web3Context = useWeb3Injected();
+
+    }
+  };
+
+
+
 
   const renderLoader = () => {
     return (

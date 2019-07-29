@@ -1,17 +1,21 @@
-import React, { Component } from "react";
+import React, { useState, useEffect} from "react";
 import { getDappBalance } from "../../utils/getWeb3";
 const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
 
-export default class RelayContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false, relayBalance: null, relayInstance: null };
-    this.setProvider = this.props.setProvider;
-    this.subscription = null;
-  }
 
-  componentDidMount = async () => {
-    const { web3, instance } = this.props;
+const RelayContainer = (props) => {
+
+  const defaultState = { validated: false, relayBalance: null, relayInstance: null };
+
+  const [relayState, setRelayState] = useState(defaultState);
+
+  const setProvider = props.setProvider;
+  let subscription = null;
+
+
+useEffect(()=> {
+  const load = async () => {
+    const { web3, instance } = props;
 
     let relayInstance = {};
     let relayHub = {};
@@ -30,22 +34,27 @@ export default class RelayContainer extends Component {
       );
 
       balance = await getDappBalance(web3, instance);
-      this.setState({ relayInstance, relayBalance: balance });
+      setRelayState({ relayInstance, relayBalance: balance });
     }
 
     const newBlocks = web3.eth.subscribe("newBlockHeaders");
-    newBlocks.on("data", this.getRelayBalance);
+    newBlocks.on("data", getDappBalance);
 
-    this.subscription = newBlocks;
+    subscription = newBlocks;
   };
-
-  componentWillUnmount = async () => {
-    if (this.subscription) {
-      this.subscription.unSubscribe();
-    }
-  };
-
-  render() {
-    return <div>Relay Balance: {this.state.relayBalance} Eth</div>;
+  if (subscription) {
+    return subscription.unSubscribe();
   }
+
+  load();
+}, [])
+ 
+
+
+
+
+    return <div>Relay Balance: {relayState.relayBalance} Eth</div>;
+  
 }
+
+export default RelayContainer;

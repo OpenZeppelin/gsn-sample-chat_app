@@ -11,7 +11,9 @@ export default class GSNContainer extends Component {
   }
 
   
+
   render() {
+    console.log("GSNCONTAINER PROPS", this.props);
     return (<div>
       <div className={styles.button}>
         

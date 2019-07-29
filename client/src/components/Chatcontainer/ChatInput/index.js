@@ -1,39 +1,41 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "rimble-ui";
 import styles from "./ChatInput.module.scss";
 import { Loader, Flash } from "rimble-ui";
 
-export default class ChatInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false, value: "", message: "Send", error: false };
-    this.instance = this.props.instance.methods;
-    this.accounts = this.props.accounts;
-  }
+const ChatInput = (props) => {
 
-  handleSubmit = async e => {
+  const defaultState = { validated: false, value: "", message: "Send", error: false };
+
+  const [state, setState] = useState(defaultState);
+
+  const instance = props.instance.methods;
+  const accounts = props.accounts;
+
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    const { signingAccount, instance, fetching, setFetchStatus } = this.props;
+    const { signingAccount, instance, fetching, setFetchStatus } = props;
     if (!fetching) {
       setFetchStatus(true);
       try {
         const tx = await instance.methods
-        .postMessage(this.state.value)
+        .postMessage(state.value)
         .send({ from: signingAccount });
       const txHash = tx.transactionHash;
-      this.pollfortx(txHash);
-      this.setState({ validated: false, value: "" });
+      pollfortx(txHash);
+      setState({ validated: false, value: "" });
       } catch (error) {
         console.log("THE ERROR: ", error)
-        this.setState({error: true})
+        setState({error: true})
         setFetchStatus(false);
       }
  
     }
   };
 
-  pollfortx = async tx => {
-    const { web3, setFetchStatus } = this.props;
+  const pollfortx = async tx => {
+    const { web3, setFetchStatus } = props;
     let newBlock;
     let currentBlock = await web3.eth.getBlockNumber();
 
@@ -47,7 +49,7 @@ export default class ChatInput extends Component {
         if (blockNumber - currentBlock > 5) {
           newBlock.unsubscribe();
           setFetchStatus(false);
-          this.setState({ message: "ERROR" });
+          setState({ message: "ERROR" });
           
         }
       }
@@ -57,37 +59,39 @@ export default class ChatInput extends Component {
     newBlock.on("data", checkBlock());
   };
 
-  handleValidation = e => {
-    this.setState({ validated: true, value: e.target.value });
+
+  const handleValidation = e => {
+    setState({ validated: true, value: e.target.value });
   };
 
-  render() {
+
     return (
       <div className={styles.chatInput}>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Field
             label="Chat Message"
             width={1}
-            validated={this.state.validated}
+            validated={state.validated}
           >
             <Form.Input
               type="text"
               required
               width={1}
-              value={this.state.value}
-              onChange={this.handleValidation}
+              value={state.value}
+              onChange={handleValidation}
             />
           </Form.Field>
           <Button type="submit" width={1}>
-            {this.props.fetching ? <Loader color="white" /> : this.state.message}
+            {props.fetching ? <Loader color="white" /> : state.message}
           </Button>
         </Form>
         <div>
-          {this.state.error ? <div><Flash my={3} variant="danger" onClick={()=> this.setState({error: false})}>
+          {state.error ? <div><Flash my={3} variant="danger" onClick={()=> setState({error: false})}>
 Error: Check console for details. Click to dismiss. 
 </Flash></div> : <div></div>}
         </div>
       </div>
     );
-  }
 }
+
+export default ChatInput;

@@ -49,6 +49,7 @@ const getGanacheWeb3 = () => {
 };
 
 const useRelayer = web3 => {
+  console.log("The web3 is: ", web3)
   const RelayProvider = tabookey.RelayProvider;
   var provider = new RelayProvider(web3.currentProvider, {
     txfee: 12,

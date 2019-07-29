@@ -2,19 +2,24 @@ import React, { Component } from "react";
 import { Button } from "rimble-ui";
 
 export default class FundMetaMask extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = { balance: null };
   }
 
   componentDidMount = async () => {
-    this.poll = setInterval(() => this.getBalance(), 1000);
+    this._isMounted = true;
+
+    this.timer = setInterval(() => this.getBalance(), 1000);
   
   };
 
   componentWillUnmount(){
     clearInterval(this.timer);
     this.timer=null;
+    this._isMounted = false;
   }
 
   getBalance = async () => {
@@ -25,7 +30,7 @@ export default class FundMetaMask extends Component {
       try {
         balance = await web3.eth.getBalance(accounts[0]);
         balance = web3.utils.fromWei(balance, "ether");
-        this.setState({ balance });
+        if(this._isMounted) this.setState({ balance });
       } catch (error) {
         console.log(error);
       }
