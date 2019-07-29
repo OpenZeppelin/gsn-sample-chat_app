@@ -81,54 +81,57 @@ class App extends Component {
     }
 
     try {
-      const isProd = process.env.NODE_ENV === "production";
-      if (!isProd) {
-        const web3 = await getWeb3();
-        const ganacheAccounts = await this.getGanacheAddresses();
-        const ganacheWeb3 = await getGanacheWeb3();
-        const accounts = await web3.eth.getAccounts();
-        const signingAccount = accounts[0];
-        const networkId = await web3.eth.net.getId();
-        const networkType = await web3.eth.net.getNetworkType();
-        const isMetaMask = web3.currentProvider.isMetaMask;
+      const web3 = await getWeb3();
+      const ganacheAccounts = await this.getGanacheAddresses();
+      const ganacheWeb3 = await getGanacheWeb3();
+      const accounts = await web3.eth.getAccounts();
+      const signingAccount = accounts[0];
+      const networkId = await web3.eth.net.getId();
+      const networkType = await web3.eth.net.getNetworkType();
+      const isMetaMask = web3.currentProvider.isMetaMask;
 
-        let balance =
-          accounts.length > 0
-            ? await web3.eth.getBalance(accounts[0])
-            : web3.utils.toWei("0");
+      let balance =
+        accounts.length > 0
+          ? await web3.eth.getBalance(accounts[0])
+          : web3.utils.toWei("0");
 
-        balance = web3.utils.fromWei(balance, "ether");
-        let instance = null;
-        let deployedNetwork = null;
+      balance = web3.utils.fromWei(balance, "ether");
+      let instance = null;
+      let deployedNetwork = null;
 
-        if (ChatApp.networks) {
-          deployedNetwork = ChatApp.networks[networkId.toString()];
-
-          if (deployedNetwork) {
-            instance = new web3.eth.Contract(
-              ChatApp.abi,
-              deployedNetwork && deployedNetwork.address
-            );
-          }
+      let chatAppAddress = null;
+      if (process.env.REACT_APP_CHAT_APP_ADDRESS) {
+        chatAppAddress = process.env.REACT_APP_CHAT_APP_ADDRESS;
+      } else if (ChatApp.networks) {
+        deployedNetwork = ChatApp.networks[networkId.toString()];
+        if (deployedNetwork) {
+          chatAppAddress = deployedNetwork && deployedNetwork.address;
         }
-
-        this.setState({
-          web3,
-          ganacheAccounts,
-          signingAccount,
-          accounts,
-          balance,
-          networkId,
-          isMetaMask,
-          instance,
-          networkType,
-          ChatApp,
-          setProvider: this.setMetaTxSigner,
-          setFetchStatus: this.setFetchStatus,
-          ganacheWeb3,
-          chatAppAddress: deployedNetwork.address
-        });
       }
+
+      if (chatAppAddress) {
+        console.log("Loading chat app from", chatAppAddress);
+        instance = new web3.eth.Contract(ChatApp.abi, chatAppAddress);
+      } else {
+        console.error("Chat app address not found");
+      }
+
+      this.setState({
+        web3,
+        ganacheAccounts,
+        signingAccount,
+        accounts,
+        balance,
+        networkId,
+        isMetaMask,
+        instance,
+        networkType,
+        ChatApp,
+        setProvider: this.setMetaTxSigner,
+        setFetchStatus: this.setFetchStatus,
+        ganacheWeb3,
+        chatAppAddress
+      });
     } catch (error) {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`

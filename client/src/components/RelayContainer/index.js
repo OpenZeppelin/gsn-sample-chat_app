@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getDappBalance } from "../../utils/getWeb3";
-const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
+const relayHubAddress = process.env.REACT_APP_HUB_ADDRESS || "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
 
 export default class RelayContainer extends Component {
   constructor(props) {
