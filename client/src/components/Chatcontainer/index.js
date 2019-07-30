@@ -85,7 +85,8 @@ export default class ChatContainer extends Component {
         <ChatWindow messages={this.state.messages} {...this.props} />
         <ChatInput {...this.props} />
         <GSNContainer {...this.props} />
-        <FundMetaMask {...this.props} />
+        {this.props.isMetamask ? <FundMetaMask {...this.props} /> : <div></div>}
+        
       </div>
     );
   }

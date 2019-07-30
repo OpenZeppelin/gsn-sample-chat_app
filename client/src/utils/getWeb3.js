@@ -2,6 +2,7 @@ import Web3 from "web3";
 const FALLBACK_WEB3_PROVIDER =
   process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
 const tabookey = require("tabookey-gasless");
+const INFURA_ID = 'd6760e62b67f4937ba1ea2691046f06d';
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -38,10 +39,21 @@ const getWeb3 = () =>
     });
   });
 
+const getInfuraWeb3 = () =>
+  new Promise((resolve, reject) => {
+      try {
+        const provider = new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/" + INFURA_ID);
+        const web3 = new Web3(provider);
+        resolve(web3);
+      } catch (error) {
+        reject(error)
+      }
+      }
+  );
+
 const getGanacheWeb3 = () => {
   const isProd = process.env.NODE_ENV === "production";
   if (isProd) {
-    
     return null;
   }
   const provider = new Web3.providers.HttpProvider("http://0.0.0.0:8545");
@@ -114,5 +126,6 @@ export {
   getGanacheWeb3,
   useRelayer,
   useEphermeralRelay,
-  useInjectedWeb3
+  useInjectedWeb3,
+  getInfuraWeb3
 };
