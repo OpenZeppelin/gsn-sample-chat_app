@@ -38,6 +38,6 @@ export default class RelayContainer extends Component {
   };
 
   render() {
-    return <div>Dapp Balance: {this.state.relayBalance} Eth</div>;
+    return <div>App balance for gasless txs: {this.state.relayBalance} Eth</div>;
   }
 }
