@@ -9,6 +9,7 @@ import { Loader } from "rimble-ui";
 import RelayContainer from "./components/RelayContainer";
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
+import logo from '../src/images/OZ_logo.png';
 // const relayHubAddress =
 //   process.env.REACT_APP_HUB_ADDRESS ||
 //   "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
@@ -476,6 +477,7 @@ class App extends Component {
     }
     return (
       <div className={styles.App}>
+        <div><img src={logo} alt="Logo" /></div>
         <h1>GSN Chat APP</h1>
         <p />
         <ChatContainer {...this.state} {...this.setMetaTxSigner} />

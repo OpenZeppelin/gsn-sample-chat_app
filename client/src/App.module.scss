@@ -24,6 +24,10 @@ code {
     monospace;
 }
 
+
+img {
+  max-width: 250px;
+}
 .wrapper {
   min-height: 80vh;
   width: 100%;
@@ -31,6 +35,7 @@ code {
   flex-flow: column nowrap;
   align-items: center;
 }
+
 
 .setup, .contracts {
   width: 100%;

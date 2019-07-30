@@ -58,7 +58,7 @@ It should be: `0x9C57C0F1965D225951FE1B2618C92Eefd687654F`
 
 Now you need to fund you dApp: 
 
-`oz send-tx --value 100000000000000000`
+`oz send-tx --value 1000000000000000000`
 
 Select: `ChatApp`
 
