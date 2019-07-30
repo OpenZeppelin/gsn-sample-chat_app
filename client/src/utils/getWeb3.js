@@ -96,6 +96,7 @@ const getRelayBalance = async (web3, appAddress, relayInstance) => {
 };
 
 const getDappBalance = async (web3, dappInstance) => {
+  console.log("Web3", web3);
   let balance;
   try {
     balance = await dappInstance.methods.getRecipientBalance().call();

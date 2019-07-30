@@ -24,6 +24,7 @@ export default class RelayContainer extends Component {
       );
 
       balance = await getDappBalance(web3, instance);
+      console.log("The Istance: ", instance);
       this.setState({ relayInstance, relayBalance: balance });
     }
 
@@ -40,6 +41,6 @@ export default class RelayContainer extends Component {
   };
 
   render() {
-    return <div>Relay Balance: {this.state.relayBalance} Eth</div>;
+    return <div>Dapp Balance in Relay Hub: {this.state.relayBalance} Eth</div>;
   }
 }
