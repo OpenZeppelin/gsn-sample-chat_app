@@ -47,6 +47,7 @@ export default class FundMetaMask extends Component {
 
   render() {
     if (process.env.NODE_ENV === 'production') return null;
+    if (!this.props.ganacheWeb3) return null;
     return (
       <div>
         <Button size="small" onClick={() => this.fund()}>

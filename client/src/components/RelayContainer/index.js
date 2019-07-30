@@ -15,7 +15,6 @@ export default class RelayContainer extends Component {
     let relayBalance = 0;
 
     if (this.instance) {
-      console.log("This instance: ", this.instance)
       try {
         relayBalance = await this.instance.methods.getRecipientBalance().call();
         relayBalance = this.web3.utils.fromWei(relayBalance, "ether");

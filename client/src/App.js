@@ -395,8 +395,6 @@ class App extends Component {
       }
      
 
-
-
       const ganacheWeb3 = await getGanacheWeb3();
       const ganacheAccounts = await this.getGanacheAddresses();
       const accounts = await web3.eth.getAccounts();
@@ -437,8 +435,6 @@ class App extends Component {
           RelayHubAbi,
           relayHubAddress
         );
-
-        console.log("Relay", relayHubInstance);
       } catch (error) {
         console.error(error);
       }
