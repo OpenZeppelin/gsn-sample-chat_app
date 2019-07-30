@@ -1,17 +1,12 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0xDBE3d944976Be6964B3304330FA1431335637089",
+      "address": "0x81498a827508a8789542b5c97c06febd152bcD48",
       "constructorCode": "60806040523480156100115760006000fd5b50610017565b6119ea806100266000396000f3fe",
-      "bodyBytecodeHash": "492aefdbb246ed4d4dccf82f8e2ce13d6fad063470c756dc396882828b3e6146",
-      "localBytecodeHash": "912e3017977fb09bb34504a46d977e48b1f096833a8226c7981a47ddcc786033",
-      "deployedBytecodeHash": "912e3017977fb09bb34504a46d977e48b1f096833a8226c7981a47ddcc786033",
+      "bodyBytecodeHash": "4ff042d49c3dc8e975ff97b398cd36f42bfef87aa4a11f7ebf9fa19cdd17e31f",
+      "localBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
+      "deployedBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
       "types": {
-        "t_address": {
-          "id": "t_address",
-          "kind": "elementary",
-          "label": "address"
-        },
         "t_bool": {
           "id": "t_bool",
           "kind": "elementary",
@@ -29,6 +24,11 @@
           "kind": "array",
           "label": "uint256[50]"
         },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
         "t_mapping<t_bool>": {
           "id": "t_mapping<t_bool>",
           "valueType": "t_bool",
@@ -37,14 +37,6 @@
         }
       },
       "storage": [
-        {
-          "contract": "RelayRecipient",
-          "path": "tabookey-gasless/contracts/RelayRecipient.sol",
-          "label": "relayHub",
-          "astId": 1413,
-          "type": "t_address",
-          "src": "807:26:8"
-        },
         {
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
@@ -70,6 +62,14 @@
           "src": "1951:29:3"
         },
         {
+          "contract": "RelayRecipient",
+          "path": "tabookey-gasless/contracts/RelayRecipient.sol",
+          "label": "relayHub",
+          "astId": 1415,
+          "type": "t_address",
+          "src": "807:26:8"
+        },
+        {
           "contract": "Ownable",
           "path": "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol",
           "label": "_owner",
@@ -89,9 +89,9 @@
           "contract": "ChatApp",
           "path": "contracts/ChatApp.sol",
           "label": "relaysWhitelist",
-          "astId": 807,
+          "astId": 809,
           "type": "t_mapping<t_bool>",
-          "src": "730:48:4"
+          "src": "746:48:4"
         }
       ],
       "warnings": {
@@ -107,17 +107,10 @@
   "proxies": {
     "zepkit/ChatApp": [
       {
-        "address": "0x8eE283a4a8278ABA9eb8720630c56AAF3dca5cF1",
+        "address": "0x11492fC99B2199cA5317f248a5877Dc03873A366",
         "version": "1.0.0",
-        "implementation": "0xB126E30EecD4b93C5123D06a375085284d95c41A",
-        "admin": "0x069503890890D53e3848394751C1FBa27E16E480",
-        "kind": "Upgradeable"
-      },
-      {
-        "address": "0x597A407c583dD31373f5185f94ec44Be6B60fD68",
-        "version": "1.0.0",
-        "implementation": "0xDBE3d944976Be6964B3304330FA1431335637089",
-        "admin": "0x069503890890D53e3848394751C1FBa27E16E480",
+        "implementation": "0x81498a827508a8789542b5c97c06febd152bcD48",
+        "admin": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2",
         "kind": "Upgradeable"
       }
     ]
@@ -125,6 +118,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0x069503890890D53e3848394751C1FBa27E16E480"
+    "address": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2"
   }
 }

@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol
 import "@openzeppelin/contracts-ethereum-package/contracts/cryptography/ECDSA.sol";
 import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
-contract ChatApp is RelayRecipient, Ownable, Initializable{
+contract ChatApp is Initializable, RelayRecipient, Ownable {
     using ECDSA for bytes32;
 
     event message(string message, address user, uint timestamp, bytes32 uuid);
