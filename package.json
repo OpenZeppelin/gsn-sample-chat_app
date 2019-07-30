@@ -1,5 +1,5 @@
 {
-  "name": "zepkit",
+  "name": "Starter Kit",
   "version": "1.0.0",
   "description": "ZeppelinOS kit containing React, ZeppelinOS & OpenZeppelin",
   "main": "index.js",
@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeppelinos/zepkit"
+    "url": "git+https://github.com/OpenZeppelin/starter-kit"
   },
   "keywords": [
-    "zeppelinos",
+    "starter kit",
     "openzeppelin",
     "truffle",
     "react"
@@ -19,9 +19,9 @@
   "author": "Ramon Recuero <ramon@dapis.io>, Igor Yalovoy <to@ylv.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zeppelinos/zepkit/issues"
+    "url": "https://github.com/OpenZeppelin/starter-kit/issues"
   },
-  "homepage": "https://github.com/zeppelinos/zepkit/blob/stable/README.md",
+  "homepage": "https://github.com/OpenZeppelin/starter-kit/blob/stable/README.md",
   "dependencies": {
     "dotenv": "^6.2.0",
     "emojisplosion": "^1.1.2",
