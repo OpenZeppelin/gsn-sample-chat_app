@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/OpenZeppelin/starter-kit/blob/stable/README.md",
   "dependencies": {
+    "@openzeppelin/contracts-ethereum-package": "^2.2.1",
     "dotenv": "^6.2.0",
     "emojisplosion": "^1.1.2",
     "openzeppelin-eth": "^2.1.3",
