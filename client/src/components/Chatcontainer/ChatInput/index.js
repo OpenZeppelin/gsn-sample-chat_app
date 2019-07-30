@@ -7,7 +7,7 @@ export default class ChatInput extends Component {
   constructor(props) {
     super(props);
     this.state = { validated: false, value: "", message: "Send", error: false };
-    this.instance = this.props.instance.methods;
+    this.instance = this.props.instance ? this.props.instance.methods : null;
     this.accounts = this.props.accounts;
   }
 

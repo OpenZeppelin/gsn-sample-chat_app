@@ -1,7 +1,7 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x81498a827508a8789542b5c97c06febd152bcD48",
+      "address": "0xE0bD2C1f9e223b582aac814eC2fE11e6353aea6C",
       "constructorCode": "60806040523480156100115760006000fd5b50610017565b6119ea806100266000396000f3fe",
       "bodyBytecodeHash": "4ff042d49c3dc8e975ff97b398cd36f42bfef87aa4a11f7ebf9fa19cdd17e31f",
       "localBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
@@ -107,24 +107,10 @@
   "proxies": {
     "zepkit/ChatApp": [
       {
-        "address": "0x11492fC99B2199cA5317f248a5877Dc03873A366",
+        "address": "0xDb5Fb39C37bc7708690781C3c4222001aa23a867",
         "version": "1.0.0",
-        "implementation": "0x81498a827508a8789542b5c97c06febd152bcD48",
-        "admin": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2",
-        "kind": "Upgradeable"
-      },
-      {
-        "address": "0x7D12730692a12582f4E0c426f46975279Dd3E12B",
-        "version": "1.0.0",
-        "implementation": "0x81498a827508a8789542b5c97c06febd152bcD48",
-        "admin": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2",
-        "kind": "Upgradeable"
-      },
-      {
-        "address": "0x3803F22E59B316c762B129B0Be5E56CFD8e1dE44",
-        "version": "1.0.0",
-        "implementation": "0x81498a827508a8789542b5c97c06febd152bcD48",
-        "admin": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2",
+        "implementation": "0xE0bD2C1f9e223b582aac814eC2fE11e6353aea6C",
+        "admin": "0xac6830d105bd47a2d0AB4833cBB073bC60df6B69",
         "kind": "Upgradeable"
       }
     ]
@@ -132,6 +118,6 @@
   "manifestVersion": "2.2",
   "version": "1.0.0",
   "proxyAdmin": {
-    "address": "0xE43d3A19e83C23A9F07b12CBb5a3e96fA029aBF2"
+    "address": "0xac6830d105bd47a2d0AB4833cBB073bC60df6B69"
   }
 }

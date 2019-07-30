@@ -7,9 +7,14 @@ import getWeb3, {
 } from "./utils/getWeb3";
 import { Loader } from "rimble-ui";
 import RelayContainer from "./components/RelayContainer";
-
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
+// const relayHubAddress =
+//   process.env.REACT_APP_HUB_ADDRESS ||
+//   "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
+
+const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
+
 
 class App extends Component {
   constructor(props, context) {
@@ -24,7 +29,10 @@ class App extends Component {
       metaTxSigner: "MetaMask Signing + Sending",
       setProvider: null,
       fetching: false,
-      setFetchStatus: null
+      setFetchStatus: null,
+      relayHubInstance: null,
+      instance: null, 
+      ganacheProvider: null,
     };
 
     this.setMetaTxSigner = this.setMetaTxSigner.bind(this);
@@ -43,18 +51,27 @@ class App extends Component {
         signingAccount = this.state.accounts[0];
         this.setState({});
         console.log("Using regular transaction flow");
-        this.setState({ signingAccount, metaTxSigner: "MetaMask Signing + Sending" });
+        this.setState({
+          signingAccount,
+          metaTxSigner: "MetaMask Signing + Sending"
+        });
         break;
       case "MMSigner":
         await useRelayer(this.state.web3);
         signingAccount = this.state.accounts[0];
         console.log("Using Metamask to sign");
-        this.setState({ signingAccount, metaTxSigner: "MetaMask KeyPair + Relayer" });
+        this.setState({
+          signingAccount,
+          metaTxSigner: "MetaMask KeyPair + Relayer"
+        });
         break;
       case "Ephemeral":
         signingAccount = await useEphermeralRelay(this.state.web3);
         console.log("Using Ephemeral KeyPair: ", signingAccount);
-        this.setState({ signingAccount, metaTxSigner: "Ephemeral KeyPair + Relayer"});
+        this.setState({
+          signingAccount,
+          metaTxSigner: "Ephemeral KeyPair + Relayer"
+        });
         break;
       default:
         await getWeb3();
@@ -73,6 +90,286 @@ class App extends Component {
   };
 
   componentDidMount = async () => {
+    const RelayHubAbi = [
+      {
+        constant: false,
+        inputs: [
+          { name: "transactionFee", type: "uint256" },
+          { name: "url", type: "string" }
+        ],
+        name: "registerRelay",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          { name: "relay", type: "address" },
+          { name: "from", type: "address" },
+          { name: "to", type: "address" },
+          { name: "encodedFunction", type: "bytes" },
+          { name: "transactionFee", type: "uint256" },
+          { name: "gasPrice", type: "uint256" },
+          { name: "gasLimit", type: "uint256" },
+          { name: "nonce", type: "uint256" },
+          { name: "signature", type: "bytes" },
+          { name: "approvalData", type: "bytes" }
+        ],
+        name: "canRelay",
+        outputs: [
+          { name: "status", type: "uint256" },
+          { name: "recipientContext", type: "bytes" }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [{ name: "from", type: "address" }],
+        name: "getNonce",
+        outputs: [{ name: "", type: "uint256" }],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [{ name: "amount", type: "uint256" }],
+        name: "withdraw",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "unsignedTx", type: "bytes" },
+          { name: "signature", type: "bytes" }
+        ],
+        name: "penalizeIllegalTransaction",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "from", type: "address" },
+          { name: "to", type: "address" },
+          { name: "encodedFunction", type: "bytes" },
+          { name: "transactionFee", type: "uint256" },
+          { name: "gasPrice", type: "uint256" },
+          { name: "gasLimit", type: "uint256" },
+          { name: "nonce", type: "uint256" },
+          { name: "signature", type: "bytes" },
+          { name: "approvalData", type: "bytes" }
+        ],
+        name: "relayCall",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [{ name: "relayedCallStipend", type: "uint256" }],
+        name: "requiredGas",
+        outputs: [{ name: "", type: "uint256" }],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [{ name: "target", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ name: "", type: "uint256" }],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [{ name: "relay", type: "address" }],
+        name: "getRelay",
+        outputs: [
+          { name: "totalStake", type: "uint256" },
+          { name: "unstakeDelay", type: "uint256" },
+          { name: "unstakeTime", type: "uint256" },
+          { name: "owner", type: "address" },
+          { name: "state", type: "uint8" }
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: true,
+        inputs: [
+          { name: "relayedCallStipend", type: "uint256" },
+          { name: "gasPrice", type: "uint256" },
+          { name: "transactionFee", type: "uint256" }
+        ],
+        name: "maxPossibleCharge",
+        outputs: [{ name: "", type: "uint256" }],
+        payable: false,
+        stateMutability: "view",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "unsignedTx1", type: "bytes" },
+          { name: "signature1", type: "bytes" },
+          { name: "unsignedTx2", type: "bytes" },
+          { name: "signature2", type: "bytes" }
+        ],
+        name: "penalizeRepeatedNonce",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [{ name: "target", type: "address" }],
+        name: "depositFor",
+        outputs: [],
+        payable: true,
+        stateMutability: "payable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "relayaddr", type: "address" },
+          { name: "unstakeDelay", type: "uint256" }
+        ],
+        name: "stake",
+        outputs: [],
+        payable: true,
+        stateMutability: "payable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [{ name: "relay", type: "address" }],
+        name: "removeRelayByOwner",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [{ name: "relay", type: "address" }],
+        name: "unstake",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: false, name: "stake", type: "uint256" },
+          { indexed: false, name: "unstakeDelay", type: "uint256" }
+        ],
+        name: "Staked",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: true, name: "owner", type: "address" },
+          { indexed: false, name: "transactionFee", type: "uint256" },
+          { indexed: false, name: "stake", type: "uint256" },
+          { indexed: false, name: "unstakeDelay", type: "uint256" },
+          { indexed: false, name: "url", type: "string" }
+        ],
+        name: "RelayAdded",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: false, name: "unstakeTime", type: "uint256" }
+        ],
+        name: "RelayRemoved",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: false, name: "stake", type: "uint256" }
+        ],
+        name: "Unstaked",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "recipient", type: "address" },
+          { indexed: true, name: "from", type: "address" },
+          { indexed: false, name: "amount", type: "uint256" }
+        ],
+        name: "Deposited",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "dest", type: "address" },
+          { indexed: false, name: "amount", type: "uint256" }
+        ],
+        name: "Withdrawn",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: true, name: "from", type: "address" },
+          { indexed: true, name: "to", type: "address" },
+          { indexed: false, name: "selector", type: "bytes4" },
+          { indexed: false, name: "reason", type: "uint256" }
+        ],
+        name: "CanRelayFailed",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: true, name: "from", type: "address" },
+          { indexed: true, name: "to", type: "address" },
+          { indexed: false, name: "selector", type: "bytes4" },
+          { indexed: false, name: "status", type: "uint8" },
+          { indexed: false, name: "charge", type: "uint256" }
+        ],
+        name: "TransactionRelayed",
+        type: "event"
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, name: "relay", type: "address" },
+          { indexed: false, name: "sender", type: "address" },
+          { indexed: false, name: "amount", type: "uint256" }
+        ],
+        name: "Penalized",
+        type: "event"
+      }
+    ];
     let ChatApp = {};
     try {
       ChatApp = require("../../build/contracts/ChatApp.json");
@@ -82,8 +379,8 @@ class App extends Component {
 
     try {
       const web3 = await getWeb3();
-      const ganacheAccounts = await this.getGanacheAddresses();
       const ganacheWeb3 = await getGanacheWeb3();
+      const ganacheAccounts = await this.getGanacheAddresses();
       const accounts = await web3.eth.getAccounts();
       const signingAccount = accounts[0];
       const networkId = await web3.eth.net.getId();
@@ -100,6 +397,7 @@ class App extends Component {
       let deployedNetwork = null;
 
       let chatAppAddress = null;
+
       if (process.env.REACT_APP_CHAT_APP_ADDRESS) {
         chatAppAddress = process.env.REACT_APP_CHAT_APP_ADDRESS;
       } else if (ChatApp.networks) {
@@ -110,10 +408,21 @@ class App extends Component {
       }
 
       if (chatAppAddress) {
-        console.log("Loading chat app from", chatAppAddress);
         instance = new web3.eth.Contract(ChatApp.abi, chatAppAddress);
       } else {
         console.error("Chat app address not found");
+      }
+
+      let relayHubInstance = null;
+      try {
+        relayHubInstance = await new web3.eth.Contract(
+          RelayHubAbi,
+          relayHubAddress
+        );
+
+        console.log("Relay", relayHubInstance);
+      } catch (error) {
+        console.error(error);
       }
 
       this.setState({
@@ -130,7 +439,8 @@ class App extends Component {
         setProvider: this.setMetaTxSigner,
         setFetchStatus: this.setFetchStatus,
         ganacheWeb3,
-        chatAppAddress
+        chatAppAddress,
+        relayHubInstance
       });
     } catch (error) {
       alert(
@@ -151,13 +461,17 @@ class App extends Component {
       <div className={styles.loader}>
         <Loader size="80px" color="red" />
         <h3> Loading Web3, accounts, and contract...</h3>
-        <p> Unlock your metamask, or check to be sure it's connected to the right network. </p>
+        <p>
+          {" "}
+          Unlock your metamask, or check to be sure it's connected to the right
+          network.{" "}
+        </p>
       </div>
     );
   }
 
   render() {
-    if (!this.state.web3) {
+    if (!this.state.instance) {
       return this.renderLoader();
     }
     return (

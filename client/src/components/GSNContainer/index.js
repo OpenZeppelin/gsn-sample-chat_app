@@ -7,7 +7,6 @@ export default class GSNContainer extends Component {
     super(props);
     this.state = { validated: false };
     this.setProvider = this.props.setProvider;
-    console.log(this.props);
   }
 
   

@@ -2,7 +2,6 @@ import Web3 from "web3";
 const FALLBACK_WEB3_PROVIDER =
   process.env.REACT_APP_NETWORK || "http://0.0.0.0:8545";
 const tabookey = require("tabookey-gasless");
-console.log("Using fallback web3 provider", FALLBACK_WEB3_PROVIDER);
 
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
@@ -42,6 +41,7 @@ const getWeb3 = () =>
 const getGanacheWeb3 = () => {
   const isProd = process.env.NODE_ENV === "production";
   if (isProd) {
+    
     return null;
   }
   const provider = new Web3.providers.HttpProvider("http://0.0.0.0:8545");
@@ -52,14 +52,15 @@ const getGanacheWeb3 = () => {
 const useRelayer = async web3 => {
   const gasPricePercent = 20;
 
-  let gasPrice = (process.env.REACT_APP_GAS_PRICE && parseInt(process.env.REACT_APP_GAS_PRICE)) ||
+  let gasPrice =
+    (process.env.REACT_APP_GAS_PRICE &&
+      parseInt(process.env.REACT_APP_GAS_PRICE)) ||
     ((await web3.eth.getGasPrice()) * (100 + gasPricePercent)) / 10;
-  console.log("Gas price: ", gasPrice);
   let relay_client_config = {
     txfee: process.env.REACT_APP_TX_FEE || 12,
-    force_gasPrice: gasPrice,			//override requested gas price
+    force_gasPrice: gasPrice, //override requested gas price
     gasPrice: gasPrice, //override requested gas price
-    force_gasLimit: 500000,		//override requested gas limit.
+    force_gasLimit: 500000, //override requested gas limit.
     gasLimit: 500000, //override requested gas limit.
     verbose: true
   };
@@ -96,16 +97,15 @@ const getRelayBalance = async (web3, appAddress, relayInstance) => {
 };
 
 const getDappBalance = async (web3, dappInstance) => {
-  console.log("Web3", web3);
   let balance;
   try {
     balance = await dappInstance.methods.getRecipientBalance().call();
     balance = web3.utils.fromWei(balance, "ether");
-  } catch (error)  {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
   return balance;
-}
+};
 
 export default getWeb3;
 export {
