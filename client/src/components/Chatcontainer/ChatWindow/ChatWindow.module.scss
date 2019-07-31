@@ -25,6 +25,13 @@
     flex-direction: row;
   }
 
+  .mined {
+    color: black;
+  }
+
+  .pending {
+    color: red;
+  }
   .blockie {
     border-radius: 25px;
     margin: 5px;

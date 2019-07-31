@@ -5,7 +5,7 @@ import { Loader, Flash } from "rimble-ui";
 
 const ChatInput = props => {
  
-  const { instance, signingAccount, fetching, web3, setFetchStatus } = props;
+  const { instance, signingAccount, fetching, web3, setFetchStatus, addSingleMessage , getAllMsg} = props;
   console.log("Chat input props: ", props);
 
   const defaultState = {
@@ -36,6 +36,7 @@ const ChatInput = props => {
         const txHash = tx.transactionHash;
         pollfortx(txHash);
         setState({ ...state, validated: false, value: "" });
+        addSingleMessage(state.value);
       } catch (error) {
         console.log("THE ERROR: ", error);
         setState({ error: true });
@@ -51,6 +52,7 @@ const ChatInput = props => {
       const included = await web3.eth.getTransaction(tx);
       if (included) {
         newBlock.unsubscribe();
+        getAllMsg();
         setFetchStatus(false);
       } else {
         const blockNumber = await web3.eth.getBlockNumber();

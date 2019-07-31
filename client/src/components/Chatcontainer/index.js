@@ -31,33 +31,31 @@ const ChatContainer = props => {
   }, []);
 
   const subscribeLogEvent = async (instance, eventName) => {
-    const eventJsonInterface = subscriptionProvider.utils._.find(
-      instance._jsonInterface,
-      o => o.name === eventName && o.type === "event"
-    );
+    // const eventJsonInterface = subscriptionProvider.utils._.find(
+    //   instance._jsonInterface,
+    //   o => o.name === eventName && o.type === "event"
+    // );
 
-    const subscription = subscriptionProvider.eth.subscribe(
-      "logs",
-      {
-        address: instance.options.address,
-        topics: [eventJsonInterface.signature]
-      },
-      (error, result) => {
-        if (!error) {
-          const eventObj = subscriptionProvider.eth.abi.decodeLog(
-            eventJsonInterface.inputs,
-            result.data,
-            result.topics.slice(1)
-          );
-          const { message, timestamp, user, uuid } = eventObj;
-          const msg = { message, timestamp, user, uuid };
-          setState(() => {
-            return { ...state, messages: [...state.messages, msg] };
-          });
-        }
-      }
-    );
-    return subscription;
+    // const subscription = subscriptionProvider.eth.subscribe(
+    //   "logs",
+    //   {
+    //     address: instance.options.address,
+    //     topics: [eventJsonInterface.signature]
+    //   },
+    //   (error, result) => {
+    //     if (!error) {
+    //       const eventObj = subscriptionProvider.eth.abi.decodeLog(
+    //         eventJsonInterface.inputs,
+    //         result.data,
+    //         result.topics.slice(1)
+    //       );
+    //       const { message, timestamp, user, uuid } = eventObj;
+    //       const msg = { message, timestamp, user, uuid };
+    //       setState({ ...state, messages: [...state.messages, msg] });
+    //     }
+    //   }
+    // );
+    // return subscription;
   };
 
   const getAllMsg = async () => {
@@ -71,7 +69,10 @@ const ChatContainer = props => {
 
     logs.forEach(el => {
       const { message, timestamp, user, uuid } = el.returnValues;
-      messages = [{ message: message, timestamp, user, uuid },...messages];
+      messages = [
+        { message: message, timestamp, user, uuid, mined: true },
+        ...messages
+      ];
     });
 
     setState(() => {
@@ -79,10 +80,15 @@ const ChatContainer = props => {
     });
   };
 
+  const addSingleMessage = async message => {
+    const msg = { message, timestamp: Date.now(), user: null, uuid: null, mined: false };
+    setState({...state, messages: [msg, ...state.messages]})
+  };
+
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
-      <ChatInput {...props} />
+      <ChatInput {...props } addSingleMessage={addSingleMessage} getAllMsg={getAllMsg} />
       <GSNContainer {...props} />
       {props.isMetamask ? <FundMetaMask {...props} /> : <div />}
     </div>
