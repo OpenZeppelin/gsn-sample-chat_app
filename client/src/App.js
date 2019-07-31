@@ -299,9 +299,6 @@ const RelayHubAbi = [
 ];
 
 const App = (props, context) => {
-  console.log("App Props: ", props);
-  console.log("App Context: ", context);
-
   const defaultState = {
     signingAccount: null,
     storageValue: 0,

@@ -1,62 +1,58 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, Tooltip } from "rimble-ui";
 import styles from "./GSNContainer.module.scss";
 
-export default class GSNContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false };
-    this.setProvider = this.props.setProvider;
-  }
+const GSNContainer = props => {
+  const { setProvider, isMetaMask, metaTxSigner } = props;
 
-  metaMaskProvider = () => {
+  const metaMaskProvider = () => {
     return (
       <Tooltip
         message="Sign your transaction inside MetaMask in the traditional way."
         placement="top"
       >
-        <Button size="small" onClick={() => this.setProvider("MetaMask")}>
+        <Button size="small" onClick={() => setProvider("MetaMask")}>
           MetaMask
         </Button>
       </Tooltip>
     );
   };
 
-  metaMaskSigner = () => {
+  const metaMaskSigner = () => {
     return (
-      <Tooltip 
+      <Tooltip
         message="Use MetaMask to sign a message for the GSN Relay but not to sign a transaction."
         placement="top"
       >
-        <Button size="small" onClick={() => this.setProvider("MMSigner")}>
+        <Button size="small" onClick={() => setProvider("MMSigner")}>
           MM Signer
         </Button>
       </Tooltip>
     );
   };
 
-  gsnProvider = () => {
+  const gsnProvider = () => {
     return (
       <Tooltip
         message="Use a keypair, generated in the browser, to sign a message for the GSN Relay. No MetaMask involved!"
         placement="top"
       >
-        <Button size="small" onClick={() => this.setProvider("Ephemeral")}>
+        <Button size="small" onClick={() => setProvider("Ephemeral")}>
           Ephemeral
         </Button>
       </Tooltip>
     );
   };
 
-  render() {
-    return (
-      <div>
-        <div className={styles.button} />
-        {this.props.isMetaMask ? this.metaMaskProvider() : null}
-        {this.metaMaskSigner()}
-        {this.gsnProvider()}
-        <div>{this.props.metaTxSigner}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <div className={styles.button} />
+      {isMetaMask ? metaMaskProvider() : null}
+      {metaMaskSigner()}
+      {gsnProvider()}
+      <div>{metaTxSigner}</div>
+    </div>
+  );
+};
+
+export default GSNContainer;
