@@ -328,7 +328,6 @@ const App = (props, context) => {
 
   const setMetaTxSigner = async signer => {
     let signingAccount;
-
     switch (signer) {
       case "MetaMask":
         await useInjectedWeb3(state.web3);

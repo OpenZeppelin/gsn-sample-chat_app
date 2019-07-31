@@ -1,42 +1,48 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-export default class RelayContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false, relayBalance: null };
-    this.setProvider = this.props.setProvider;
-    this.subscription = null;
-    this.web3 = this.props.web3;
-    this.instance = this.props.instance;
-    this.relayHubInstance = this.props.relayHubInstance;
-  }
+const RelayContainer = props => {
+  const { web3, instance } = props;
+  const defaultState = { validated: false, dappBalance: null };
 
-  componentDidMount = async () => {
-    let relayBalance = 0;
+  const [state, setState] = useState(defaultState);
 
-    if (this.instance) {
-      try {
-        relayBalance = await this.instance.methods.getRecipientBalance().call();
-        relayBalance = this.web3.utils.fromWei(relayBalance, "ether");
-      } catch (errors) {
-        console.error(errors)
+  useEffect(() => {
+    let subscription = null;
+
+    const getDappBalance = async instance => {
+      let dappBalance = null;
+      if (instance) {
+        try {
+          dappBalance = await instance.methods.getRecipientBalance().call();
+          dappBalance = web3.utils.fromWei(dappBalance, "ether");
+        } catch (errors) {
+          console.error(errors);
+        }
+        setState({ dappBalance });
       }
-      this.setState({ relayBalance });
+    };
+
+    const load = async () => {
+      getDappBalance(instance);
+
+      const newBlocks = web3.eth.subscribe("newBlockHeaders");
+      newBlocks.on("data", getDappBalance());
+      subscription = newBlocks;
+    };
+
+    load();
+    if (subscription) {
+      return () => {
+        subscription.unSubscribe();
+      };
     }
+  }, [instance]);
 
-    const newBlocks = this.web3.eth.subscribe("newBlockHeaders");
-    newBlocks.on("data", this.getRelayBalance);
-
-    this.subscription = newBlocks;
-  };
-
-  componentWillUnmount = async () => {
-    if (this.subscription) {
-      this.subscription.unSubscribe();
-    }
-  };
-
-  render() {
-    return <div>App balance for gasless txs: {this.state.relayBalance} Eth</div>;
+  if (state.dappBalance) {
+    return <div>App balance for gasless txs: {state.dappBalance} Eth</div>;
+  } else {
+    return <div>App balance not loaded.</div>;
   }
-}
+};
+
+export default RelayContainer;
