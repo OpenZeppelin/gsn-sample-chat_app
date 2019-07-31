@@ -76,7 +76,6 @@ const ChatInput = props => {
     setState({ ...state, validated: true, value: e.target.value });
   };
 
-  console.log("Chat input State: ", state);
   return (
     <div className={styles.chatInput}>
       <Form onSubmit={handleSubmit}>

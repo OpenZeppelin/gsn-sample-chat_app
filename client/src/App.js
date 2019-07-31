@@ -309,7 +309,6 @@ const App = (props, context) => {
   const web3Context = useWeb3Injected({ gsn: { signKey } });
   const ganacheContext = useWeb3Network("http://127.0.0.1:8545");
 
-  console.log("Web3 Context", web3Context);
   const defaultState = {
     signingAccount: null,
     storageValue: 0,
@@ -328,7 +327,6 @@ const App = (props, context) => {
   };
 
   const [state, setState] = useState(defaultState);
-
   const [fetchState, setFetchState] = useState({ fetching: false });
 
   const setFetchStatus = status => {

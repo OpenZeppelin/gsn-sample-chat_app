@@ -95,7 +95,7 @@ const ChatContainer = props => {
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
       <ChatInput {...props } addSingleMessage={addSingleMessage} getAllMsg={getAllMsg} />
-      <GSNContainer {...props} />
+      {/* <GSNContainer {...props} /> */}
       {props.isMetamask ? <FundMetaMask {...props} /> : <div />}
     </div>
   );

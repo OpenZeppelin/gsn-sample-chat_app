@@ -7,7 +7,6 @@ import { Loader } from "rimble-ui";
 const ChatWindow = props => {
   const { messages } = props;
   const filter = new Filter();
-  console.log("Chat Window Messages: ", messages);
   const listMsg = messages.slice(0, 5).map(msg => {
     msg.message = filter.clean(msg.message);
     return (
