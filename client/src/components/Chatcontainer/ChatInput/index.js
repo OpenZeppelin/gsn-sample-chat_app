@@ -28,8 +28,6 @@ const ChatInput = props => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    if (!fetching) {
       setFetchStatus(true);
       try {
         const tx = await instance.methods
@@ -37,13 +35,13 @@ const ChatInput = props => {
           .send({ from: signingAccount });
         const txHash = tx.transactionHash;
         pollfortx(txHash);
-        setState({ validated: false, value: "" });
+        setState({ ...state, validated: false, value: "" });
       } catch (error) {
         console.log("THE ERROR: ", error);
         setState({ error: true });
         setFetchStatus(false);
       }
-    }
+    
   };
 
   const pollfortx = async tx => {

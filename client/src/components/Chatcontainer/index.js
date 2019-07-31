@@ -7,8 +7,6 @@ import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
 
 const ChatContainer = props => {
-  let _isMounted = false;
-
   const { instance } = props;
 
   //Maybe this isn't the best idea for props?
@@ -17,11 +15,6 @@ const ChatContainer = props => {
   let unsubscribe = null;
 
   const [state, setState] = useState(defaultState);
-
-  useEffect(() => {
-    _isMounted = true;
-    return () => (_isMounted = false);
-  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -35,7 +28,7 @@ const ChatContainer = props => {
     if (unsubscribe) {
       return () => unsubscribe.unsubscribe();
     }
-  }, [instance]);
+  }, []);
 
   const subscribeLogEvent = async (instance, eventName) => {
     const eventJsonInterface = subscriptionProvider.utils._.find(
@@ -58,10 +51,9 @@ const ChatContainer = props => {
           );
           const { message, timestamp, user, uuid } = eventObj;
           const msg = { message, timestamp, user, uuid };
-          if (_isMounted)
-            setState(() => {
-              return { ...state, messages: [...state.messages, msg] };
-            });
+          setState(() => {
+            return { ...state, messages: [...state.messages, msg] };
+          });
         }
       }
     );
