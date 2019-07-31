@@ -71,7 +71,7 @@ const ChatContainer = props => {
 
     logs.forEach(el => {
       const { message, timestamp, user, uuid } = el.returnValues;
-      messages.push({ message: message, timestamp, user, uuid });
+      messages = [{ message: message, timestamp, user, uuid },...messages];
     });
 
     setState(() => {

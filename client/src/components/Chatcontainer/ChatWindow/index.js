@@ -6,7 +6,7 @@ import Filter from "bad-words";
 const ChatWindow = props => {
   const { messages } = props;
   const filter = new Filter();
-  const listMsg = messages.map(msg => {
+  const listMsg = messages.slice(0, 5).map(msg => {
     msg.message = filter.clean(msg.message);
     return (
       <div className={styles.singleMessage} key={msg.uuid}>

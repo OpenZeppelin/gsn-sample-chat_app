@@ -47,7 +47,6 @@ const ChatInput = props => {
   const pollfortx = async tx => {
     
     let currentBlock = await web3.eth.getBlockNumber();
-
     const checkBlock = async () => {
       const included = await web3.eth.getTransaction(tx);
       if (included) {
