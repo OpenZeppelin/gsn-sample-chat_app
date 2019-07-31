@@ -1,36 +1,47 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ChatContainer.module.scss";
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
+import { loadavg } from "os";
 
-export default class ChatContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { messages: [], ...props };
-    this.subWeb3 = null;
-  }
+const ChatContainer = (props) => {
 
-  unsubscribe = null;
+  const {instance} = props;
 
-  componentDidMount = async () => {
-    this.subWeb3 = new Web3(window.ethereum);
-    const { instance } = this.props;
-    await this.getAllMsg();
-    this.unsubscribe = await this.subscribeLogEvent(instance, "message");
-  };
+  //Maybe this isn't the best idea for props? 
+  const defaultState = {messages: [], ...props};
+  let subscriptionProvider = null;
+  let unsubscribe = null;
 
-  waitForMinedTransaction = txHash => {};
+  const [state, setState] = useState(defaultState);
 
-  subscribeLogEvent = async (instance, eventName) => {
-    const eventJsonInterface = this.subWeb3.utils._.find(
+  useEffect(() => {
+
+
+    const load = async () => {
+      subscriptionProvider = new Web3(window.ethereum);
+
+      await getAllMsg();
+      unsubscribe = await subscribeLogEvent(instance, "message");
+    }
+
+    load()
+    if(unsubscribe){
+      return () => unsubscribe.unsubscribe();
+    }
+  }, [instance]);
+
+
+  const subscribeLogEvent = async (instance, eventName) => {
+    const eventJsonInterface = subscriptionProvider.utils._.find(
       instance._jsonInterface,
       o => o.name === eventName && o.type === "event"
     );
 
-    const subscription = this.subWeb3.eth.subscribe(
+    const subscription = subscriptionProvider.eth.subscribe(
       "logs",
       {
         address: instance.options.address,
@@ -38,15 +49,15 @@ export default class ChatContainer extends Component {
       },
       (error, result) => {
         if (!error) {
-          const eventObj = this.subWeb3.eth.abi.decodeLog(
+          const eventObj = subscriptionProvider.eth.abi.decodeLog(
             eventJsonInterface.inputs,
             result.data,
             result.topics.slice(1)
           );
           const { message, timestamp, user, uuid } = eventObj;
           const msg = { message, timestamp, user, uuid };
-          this.setState(() => {
-            return { ...this.state, messages: [...this.state.messages, msg] };
+          setState(() => {
+            return { ...state, messages: [...state.messages, msg] };
           });
         }
       }
@@ -54,8 +65,8 @@ export default class ChatContainer extends Component {
     return subscription;
   };
 
-  getAllMsg = async () => {
-    const { instance } = this.props;
+  const getAllMsg = async () => {
+    const { instance } = props;
     let messages = [];
 
     const logs = await instance.getPastEvents("message", {
@@ -68,26 +79,23 @@ export default class ChatContainer extends Component {
       messages.push({ message: message, timestamp, user, uuid });
     });
 
-    this.setState(() => {
+    setState(() => {
       return { messages: messages };
     });
   };
 
-  componentWillUnmount = () => {
-    if (this.unsubscribe) {
-      this.unsubscribe.unsubscribe();
-    }
-  };
 
-  render() {
+
     return (
       <div className={styles.chatContainer}>
-        <ChatWindow messages={this.state.messages} {...this.props} />
-        <ChatInput {...this.props} />
-        <GSNContainer {...this.props} />
-        {this.props.isMetamask ? <FundMetaMask {...this.props} /> : <div></div>}
+        <ChatWindow messages={state.messages} {...props} />
+        <ChatInput {...props} />
+        <GSNContainer {...props} />
+        {props.isMetamask ? <FundMetaMask {...props} /> : <div></div>}
         
       </div>
     );
-  }
+  
 }
+
+export default ChatContainer;

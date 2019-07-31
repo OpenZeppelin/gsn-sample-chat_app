@@ -28,12 +28,13 @@ const RelayContainer = props => {
       const newBlocks = web3.eth.subscribe("newBlockHeaders");
       newBlocks.on("data", getDappBalance());
       subscription = newBlocks;
+
     };
 
     load();
     if (subscription) {
       return () => {
-        subscription.unSubscribe();
+        subscription.unsubscribe();
       };
     }
   }, [instance]);
