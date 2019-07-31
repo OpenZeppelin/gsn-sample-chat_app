@@ -6,8 +6,11 @@ import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
 
+
+
 const ChatContainer = props => {
-  const { instance } = props;
+  const { web3, instance } = props;
+  const blockCount = 400;
 
   //Maybe this isn't the best idea for props?
   const defaultState = { messages: [], ...props };
@@ -62,8 +65,11 @@ const ChatContainer = props => {
     const { instance } = props;
     let messages = [];
 
+    const currentblock = await web3.eth.getBlockNumber();
+
+
     const logs = await instance.getPastEvents("message", {
-      fromBlock: 0,
+      fromBlock: currentblock-blockCount,
       toBlock: "latest"
     });
 
