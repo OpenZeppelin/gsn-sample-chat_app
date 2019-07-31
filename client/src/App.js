@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import {
+  useWeb3Injected,
+  useEphemeralKey,
+  useWeb3Network
+} from "@openzeppelin/network";
+
 import getWeb3, {
   getGanacheWeb3,
   useRelayer,
@@ -299,6 +305,11 @@ const RelayHubAbi = [
 ];
 
 const App = (props, context) => {
+  const signKey = useEphemeralKey();
+  const web3Context = useWeb3Injected({ gsn: { signKey } });
+  const ganacheContext = useWeb3Network("http://127.0.0.1:8545");
+
+  console.log("Web3 Context", web3Context);
   const defaultState = {
     signingAccount: null,
     storageValue: 0,
@@ -318,7 +329,7 @@ const App = (props, context) => {
 
   const [state, setState] = useState(defaultState);
 
-  const [fetchState, setFetchState] = useState({fetching: false});
+  const [fetchState, setFetchState] = useState({ fetching: false });
 
   const setFetchStatus = status => {
     setFetchState({ fetching: status });
@@ -389,17 +400,21 @@ const App = (props, context) => {
       }
 
       try {
-        let web3;
-        if (isMobile) {
-          web3 = await getInfuraWeb3();
-          console.log("On Mobile, Not loading MetaMask");
-        } else {
-          web3 = await getWeb3();
-          console.log("On Desktop, Trying to Load MetaMask");
+        let web3 = web3Context.lib;
+        // if (isMobile) {
+        //   web3 = await getInfuraWeb3();
+        //   console.log("On Mobile, Not loading MetaMask");
+        // } else {
+        //   web3 = await getWeb3();
+        //   console.log("On Desktop, Trying to Load MetaMask");
+        // }
+
+        // const ganacheWeb3 = await getGanacheWeb3();
+        let ganacheAccounts = [];
+        if(ganacheContext.connected){
+          ganacheAccounts = await getGanacheAddresses();
         }
 
-        const ganacheWeb3 = await getGanacheWeb3();
-        const ganacheAccounts = await getGanacheAddresses();
         const accounts = await web3.eth.getAccounts();
         const signingAccount = accounts[0];
         const networkId = await web3.eth.net.getId();
@@ -455,7 +470,7 @@ const App = (props, context) => {
           ChatApp,
           setProvider: setMetaTxSigner,
           setFetchStatus: setFetchStatus,
-          ganacheWeb3,
+          ganacheWeb3: ganacheContext.lib,
           chatAppAddress,
           relayHubInstance
         });
@@ -466,10 +481,10 @@ const App = (props, context) => {
         console.error(error);
       }
     };
-    if(!state.web3){
-    load();
+    if (web3Context.connected) {
+      load();
     }
-  }, [state.web3]);
+  }, [web3Context.connected]);
 
   const renderLoader = () => {
     return (

@@ -4,49 +4,52 @@ import styles from "./ChatInput.module.scss";
 import { Loader, Flash } from "rimble-ui";
 
 const ChatInput = props => {
- 
-  const { instance, signingAccount, fetching, web3, setFetchStatus, addSingleMessage , getAllMsg} = props;
-  console.log("Chat input props: ", props);
+  const {
+    instance,
+    signingAccount,
+    fetching,
+    web3,
+    setFetchStatus,
+    addSingleMessage,
+    getAllMsg
+  } = props;
 
   const defaultState = {
     validated: false,
     value: "",
-    message: "Send",
+    buttonMessage: "Send",
     error: false
   };
   const [state, setState] = useState(defaultState);
 
   let newBlock = null;
 
-
-
   useEffect(() => {
-    if(newBlock){
-  return () => newBlock.unsubscribe();
+    if (newBlock) {
+      return () => newBlock.unsubscribe();
     }
   }, [newBlock]);
 
   const handleSubmit = async e => {
     e.preventDefault();
-      setFetchStatus(true);
-      try {
-        const tx = await instance.methods
-          .postMessage(state.value)
-          .send({ from: signingAccount });
-        const txHash = tx.transactionHash;
-        pollfortx(txHash);
-        setState({ ...state, validated: false, value: "" });
-        addSingleMessage(state.value);
-      } catch (error) {
-        console.log("THE ERROR: ", error);
-        setState({ error: true });
-        setFetchStatus(false);
-      }
-    
+    setFetchStatus(true);
+    try {
+      const tx = await instance.methods
+        .postMessage(state.value)
+        .send({ from: signingAccount });
+      const txHash = tx.transactionHash;
+      pollfortx(txHash);
+      setState({ ...state, validated: false, value: "" });
+      addSingleMessage(state.value);
+      console.log("The tx: ", tx);
+    } catch (error) {
+      console.log("THE ERROR: ", error);
+      setState({ ...state, error: true });
+      setFetchStatus(false);
+    }
   };
 
   const pollfortx = async tx => {
-    
     let currentBlock = await web3.eth.getBlockNumber();
     const checkBlock = async () => {
       const included = await web3.eth.getTransaction(tx);
@@ -60,7 +63,7 @@ const ChatInput = props => {
           newBlock.unsubscribe();
           setFetchStatus(false);
           setState({ message: "ERROR" });
-          console.error("Transaction not found in the past five blocks")
+          console.error("Transaction not found in the past five blocks");
         }
       }
     };
@@ -87,7 +90,7 @@ const ChatInput = props => {
           />
         </Form.Field>
         <Button type="submit" width={1}>
-          {fetching ? <Loader color="white" /> : state.message}
+          {fetching ? <Loader color="white" /> : state.buttonMessage}
         </Button>
       </Form>
       <div>
@@ -96,7 +99,7 @@ const ChatInput = props => {
             <Flash
               my={3}
               variant="danger"
-              onClick={() => setState({ error: false })}
+              onClick={() => setState({ ...state, error: false })}
             >
               Error: Check console for details. Click to dismiss.
             </Flash>
