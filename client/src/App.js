@@ -466,8 +466,9 @@ const App = (props, context) => {
         console.error(error);
       }
     };
-
+    if(!state.web3){
     load();
+    }
   }, [state.web3]);
 
   const renderLoader = () => {
