@@ -59,6 +59,7 @@ const ChatInput = props => {
           newBlock.unsubscribe();
           setFetchStatus(false);
           setState({ message: "ERROR" });
+          console.error("Transaction not found in the past five blocks")
         }
       }
     };
