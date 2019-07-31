@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ChatWindow.module.scss";
 import { Blockie } from "rimble-ui";
 import Filter from "bad-words";
+import { Loader } from "rimble-ui";
 
 const ChatWindow = props => {
   const { messages } = props;
@@ -12,17 +13,19 @@ const ChatWindow = props => {
     return (
       <div className={styles.singleMessage} key={msg.uuid}>
         <div className={styles.blockie}>
-          <Blockie
-            className={styles.blockie}
-            opts={{
-              seed: msg.user,
-              color: "#dfe",
-              bgcolor: "#d71",
-              size: 5,
-              scale: 5,
-              spotcolor: "#000"
-            }}
-          />
+          {msg.mined ? 
+                    <Blockie
+                    className={styles.blockie}
+                    opts={{
+                      seed: msg.user,
+                      color: "#dfe",
+                      bgcolor: "#d71",
+                      size: 5,
+                      scale: 5,
+                      spotcolor: "#000"
+                    }}
+                  /> : <Loader color="blue" />}
+
         </div>
         <div className={msg.mined ? styles.mined : styles.pending}>{msg.message}</div>
       </div>
