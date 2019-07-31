@@ -5,35 +5,37 @@ import ChatInput from "./ChatInput";
 import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
-import { loadavg } from "os";
 
-const ChatContainer = (props) => {
+const ChatContainer = props => {
+  let _isMounted = false;
 
-  const {instance} = props;
+  const { instance } = props;
 
-  //Maybe this isn't the best idea for props? 
-  const defaultState = {messages: [], ...props};
+  //Maybe this isn't the best idea for props?
+  const defaultState = { messages: [], ...props };
   let subscriptionProvider = null;
   let unsubscribe = null;
 
   const [state, setState] = useState(defaultState);
 
   useEffect(() => {
+    _isMounted = true;
+    return () => (_isMounted = false);
+  }, []);
 
-
+  useEffect(() => {
     const load = async () => {
       subscriptionProvider = new Web3(window.ethereum);
 
       await getAllMsg();
       unsubscribe = await subscribeLogEvent(instance, "message");
-    }
+    };
 
-    load()
-    if(unsubscribe){
+    load();
+    if (unsubscribe) {
       return () => unsubscribe.unsubscribe();
     }
   }, [instance]);
-
 
   const subscribeLogEvent = async (instance, eventName) => {
     const eventJsonInterface = subscriptionProvider.utils._.find(
@@ -56,9 +58,10 @@ const ChatContainer = (props) => {
           );
           const { message, timestamp, user, uuid } = eventObj;
           const msg = { message, timestamp, user, uuid };
-          setState(() => {
-            return { ...state, messages: [...state.messages, msg] };
-          });
+          if (_isMounted)
+            setState(() => {
+              return { ...state, messages: [...state.messages, msg] };
+            });
         }
       }
     );
@@ -84,18 +87,14 @@ const ChatContainer = (props) => {
     });
   };
 
-
-
-    return (
-      <div className={styles.chatContainer}>
-        <ChatWindow messages={state.messages} {...props} />
-        <ChatInput {...props} />
-        <GSNContainer {...props} />
-        {props.isMetamask ? <FundMetaMask {...props} /> : <div></div>}
-        
-      </div>
-    );
-  
-}
+  return (
+    <div className={styles.chatContainer}>
+      <ChatWindow messages={state.messages} {...props} />
+      <ChatInput {...props} />
+      <GSNContainer {...props} />
+      {props.isMetamask ? <FundMetaMask {...props} /> : <div />}
+    </div>
+  );
+};
 
 export default ChatContainer;

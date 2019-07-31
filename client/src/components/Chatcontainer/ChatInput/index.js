@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "rimble-ui";
 import styles from "./ChatInput.module.scss";
 import { Loader, Flash } from "rimble-ui";
 
 const ChatInput = props => {
+ 
   const { instance, signingAccount, fetching, web3, setFetchStatus } = props;
+  console.log("Chat input props: ", props);
 
   const defaultState = {
     validated: false,
@@ -13,6 +15,16 @@ const ChatInput = props => {
     error: false
   };
   const [state, setState] = useState(defaultState);
+
+  let newBlock = null;
+
+
+
+  useEffect(() => {
+    if(newBlock){
+  return () => newBlock.unsubscribe();
+    }
+  }, [newBlock]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -35,7 +47,7 @@ const ChatInput = props => {
   };
 
   const pollfortx = async tx => {
-    let newBlock;
+    
     let currentBlock = await web3.eth.getBlockNumber();
 
     const checkBlock = async () => {
@@ -61,7 +73,7 @@ const ChatInput = props => {
     setState({ ...state, validated: true, value: e.target.value });
   };
 
-  console.log("State: ", state);
+  console.log("Chat input State: ", state);
   return (
     <div className={styles.chatInput}>
       <Form onSubmit={handleSubmit}>

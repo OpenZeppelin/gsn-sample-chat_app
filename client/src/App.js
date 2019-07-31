@@ -309,7 +309,6 @@ const App = (props, context) => {
     metaTxSigner: "MetaMask Signing + Sending",
     isMetaMask: false,
     setProvider: null,
-    fetching: false,
     setFetchStatus: null,
     relayHubInstance: null,
     instance: null,
@@ -319,8 +318,10 @@ const App = (props, context) => {
 
   const [state, setState] = useState(defaultState);
 
+  const [fetchState, setFetchState] = useState({fetching: false});
+
   const setFetchStatus = status => {
-    setState({ fetching: status });
+    setFetchState({ fetching: status });
   };
 
   const setMetaTxSigner = async signer => {
@@ -467,7 +468,7 @@ const App = (props, context) => {
     };
 
     load();
-  }, []);
+  }, [state.web3]);
 
   const renderLoader = () => {
     return (
@@ -493,7 +494,7 @@ const App = (props, context) => {
       </div>
       <h1>GSN Chat APP</h1>
       <p />
-      <ChatContainer {...state} {...setMetaTxSigner} />
+      <ChatContainer {...state} {...setMetaTxSigner} {...fetchState} />
       <RelayContainer {...state} />
     </div>
   );
