@@ -11,7 +11,6 @@ const ChatInput = props => {
     getAllMsg,
     fetchState,
     setFetchState,
-    signKey
   } = props;
 
   const { lib, accounts } = web3Context;
@@ -46,6 +45,7 @@ const ChatInput = props => {
     } catch (error) {
       console.log("THE ERROR: ", error);
       setState({ ...state, error: true });
+      getAllMsg();
       setFetchState(false);
     }
   };

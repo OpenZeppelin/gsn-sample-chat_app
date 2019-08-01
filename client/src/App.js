@@ -5,16 +5,13 @@ import {
 } from "@openzeppelin/network";
 
 import { Loader } from "rimble-ui";
-import RelayContainer from "./components/RelayContainer";
+
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
 
-const relayHubAddress =
-  process.env.REACT_APP_HUB_ADDRESS ||
-  "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
 
-//const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
+const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
 
 let ChatApp = require("../../build/contracts/ChatApp.json");
 
@@ -300,8 +297,18 @@ const RelayHubAbi = [
 ];
 
 const App = () => {
+
+  let relay_client_config = {
+    txfee: 99,
+    force_gasPrice: 400000001,            //override requested gas price
+    gasPrice: 400000001, //override requested gas price
+    force_gasLimit: 500000,        //override requested gas limit.
+    gasLimit: 500000, //override requested gas limit.
+    verbose: true
+  };
   const signKey = useEphemeralKey();
-  const web3Context = useWeb3Injected({gsn:{signKey}});
+  const web3Context = useWeb3Injected({gsn:{signKey, ...relay_client_config}});
+
   
   const defaultState = {
     web3Context: web3Context,
