@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./ChatContainer.module.scss";
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
-import Web3 from "web3";
-import GSNContainer from "../GSNContainer";
-import FundMetaMask from "../fundMetaMask/index";
 import RelayContainer from "../RelayContainer";
 
 const ChatContainer = props => {
@@ -43,14 +40,17 @@ const ChatContainer = props => {
       },
       (error, result) => {
         if (!error) {
-          const eventObj = lib.eth.abi.decodeLog(
-            eventJsonInterface.inputs,
-            result.data,
-            result.topics.slice(1)
-          );
-          const { message, timestamp, user, uuid, mined } = eventObj;
-          const msg = { message, timestamp, user, uuid, mined};
-          //console.log("New Message: ", msg);
+          //@ This code will give you access to the eventObj.
+          //@ This is nice for displaying the incoming message. 
+          //
+          // const eventObj = lib.eth.abi.decodeLog(
+          //   eventJsonInterface.inputs,
+          //   result.data,
+          //   result.topics.slice(1)
+          // );
+          // const { message, timestamp, user, uuid, mined } = eventObj;
+          // const msg = { message, timestamp, user, uuid, mined};
+          // console.log("New Message: ", msg);
           getAllMsg();
         }
       }

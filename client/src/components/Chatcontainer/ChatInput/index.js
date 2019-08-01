@@ -11,6 +11,7 @@ const ChatInput = props => {
     getAllMsg,
     fetchState,
     setFetchState,
+    signKey
   } = props;
 
   const { lib, accounts } = web3Context;
@@ -40,6 +41,7 @@ const ChatInput = props => {
         .postMessage(state.value)
         .send({ from });
       const txHash = tx.transactionHash;
+    
       pollfortx(txHash);
       setState({ ...state, validated: false, value: "" });
       

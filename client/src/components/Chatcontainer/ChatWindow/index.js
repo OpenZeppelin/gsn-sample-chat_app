@@ -1,4 +1,4 @@
-import React, { version } from "react";
+import React from "react";
 import styles from "./ChatWindow.module.scss";
 import { Blockie } from "rimble-ui";
 import Filter from "bad-words";
