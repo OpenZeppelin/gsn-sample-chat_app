@@ -35,7 +35,6 @@ const ChatInput = props => {
     e.preventDefault();
     setFetchState(true);
     try {
-      console.log("ChatApp Address: ", chatAppInstance);
       const tx = await chatAppInstance.methods
         .postMessage(state.value)
         .send({ from: signKey.address });

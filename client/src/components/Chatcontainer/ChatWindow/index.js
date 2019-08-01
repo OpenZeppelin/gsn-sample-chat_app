@@ -26,7 +26,7 @@ const ChatWindow = props => {
                   /> : <Loader color="blue" />}
 
         </div>
-        <div className={msg.mined ? styles.mined : styles.pending}>{msg.message}</div>
+        <div className={msg.mined ? styles.mined : styles.pending}><span className={styles.singleMessageText}>{msg.message}</span></div>
       </div>
     );
   });

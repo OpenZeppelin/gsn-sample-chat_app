@@ -5,6 +5,7 @@ import ChatInput from "./ChatInput";
 import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
+import RelayContainer from "../RelayContainer";
 
 const ChatContainer = props => {
   const { web3Context, chatAppInstance } = props;
@@ -97,6 +98,7 @@ const ChatContainer = props => {
         getAllMsg={getAllMsg}
       />
       {/* <GSNContainer {...props} /> */}
+      <RelayContainer {...props}/>
     </div>
   );
 };

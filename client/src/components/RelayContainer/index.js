@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const RelayContainer = props => {
-  console.log(props);
-  const {web3Context, chatAppInstance}= props;
-  const {lib} = web3Context;
+  const { web3Context, chatAppInstance } = props;
+  const { lib } = web3Context;
 
-  
   const defaultState = { validated: false, dappBalance: null };
 
   const [state, setState] = useState(defaultState);
@@ -16,10 +14,10 @@ const RelayContainer = props => {
     const getDappBalance = async () => {
       let dappBalance = null;
       if (chatAppInstance) {
-        console.log("chatAppInstance: ", chatAppInstance);
         try {
-          dappBalance = await chatAppInstance.methods.getRecipientBalance().call();
-          console.log("Dapp Balance: ", dappBalance);
+          dappBalance = await chatAppInstance.methods
+            .getRecipientBalance()
+            .call();
           dappBalance = lib.utils.fromWei(dappBalance, "ether");
         } catch (errors) {
           console.error(errors);
