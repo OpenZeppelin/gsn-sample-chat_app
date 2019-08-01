@@ -298,17 +298,21 @@ const RelayHubAbi = [
 
 const App = () => {
 
+  const signKey = useEphemeralKey();
+
+  const gasPrice = 22000000001;
   let relay_client_config = {
-    txfee: 99,
-    force_gasPrice: 400000001,            //override requested gas price
-    gasPrice: 400000001, //override requested gas price
+    txfee: process.env.REACT_APP_TX_FEE || 90,
+    force_gasPrice: gasPrice,            //override requested gas price
+    gasPrice: gasPrice, //override requested gas price
     force_gasLimit: 500000,        //override requested gas limit.
     gasLimit: 500000, //override requested gas limit.
     verbose: true
   };
-  const signKey = useEphemeralKey();
-  const web3Context = useWeb3Injected({gsn:{signKey, ...relay_client_config}});
-
+  
+  const web3Context = useWeb3Injected({
+    gsn: { signKey, ...relay_client_config }
+  });
   
   const defaultState = {
     web3Context: web3Context,
