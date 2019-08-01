@@ -50,7 +50,8 @@ const ChatContainer = props => {
           );
           const { message, timestamp, user, uuid, mined } = eventObj;
           const msg = { message, timestamp, user, uuid, mined};
-          setState({ ...state, messages: [...state.messages, msg] });
+          //console.log("New Message: ", msg);
+          getAllMsg();
         }
       }
     );
@@ -88,7 +89,7 @@ const ChatContainer = props => {
     };
     setState({ ...state, messages: [msg, ...state.messages] });
   };
-console.log("Message: ", state.messages);
+
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
