@@ -51,15 +51,16 @@ const GSNContainer = props => {
     return(
   
       <div>
-        <div className={styles.button} />
+        <div className={styles.small} onClick={() => setState(!state)}>Close Options...</div>
         {isMetaMask ? metaMaskProvider() : null}
         {metaMaskSigner()}
         {gsnProvider()}
         <div>{metaTxSigner}</div>
+        
       </div>
     );
   } else { 
-    return (<div>Advanced Options...</div>)
+    return (<div className={styles.small} onClick={() => setState(!state)}>Advanced Options...</div>)
   }
 
 };
