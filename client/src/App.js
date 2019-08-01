@@ -301,7 +301,7 @@ const RelayHubAbi = [
 
 const App = () => {
   const signKey = useEphemeralKey();
-  const web3Context = useWeb3Injected();
+  const web3Context = useWeb3Injected({gsn:{signKey}});
   
   const defaultState = {
     web3Context: web3Context,
