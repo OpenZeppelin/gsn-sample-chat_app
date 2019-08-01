@@ -362,12 +362,7 @@ const App = () => {
     return (
       <div className={styles.loader}>
         <Loader size="80px" color="red" />
-        <h3> Loading Web3, accounts, and contract...</h3>
-        <p>
-          {" "}
-          Unlock your metamask, or check to be sure it's connected to the right
-          network.{" "}
-        </p>
+        <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
       </div>
     );
   };

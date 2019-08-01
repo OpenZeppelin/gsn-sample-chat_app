@@ -3,6 +3,7 @@ import styles from "./ChatContainer.module.scss";
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 import RelayContainer from "../RelayContainer";
+import GSNContainer from "../GSNContainer/index.js";
 
 const ChatContainer = props => {
   const { web3Context, chatAppInstance } = props;
@@ -98,7 +99,7 @@ const ChatContainer = props => {
         addSingleMessage={addSingleMessage}
         getAllMsg={getAllMsg}
       />
-      {/* <GSNContainer {...props} /> */}
+      <GSNContainer {...props} />
       <RelayContainer {...props}/>
     </div>
   );

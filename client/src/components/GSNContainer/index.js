@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button, Tooltip } from "rimble-ui";
 import styles from "./GSNContainer.module.scss";
 
 const GSNContainer = props => {
   const { setProvider, isMetaMask, metaTxSigner } = props;
+
+  const [state, setState] = useState(false);
 
   const metaMaskProvider = () => {
     return (
@@ -44,15 +46,22 @@ const GSNContainer = props => {
     );
   };
 
-  return (
-    <div>
-      <div className={styles.button} />
-      {isMetaMask ? metaMaskProvider() : null}
-      {metaMaskSigner()}
-      {gsnProvider()}
-      <div>{metaTxSigner}</div>
-    </div>
-  );
+
+  if(state){
+    return(
+  
+      <div>
+        <div className={styles.button} />
+        {isMetaMask ? metaMaskProvider() : null}
+        {metaMaskSigner()}
+        {gsnProvider()}
+        <div>{metaTxSigner}</div>
+      </div>
+    );
+  } else { 
+    return (<div>Advanced Options...</div>)
+  }
+
 };
 
 export default GSNContainer;
