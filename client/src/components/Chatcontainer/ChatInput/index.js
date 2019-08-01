@@ -5,15 +5,16 @@ import { Loader, Flash } from "rimble-ui";
 
 const ChatInput = props => {
   const {
-    instance,
-    signingAccount,
-    fetching,
-    web3,
-    setFetchStatus,
+    web3Context,
     addSingleMessage,
-    getAllMsg
+    chatAppInstance,
+    getAllMsg,
+    fetchState,
+    setFetchState,
+    signKey
   } = props;
 
+  const { lib, accounts } = web3Context;
   const defaultState = {
     validated: false,
     value: "",
@@ -32,11 +33,12 @@ const ChatInput = props => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setFetchStatus(true);
+    setFetchState(true);
     try {
-      const tx = await instance.methods
+      console.log("ChatApp Address: ", chatAppInstance);
+      const tx = await chatAppInstance.methods
         .postMessage(state.value)
-        .send({ from: signingAccount });
+        .send({ from: signKey.address });
       const txHash = tx.transactionHash;
       pollfortx(txHash);
       setState({ ...state, validated: false, value: "" });
@@ -45,30 +47,31 @@ const ChatInput = props => {
     } catch (error) {
       console.log("THE ERROR: ", error);
       setState({ ...state, error: true });
-      setFetchStatus(false);
+      setFetchState(false);
     }
   };
 
   const pollfortx = async tx => {
-    let currentBlock = await web3.eth.getBlockNumber();
+    let currentBlock = await lib.eth.getBlockNumber();
+    console.log("Current block: ", currentBlock);
     const checkBlock = async () => {
-      const included = await web3.eth.getTransaction(tx);
+      const included = await lib.eth.getTransaction(tx);
       if (included) {
         newBlock.unsubscribe();
         getAllMsg();
-        setFetchStatus(false);
+        setFetchState(false);
       } else {
-        const blockNumber = await web3.eth.getBlockNumber();
+        const blockNumber = await lib.eth.getBlockNumber();
         if (blockNumber - currentBlock > 5) {
           newBlock.unsubscribe();
-          setFetchStatus(false);
+          setFetchState(false);
           setState({ message: "ERROR" });
           console.error("Transaction not found in the past five blocks");
         }
       }
     };
 
-    newBlock = web3.eth.subscribe("newBlockHeaders");
+    newBlock = lib.eth.subscribe("newBlockHeaders");
     newBlock.on("data", checkBlock());
   };
 
@@ -89,7 +92,7 @@ const ChatInput = props => {
           />
         </Form.Field>
         <Button type="submit" width={1}>
-          {fetching ? <Loader color="white" /> : state.buttonMessage}
+          {fetchState.fetching ? <Loader color="white" /> : state.buttonMessage}
         </Button>
       </Form>
       <div>

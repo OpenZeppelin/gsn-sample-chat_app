@@ -6,25 +6,20 @@ import Web3 from "web3";
 import GSNContainer from "../GSNContainer";
 import FundMetaMask from "../fundMetaMask/index";
 
-
-
 const ChatContainer = props => {
-  const { web3, instance } = props;
+  const { web3Context, chatAppInstance } = props;
+  const { lib } = web3Context;
   const blockCount = 400;
 
-  //Maybe this isn't the best idea for props?
-  const defaultState = { messages: [], ...props };
-  let subscriptionProvider = null;
+  const defaultState = { messages: [] };
   let unsubscribe = null;
 
   const [state, setState] = useState(defaultState);
 
   useEffect(() => {
     const load = async () => {
-      subscriptionProvider = new Web3(window.ethereum);
-
       await getAllMsg();
-      unsubscribe = await subscribeLogEvent(instance, "message");
+      unsubscribe = await subscribeLogEvent(chatAppInstance, "message");
     };
 
     load();
@@ -34,12 +29,12 @@ const ChatContainer = props => {
   }, []);
 
   const subscribeLogEvent = async (instance, eventName) => {
-    const eventJsonInterface = subscriptionProvider.utils._.find(
+    const eventJsonInterface = lib.utils._.find(
       instance._jsonInterface,
       o => o.name === eventName && o.type === "event"
     );
 
-    const subscription = subscriptionProvider.eth.subscribe(
+    const subscription = lib.eth.subscribe(
       "logs",
       {
         address: instance.options.address,
@@ -47,7 +42,7 @@ const ChatContainer = props => {
       },
       (error, result) => {
         if (!error) {
-          const eventObj = subscriptionProvider.eth.abi.decodeLog(
+          const eventObj = lib.eth.abi.decodeLog(
             eventJsonInterface.inputs,
             result.data,
             result.topics.slice(1)
@@ -62,14 +57,10 @@ const ChatContainer = props => {
   };
 
   const getAllMsg = async () => {
-    const { instance } = props;
     let messages = [];
-
-    const currentblock = await web3.eth.getBlockNumber();
-
-
-    const logs = await instance.getPastEvents("message", {
-      fromBlock: currentblock-blockCount,
+    const currentblock = await lib.eth.getBlockNumber();
+    const logs = await chatAppInstance.getPastEvents("message", {
+      fromBlock: currentblock - blockCount,
       toBlock: "latest"
     });
 
@@ -87,16 +78,25 @@ const ChatContainer = props => {
   };
 
   const addSingleMessage = async message => {
-    const msg = { message, timestamp: Date.now(), user: null, uuid: null, mined: false };
-    setState({...state, messages: [msg, ...state.messages]})
+    const msg = {
+      message,
+      timestamp: Date.now(),
+      user: null,
+      uuid: null,
+      mined: false
+    };
+    setState({ ...state, messages: [msg, ...state.messages] });
   };
 
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
-      <ChatInput {...props } addSingleMessage={addSingleMessage} getAllMsg={getAllMsg} />
+      <ChatInput
+        {...props}
+        addSingleMessage={addSingleMessage}
+        getAllMsg={getAllMsg}
+      />
       {/* <GSNContainer {...props} /> */}
-      {props.isMetamask ? <FundMetaMask {...props} /> : <div />}
     </div>
   );
 };

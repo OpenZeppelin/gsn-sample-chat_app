@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const RelayContainer = props => {
-  const { web3, instance } = props;
+  console.log(props);
+  const {web3Context, chatAppInstance}= props;
+  const {lib} = web3Context;
+
+  
   const defaultState = { validated: false, dappBalance: null };
 
   const [state, setState] = useState(defaultState);
@@ -9,12 +13,14 @@ const RelayContainer = props => {
   useEffect(() => {
     let subscription = null;
 
-    const getDappBalance = async instance => {
+    const getDappBalance = async () => {
       let dappBalance = null;
-      if (instance) {
+      if (chatAppInstance) {
+        console.log("chatAppInstance: ", chatAppInstance);
         try {
-          dappBalance = await instance.methods.getRecipientBalance().call();
-          dappBalance = web3.utils.fromWei(dappBalance, "ether");
+          dappBalance = await chatAppInstance.methods.getRecipientBalance().call();
+          console.log("Dapp Balance: ", dappBalance);
+          dappBalance = lib.utils.fromWei(dappBalance, "ether");
         } catch (errors) {
           console.error(errors);
         }
@@ -23,21 +29,20 @@ const RelayContainer = props => {
     };
 
     const load = async () => {
-      getDappBalance(instance);
+      getDappBalance(chatAppInstance);
 
-      const newBlocks = web3.eth.subscribe("newBlockHeaders");
+      const newBlocks = lib.eth.subscribe("newBlockHeaders");
       newBlocks.on("data", getDappBalance());
       subscription = newBlocks;
-
     };
+    if (chatAppInstance) load();
 
-    load();
     if (subscription) {
       return () => {
         subscription.unsubscribe();
       };
     }
-  }, [instance]);
+  }, []);
 
   if (state.dappBalance) {
     return <div>App balance for gasless txs: {state.dappBalance} Eth</div>;

@@ -2,27 +2,22 @@ import React, { useState, useEffect } from "react";
 import {
   useWeb3Injected,
   useEphemeralKey,
-  useWeb3Network
 } from "@openzeppelin/network";
 
-import getWeb3, {
-  getGanacheWeb3,
-  useRelayer,
-  useEphermeralRelay,
-  useInjectedWeb3,
-  getInfuraWeb3
-} from "./utils/getWeb3";
 import { Loader } from "rimble-ui";
 import RelayContainer from "./components/RelayContainer";
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
-import { isMobile } from "react-device-detect";
-// const relayHubAddress =
-//   process.env.REACT_APP_HUB_ADDRESS ||
-//   "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
 
-const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
+const relayHubAddress =
+  process.env.REACT_APP_HUB_ADDRESS ||
+  "0x254dffcd3277c0b1660f6d42efbb754edababc2b";
+
+//const relayHubAddress = "0x9C57C0F1965D225951FE1B2618C92Eefd687654F";
+
+let ChatApp = require("../../build/contracts/ChatApp.json");
+
 const RelayHubAbi = [
   {
     constant: false,
@@ -306,179 +301,47 @@ const RelayHubAbi = [
 
 const App = (props, context) => {
   const signKey = useEphemeralKey();
-  const web3Context = useWeb3Injected({ gsn: { signKey } });
-  const ganacheContext = useWeb3Network("http://127.0.0.1:8545");
 
+  const web3Context = useWeb3Injected({ gsn: { signKey } });
   const defaultState = {
-    signingAccount: null,
-    storageValue: 0,
-    web3: null,
-    ganacheWeb3: null,
-    accounts: null,
-    route: window.location.pathname.replace("/", ""),
-    metaTxSigner: "MetaMask Signing + Sending",
-    isMetaMask: false,
-    setProvider: null,
-    setFetchStatus: null,
-    relayHubInstance: null,
-    instance: null,
-    ganacheProvider: null,
-    ganacheAccounts: []
+    web3Context: web3Context,
+    chatAppInstance: null,
+    appReady: false,
+    signKey: signKey
   };
 
   const [state, setState] = useState(defaultState);
   const [fetchState, setFetchState] = useState({ fetching: false });
 
-  const setFetchStatus = status => {
-    setFetchState({ fetching: status });
-  };
-
-  const setMetaTxSigner = async signer => {
-    let signingAccount;
-    switch (signer) {
-      case "MetaMask":
-        await useInjectedWeb3(state.web3);
-        signingAccount = state.accounts[0];
-        setState({});
-        console.log("Using regular transaction flow");
-        setState({
-          signingAccount,
-          metaTxSigner: "MetaMask Signing + Sending"
-        });
-        break;
-      case "MMSigner":
-        await useRelayer(state.web3);
-        signingAccount = state.accounts[0];
-        console.log("Using Metamask to sign");
-        setState({
-          signingAccount,
-          metaTxSigner: "MetaMask KeyPair + Relayer"
-        });
-        break;
-      case "Ephemeral":
-        signingAccount = await useEphermeralRelay(state.web3);
-        console.log("Using Ephemeral KeyPair: ", signingAccount);
-        setState({
-          signingAccount,
-          metaTxSigner: "Ephemeral KeyPair + Relayer"
-        });
-        break;
-      default:
-        await getWeb3();
-    }
-  };
-
-  const getGanacheAddresses = async () => {
-    let ganacheAccounts = [];
-    let ganacheProvider = null;
-
-    if (!state.ganacheProvider) {
-      ganacheProvider = getGanacheWeb3();
-      if (ganacheProvider) {
-        ganacheAccounts = await ganacheProvider.eth.getAccounts();
-      }
-      setState({ ganacheProvider, ganacheAccounts });
-    }
-    if (state.ganacheProvider) {
-      ganacheAccounts = await ganacheProvider.eth.getAccounts();
-      setState({ ganacheAccounts });
-      return ganacheAccounts;
-    }
-    return [];
-  };
+  const setFetching = (value) => {
+    setFetchState({fetching: value})
+  }
 
   useEffect(() => {
+    const { lib, networkId } = web3Context;
     const load = async () => {
-      let ChatApp = {};
+      let chatAppInstance = {};
+      let chatAppAddress = null;
+      let deployedNetwork = null;
 
-      try {
-        ChatApp = require("../../build/contracts/ChatApp.json");
-      } catch (e) {
-        console.error(e);
+      if (process.env.REACT_APP_CHAT_APP_ADDRESS) {
+        chatAppAddress = process.env.REACT_APP_CHAT_APP_ADDRESS;
+      } else if (ChatApp.networks) {
+        deployedNetwork = ChatApp.networks[networkId.toString()];
+        if (deployedNetwork) {
+          chatAppAddress = deployedNetwork && deployedNetwork.address;
+        }
       }
 
-      try {
-        let web3 = web3Context.lib;
-        // if (isMobile) {
-        //   web3 = await getInfuraWeb3();
-        //   console.log("On Mobile, Not loading MetaMask");
-        // } else {
-        //   web3 = await getWeb3();
-        //   console.log("On Desktop, Trying to Load MetaMask");
-        // }
-
-        // const ganacheWeb3 = await getGanacheWeb3();
-        let ganacheAccounts = [];
-        if(ganacheContext.connected){
-          ganacheAccounts = await getGanacheAddresses();
-        }
-
-        const accounts = await web3.eth.getAccounts();
-        const signingAccount = accounts[0];
-        const networkId = await web3.eth.net.getId();
-        const networkType = await web3.eth.net.getNetworkType();
-        const isMetaMask = web3.currentProvider.isMetaMask;
-
-        let balance =
-          accounts.length > 0
-            ? await web3.eth.getBalance(accounts[0])
-            : web3.utils.toWei("0");
-
-        balance = web3.utils.fromWei(balance, "ether");
-        let instance = null;
-        let deployedNetwork = null;
-
-        let chatAppAddress = null;
-
-        if (process.env.REACT_APP_CHAT_APP_ADDRESS) {
-          chatAppAddress = process.env.REACT_APP_CHAT_APP_ADDRESS;
-        } else if (ChatApp.networks) {
-          deployedNetwork = ChatApp.networks[networkId.toString()];
-          if (deployedNetwork) {
-            chatAppAddress = deployedNetwork && deployedNetwork.address;
-          }
-        }
-
-        if (chatAppAddress) {
-          instance = new web3.eth.Contract(ChatApp.abi, chatAppAddress);
-        } else {
-          console.error("Chat app address not found");
-        }
-
-        let relayHubInstance = null;
-        try {
-          relayHubInstance = await new web3.eth.Contract(
-            RelayHubAbi,
-            relayHubAddress
-          );
-        } catch (error) {
-          console.error(error);
-        }
-
-        setState({
-          web3,
-          ganacheAccounts,
-          signingAccount,
-          accounts,
-          balance,
-          networkId,
-          isMetaMask,
-          instance,
-          networkType,
-          ChatApp,
-          setProvider: setMetaTxSigner,
-          setFetchStatus: setFetchStatus,
-          ganacheWeb3: ganacheContext.lib,
-          chatAppAddress,
-          relayHubInstance
-        });
-      } catch (error) {
-        alert(
-          `Failed to load web3, accounts, or contract. Check console for details.`
-        );
-        console.error(error);
+      if (chatAppAddress) {
+        chatAppInstance = new lib.eth.Contract(ChatApp.abi, chatAppAddress);
+      } else {
+        console.error("Chat app address not found");
       }
+      setState({ ...state, chatAppInstance, appReady: true, signKey });
+      setFetchState({ fetching: false });
     };
+
     if (web3Context.connected) {
       load();
     }
@@ -498,20 +361,25 @@ const App = (props, context) => {
     );
   };
 
-  if (!state.instance) {
-    return renderLoader();
-  }
-  return (
-    <div className={styles.App}>
-      <div>
-        <img src={logo} alt="Logo" />
+  const renderApp = () => {
+    return (
+      <div className={styles.App}>
+        <div>
+          <img src={logo} alt="Logo" />
+        </div>
+        <h1>GSN Chat APP</h1>
+        <p />
+        <ChatContainer {...state} fetchState={fetchState} setFetchState={setFetching} />
+        <RelayContainer {...state} fetchState={fetchState} setFetchState={setFetching} />
       </div>
-      <h1>GSN Chat APP</h1>
-      <p />
-      <ChatContainer {...state} {...setMetaTxSigner} {...fetchState} />
-      <RelayContainer {...state} />
-    </div>
-  );
+    );
+  };
+
+  if (!state.appReady) {
+    return renderLoader();
+  } else {
+    return renderApp();
+  }
 };
 
 export default App;
