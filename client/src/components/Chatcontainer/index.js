@@ -48,8 +48,8 @@ const ChatContainer = props => {
             result.data,
             result.topics.slice(1)
           );
-          const { message, timestamp, user, uuid } = eventObj;
-          const msg = { message, timestamp, user, uuid };
+          const { message, timestamp, user, uuid, mined } = eventObj;
+          const msg = { message, timestamp, user, uuid, mined};
           setState({ ...state, messages: [...state.messages, msg] });
         }
       }
@@ -88,7 +88,7 @@ const ChatContainer = props => {
     };
     setState({ ...state, messages: [msg, ...state.messages] });
   };
-
+console.log("Message: ", state.messages);
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />

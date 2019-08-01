@@ -299,30 +299,10 @@ const RelayHubAbi = [
   }
 ];
 
-const App = (props, context) => {
+const App = () => {
   const signKey = useEphemeralKey();
-  const gasPricePercent = 20;
-
-
-
-  // const getGasPrice = async () => {
-  // let gasPrice =
-  //   (process.env.REACT_APP_GAS_PRICE &&
-  //     parseInt(process.env.REACT_APP_GAS_PRICE)) ||
-  //   ((await web3.eth.getGasPrice()) * (100 + gasPricePercent)) / 10;
-  //   return gasPrice;
-  // }
-  let relay_client_config = {
-    txfee: process.env.REACT_APP_TX_FEE || 12,
-    force_gasPrice: 5000000, //override requested gas price
-    gasPrice: 5000000, //override requested gas price
-    force_gasLimit: 500000, //override requested gas limit.
-    gasLimit: 500000, //override requested gas limit.
-    verbose: true,
-    gsn: { signKey }
-  };
-  const web3Context = useWeb3Injected({ gsn: { signKey } });
-  //const web3Context = useWeb3Injected(relay_client_config);
+  const web3Context = useWeb3Injected();
+  
   const defaultState = {
     web3Context: web3Context,
     chatAppInstance: null,
@@ -388,7 +368,6 @@ const App = (props, context) => {
           <img src={logo} alt="Logo" />
         </div>
         <h1>GSN Chat APP</h1>
-        <p />
         <ChatContainer {...state} fetchState={fetchState} setFetchState={setFetching} />
       </div>
     );

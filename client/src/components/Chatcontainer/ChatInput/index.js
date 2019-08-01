@@ -35,14 +35,14 @@ const ChatInput = props => {
     e.preventDefault();
     setFetchState(true);
     try {
+      addSingleMessage(state.value);
       const tx = await chatAppInstance.methods
         .postMessage(state.value)
-        .send({ from: signKey.address });
+        .send({ from: accounts[0] });
       const txHash = tx.transactionHash;
       pollfortx(txHash);
       setState({ ...state, validated: false, value: "" });
-      addSingleMessage(state.value);
-      console.log("The tx: ", tx);
+      
     } catch (error) {
       console.log("THE ERROR: ", error);
       setState({ ...state, error: true });
