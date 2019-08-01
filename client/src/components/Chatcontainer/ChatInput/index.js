@@ -15,6 +15,7 @@ const ChatInput = props => {
   } = props;
 
   const { lib, accounts } = web3Context;
+  const from = signKey ? signKey.address : accounts[0];
   const defaultState = {
     validated: false,
     value: "",
@@ -38,7 +39,7 @@ const ChatInput = props => {
       addSingleMessage(state.value);
       const tx = await chatAppInstance.methods
         .postMessage(state.value)
-        .send({ from: accounts[0] });
+        .send({ from });
       const txHash = tx.transactionHash;
       pollfortx(txHash);
       setState({ ...state, validated: false, value: "" });
@@ -71,7 +72,7 @@ const ChatInput = props => {
     };
 
     newBlock = lib.eth.subscribe("newBlockHeaders");
-    newBlock.on("data", checkBlock());
+    newBlock.on("data", checkBlock);
   };
 
   const handleValidation = e => {

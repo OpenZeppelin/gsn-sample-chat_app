@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   useWeb3Injected,
+  useWeb3Network,
   useEphemeralKey,
 } from "@openzeppelin/network";
 
@@ -301,7 +302,20 @@ const RelayHubAbi = [
 
 const App = () => {
   const signKey = useEphemeralKey();
-  const web3Context = useWeb3Injected({gsn:{signKey}});
+
+  const gasPrice = 22000000001;
+  let relay_client_config = {
+    txfee: process.env.REACT_APP_TX_FEE || 90,
+    force_gasPrice: gasPrice,            //override requested gas price
+    gasPrice: gasPrice, //override requested gas price
+    force_gasLimit: 500000,        //override requested gas limit.
+    gasLimit: 500000, //override requested gas limit.
+    verbose: true
+  };
+  
+  const web3Context = useWeb3Injected({
+    gsn: { signKey, ...relay_client_config }
+  });
   
   const defaultState = {
     web3Context: web3Context,

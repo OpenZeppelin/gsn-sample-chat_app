@@ -30,7 +30,7 @@ const RelayContainer = props => {
       getDappBalance(chatAppInstance);
 
       const newBlocks = lib.eth.subscribe("newBlockHeaders");
-      newBlocks.on("data", getDappBalance());
+      newBlocks.on("data", getDappBalance);
       subscription = newBlocks;
     };
     if (chatAppInstance) load();

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@openzeppelin/network": "github:frangio/openzeppelin-network.js#gsn",
+    "@openzeppelin/network": "github:frangio/openzeppelin-network.js#bea57de3c8933e80d7d1d2c4abd065c756b3fdd6",
     "bad-words": "^3.0.2",
     "browser-cookies": "^1.2.0",
     "classnames": "^2.2.6",
