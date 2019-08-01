@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Tooltip } from 'rimble-ui';
 
 const RelayContainer = props => {
   const { web3Context, chatAppInstance } = props;
@@ -39,11 +40,12 @@ const RelayContainer = props => {
       return () => {
         subscription.unsubscribe();
       };
+
     }
   }, []);
 
   if (state.dappBalance) {
-    return <div>App balance for gasless txs: {state.dappBalance} Eth</div>;
+    return <div><Tooltip message={`Precise Amount: ${state.dappBalance}`} placement="bottom">App balance for gasless txs: {parseFloat(state.dappBalance).toFixed(2)} Eth</Tooltip></div>;
   } else {
     return <div>App balance not loaded.</div>;
   }
