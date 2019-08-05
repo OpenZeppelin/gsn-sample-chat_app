@@ -10,8 +10,18 @@
   justify-content: flex-start;
   align-items: center;
   background-color: rgb(245, 245, 245);
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  padding: 20px 0;
   background-image: url("./images/bg_sdk_full.svg");
+
+  h1 {
+    margin: 0 0 20px;
+  }
+}
+
+.logo {
+  margin: 20px;
 }
 
 code {
@@ -73,7 +83,7 @@ img {
   align-items: center;
   justify-content: center;
   min-height: 80vh;
-  padding: 40px 0;
+  padding: 40px;
   h3 {
     margin-top: 30px;
   }

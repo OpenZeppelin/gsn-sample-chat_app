@@ -12,7 +12,7 @@ const ChatWindow = props => {
     return (
       <div className={styles.singleMessage} key={msg.uuid}>
         <div className={styles.blockie}>
-          {msg.mined ? 
+          {msg.mined ?
                     <Blockie
                     className={styles.blockie}
                     opts={{
@@ -23,10 +23,10 @@ const ChatWindow = props => {
                       scale: 5,
                       spotcolor: "#000"
                     }}
-                  /> : <Loader color="blue" />}
+                  /> : <Loader color="blue" size="25px" />}
 
         </div>
-        <div className={msg.mined ? styles.mined : styles.pending}><span className={styles.singleMessageText}>{msg.message}</span></div>
+        <div className={styles.mined }><span className={styles.singleMessageText}>{msg.message}</span></div>
       </div>
     );
   });
