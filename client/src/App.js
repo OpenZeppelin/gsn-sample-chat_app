@@ -6,19 +6,21 @@ import {
 } from "@openzeppelin/network";
 
 import { Loader } from "rimble-ui";
-
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
 
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
-const REACT_APP_NETWORK = process.env.REACT_APP_NETWORK || "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d";
-const REACT_APP_CHAT_APP_ADDRESS = process.env.REACT_APP_CHAT_APP_ADDRESS || null;
+const REACT_APP_NETWORK =
+  process.env.REACT_APP_NETWORK ||
+  "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d";
+const REACT_APP_CHAT_APP_ADDRESS =
+  process.env.REACT_APP_CHAT_APP_ADDRESS || null;
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 let ChatApp = require("../../build/contracts/ChatApp.json");
 
 const App = () => {
-  const prod = false;
   const signKey = useEphemeralKey();
 
   const gasPrice = 22000000001;
@@ -33,25 +35,19 @@ const App = () => {
 
   let web3Context = null; //
 
-  if (window.ethereum && typeof(window.ethereum)) {
+  if (typeof window.ethereum && window.ethereum) {
     web3Context = useWeb3Injected({
       gsn: { signKey, ...relay_client_config }
     });
-
   } else {
-    if (prod) {
-      web3Context = useWeb3Network(
-        REACT_APP_NETWORK,
-        {
-          gsn: { signKey, ...relay_client_config }
-        }
-      );
-
+    if (NODE_ENV === "production") {
+      web3Context = useWeb3Network(REACT_APP_NETWORK, {
+        gsn: { signKey, ...relay_client_config }
+      });
     } else {
       web3Context = useWeb3Network("ws://127.0.0.1:8545", {
         gsn: { signKey, ...relay_client_config }
       });
-
     }
   }
 
@@ -132,4 +128,3 @@ const App = () => {
 };
 
 export default App;
-
