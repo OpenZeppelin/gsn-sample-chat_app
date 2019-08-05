@@ -1,11 +1,11 @@
 {
   "contracts": {
     "ChatApp": {
-      "address": "0x1386441542fC59B030540C0804C4e2C3BF7ad2Cd",
+      "address": "0x8511797a972c98a84edFCcF49af40ad22F4c92E4",
       "constructorCode": "60806040523480156100115760006000fd5b50610017565b6119ea806100266000396000f3fe",
-      "bodyBytecodeHash": "4ff042d49c3dc8e975ff97b398cd36f42bfef87aa4a11f7ebf9fa19cdd17e31f",
-      "localBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
-      "deployedBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
+      "bodyBytecodeHash": "af54ff4c35f4fc0c0363f80774552ddd516e6801a6d1dea8c473091e78a670cf",
+      "localBytecodeHash": "0b5840759e6903e32d82df9512f084c3d87bf8b650cf5e73b625376f3abb2df4",
+      "deployedBytecodeHash": "0b5840759e6903e32d82df9512f084c3d87bf8b650cf5e73b625376f3abb2df4",
       "types": {
         "t_bool": {
           "id": "t_bool",
@@ -99,7 +99,9 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
@@ -109,7 +111,14 @@
       {
         "address": "0x31972F02C11eEa7eBFD8bbdB4f6E9684B782085C",
         "version": "1.0.0",
-        "implementation": "0x1386441542fC59B030540C0804C4e2C3BF7ad2Cd",
+        "implementation": "0x8511797a972c98a84edFCcF49af40ad22F4c92E4",
+        "admin": "0x54A4B622663E8E7b7b308F7e17CE85652cb55028",
+        "kind": "Upgradeable"
+      },
+      {
+        "address": "0x863588a990c5901b2E0F108b418aF0C262070cE5",
+        "version": "1.0.0",
+        "implementation": "0x8511797a972c98a84edFCcF49af40ad22F4c92E4",
         "admin": "0x54A4B622663E8E7b7b308F7e17CE85652cb55028",
         "kind": "Upgradeable"
       }

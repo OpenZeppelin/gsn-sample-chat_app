@@ -18,7 +18,7 @@ contract ChatApp is Initializable, RelayRecipient, Ownable {
 
     mapping (address => bool) public relaysWhitelist;
 
-    function init(IRelayHub rhub) public initializer {
+    function linkRelayHub(IRelayHub rhub) public initializer {
         setRelayHub(rhub);
     }
 
