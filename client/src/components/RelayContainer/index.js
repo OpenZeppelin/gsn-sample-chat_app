@@ -4,7 +4,7 @@ import { Tooltip } from 'rimble-ui';
 const RelayContainer = props => {
   const { web3Context, chatAppInstance } = props;
   const { lib } = web3Context;
-
+console.log("Web3Context", web3Context);
   const defaultState = { validated: false, dappBalance: null };
 
   const [state, setState] = useState(defaultState);

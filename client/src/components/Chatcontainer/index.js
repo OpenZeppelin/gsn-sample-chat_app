@@ -96,12 +96,14 @@ const ChatContainer = props => {
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
+      
       <ChatInput
         {...props}
         addSingleMessage={addSingleMessage}
         getAllMsg={getAllMsg}
       />
-      <GSNContainer {...props} />
+      {web3Context.networkName ? <div className={styles.networkName}>Network: {web3Context.networkName}</div> : null}
+      {/* <GSNContainer {...props} /> */}
       <RelayContainer {...props} />
     </div>
   );
