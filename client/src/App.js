@@ -33,6 +33,7 @@ const App = () => {
     web3Context = useWeb3Injected({
       gsn: { signKey, ...relay_client_config }
     });
+    console.log("Using Injected")
   } else {
     if (prod) {
       web3Context = useWeb3Network(
@@ -41,10 +42,12 @@ const App = () => {
           gsn: { signKey, ...relay_client_config }
         }
       );
+      console.log("Using Infura")
     } else {
       web3Context = useWeb3Network("http://127.0.0.1:8545", {
         gsn: { signKey, ...relay_client_config }
       });
+      console.log("Using Ganache")
     }
   }
 
