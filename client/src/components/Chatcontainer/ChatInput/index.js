@@ -13,7 +13,6 @@ const ChatInput = props => {
     setFetchState,
     signKey
   } = props;
-  console.log("fetchState: ", fetchState);
 
   const { lib, accounts } = web3Context;
   const from = signKey ? signKey.address : accounts[0];
