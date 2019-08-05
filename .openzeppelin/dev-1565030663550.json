@@ -1,0 +1,123 @@
+{
+  "contracts": {
+    "ChatApp": {
+      "address": "0x1386441542fC59B030540C0804C4e2C3BF7ad2Cd",
+      "constructorCode": "60806040523480156100115760006000fd5b50610017565b6119ea806100266000396000f3fe",
+      "bodyBytecodeHash": "4ff042d49c3dc8e975ff97b398cd36f42bfef87aa4a11f7ebf9fa19cdd17e31f",
+      "localBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
+      "deployedBytecodeHash": "a392611dbe7be8237e8b671b9cc46dff0c8a589a1284d7c3b7ab6843d1953a9c",
+      "types": {
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_mapping<t_bool>": {
+          "id": "t_mapping<t_bool>",
+          "valueType": "t_bool",
+          "label": "mapping(key => bool)",
+          "kind": "mapping"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 697,
+          "type": "t_bool",
+          "src": "757:24:3"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 699,
+          "type": "t_bool",
+          "src": "876:25:3"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 755,
+          "type": "t_array:50<t_uint256>",
+          "src": "1951:29:3"
+        },
+        {
+          "contract": "RelayRecipient",
+          "path": "tabookey-gasless/contracts/RelayRecipient.sol",
+          "label": "relayHub",
+          "astId": 1415,
+          "type": "t_address",
+          "src": "807:26:8"
+        },
+        {
+          "contract": "Ownable",
+          "path": "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol",
+          "label": "_owner",
+          "astId": 581,
+          "type": "t_address",
+          "src": "317:22:2"
+        },
+        {
+          "contract": "Ownable",
+          "path": "@openzeppelin/contracts-ethereum-package/contracts/ownership/Ownable.sol",
+          "label": "______gap",
+          "astId": 692,
+          "type": "t_array:50<t_uint256>",
+          "src": "2277:29:2"
+        },
+        {
+          "contract": "ChatApp",
+          "path": "contracts/ChatApp.sol",
+          "label": "relaysWhitelist",
+          "astId": 809,
+          "type": "t_mapping<t_bool>",
+          "src": "746:48:4"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "zepkit/ChatApp": [
+      {
+        "address": "0x31972F02C11eEa7eBFD8bbdB4f6E9684B782085C",
+        "version": "1.0.0",
+        "implementation": "0x1386441542fC59B030540C0804C4e2C3BF7ad2Cd",
+        "admin": "0x54A4B622663E8E7b7b308F7e17CE85652cb55028",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "1.0.0",
+  "proxyAdmin": {
+    "address": "0x54A4B622663E8E7b7b308F7e17CE85652cb55028"
+  }
+}

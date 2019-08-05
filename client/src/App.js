@@ -105,7 +105,7 @@ const App = () => {
     return (
       <div className={styles.App}>
         <div>
-          <img src={logo} alt="Logo" />
+          <img className={styles.logo} src={logo} alt="Logo" />
         </div>
         <h1>GSN Chat APP</h1>
         <ChatContainer
@@ -125,3 +125,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -50,7 +50,7 @@ Select `ChatApp`
 
 Network `development`
 
-Select "yes" to run a function. Choose the init function. You need to enter the address of your relay hub here. You will find this at the deployment part of the docker instance. 
+Select "yes" to run a function. Choose the `init` function. You need to enter the address of your relay hub here. You will find this at the deployment part of the docker instance. 
 
 It should be: `0x9C57C0F1965D225951FE1B2618C92Eefd687654F`
 
