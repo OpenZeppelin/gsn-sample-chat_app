@@ -18,14 +18,16 @@
   // overflow: auto;
   box-sizing: border-box;
   background-color: #eee;
+  overflow: scroll;
 
   .singleMessage {
     margin: 10px;
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
-  .singleMessageText { margin-top: 5px}
+  .singleMessageText { margin-left: 3px}
 
   .mined {
     color: black;
@@ -37,6 +39,8 @@
   .blockie {
     border-radius: 25px;
     margin: 5px;
+    min-width: 25px;
+    min-height: 31px;
   }
 
   h3 {
