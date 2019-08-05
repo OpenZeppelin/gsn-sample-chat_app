@@ -3,10 +3,6 @@ import { Button, Tooltip } from "rimble-ui";
 import styles from "./GSNContainer.module.scss";
 
 const GSNContainer = props => {
-  console.log("The props: ", props);
-  const { web3Context } = props;
-  const { lib } = web3Context;
-
   const [state, setState] = useState(false);
   const setProvider = () => {};
 
@@ -55,8 +51,12 @@ const GSNContainer = props => {
         <div className={styles.small} onClick={() => setState(!state)}>
           Close Options...
         </div>
-        {window.ethereum && typeof(window.ethereum.isMetamask) ? metaMaskProvider() : null}
-        {window.ethereum && typeof(window.ethereum.isMetamask) ? metaMaskSigner() : null}
+        {window.ethereum && typeof window.ethereum.isMetamask
+          ? metaMaskProvider()
+          : null}
+        {window.ethereum && typeof window.ethereum.isMetamask
+          ? metaMaskSigner()
+          : null}
         {gsnProvider()}
       </div>
     );

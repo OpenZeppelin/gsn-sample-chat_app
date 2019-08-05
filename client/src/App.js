@@ -11,6 +11,10 @@ import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
 
+const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
+const REACT_APP_NETWORK = process.env.REACT_APP_NETWORK || "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d";
+const REACT_APP_CHAT_APP_ADDRESS = process.env.REACT_APP_CHAT_APP_ADDRESS || null;
+
 let ChatApp = require("../../build/contracts/ChatApp.json");
 
 const App = () => {
@@ -19,7 +23,7 @@ const App = () => {
 
   const gasPrice = 22000000001;
   let relay_client_config = {
-    txfee: process.env.REACT_APP_TX_FEE || 90,
+    txfee: REACT_APP_TX_FEE,
     force_gasPrice: gasPrice, //override requested gas price
     gasPrice: gasPrice, //override requested gas price
     force_gasLimit: 500000, //override requested gas limit.
@@ -37,7 +41,7 @@ const App = () => {
   } else {
     if (prod) {
       web3Context = useWeb3Network(
-        "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d",
+        REACT_APP_NETWORK,
         {
           gsn: { signKey, ...relay_client_config }
         }
@@ -72,8 +76,8 @@ const App = () => {
       let chatAppAddress = null;
       let deployedNetwork = null;
 
-      if (process.env.REACT_APP_CHAT_APP_ADDRESS) {
-        chatAppAddress = process.env.REACT_APP_CHAT_APP_ADDRESS;
+      if (REACT_APP_CHAT_APP_ADDRESS) {
+        chatAppAddress = REACT_APP_CHAT_APP_ADDRESS;
       } else if (ChatApp.networks) {
         deployedNetwork = ChatApp.networks[networkId.toString()];
         if (deployedNetwork) {

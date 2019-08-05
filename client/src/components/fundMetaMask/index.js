@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "rimble-ui";
+import { Button } from "rimble-ui";]
+
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 const FundMetaMask = props => {
   const { web3, accounts, ganacheAccounts, ganacheWeb3 } = props;
@@ -41,7 +43,7 @@ const FundMetaMask = props => {
     }
   };
 
-  if (process.env.NODE_ENV === "production") return null;
+  if (NODE_ENV === "production") return null;
   if (!props.ganacheWeb3) return null;
   return (
     <div>
