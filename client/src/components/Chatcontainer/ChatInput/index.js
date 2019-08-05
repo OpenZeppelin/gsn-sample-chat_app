@@ -13,6 +13,7 @@ const ChatInput = props => {
     setFetchState,
     signKey
   } = props;
+  console.log("fetchState: ", fetchState);
 
   const { lib, accounts } = web3Context;
   const from = signKey ? signKey.address : accounts[0];
@@ -41,10 +42,9 @@ const ChatInput = props => {
         .postMessage(state.value)
         .send({ from });
       const txHash = tx.transactionHash;
-    
+
       pollfortx(txHash);
       setState({ ...state, validated: false, value: "" });
-      
     } catch (error) {
       console.log("THE ERROR: ", error);
       setState({ ...state, error: true });

@@ -6,7 +6,7 @@ import RelayContainer from "../RelayContainer";
 import GSNContainer from "../GSNContainer/index.js";
 
 const ChatContainer = props => {
-  const { web3Context, chatAppInstance } = props;
+  const { web3Context, chatAppInstance, setFetchState } = props;
   const { lib } = web3Context;
   const blockCount = 400;
 
@@ -42,7 +42,7 @@ const ChatContainer = props => {
       (error, result) => {
         if (!error) {
           //@ This code will give you access to the eventObj.
-          //@ This is nice for displaying the incoming message. 
+          //@ This is nice for displaying the incoming message.
           //
           // const eventObj = lib.eth.abi.decodeLog(
           //   eventJsonInterface.inputs,
@@ -78,6 +78,8 @@ const ChatContainer = props => {
     setState(() => {
       return { messages: messages };
     });
+    setFetchState(false);
+
   };
 
   const addSingleMessage = async message => {
@@ -100,7 +102,7 @@ const ChatContainer = props => {
         getAllMsg={getAllMsg}
       />
       <GSNContainer {...props} />
-      <RelayContainer {...props}/>
+      <RelayContainer {...props} />
     </div>
   );
 };
