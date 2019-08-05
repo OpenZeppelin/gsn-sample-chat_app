@@ -4,7 +4,7 @@
 
 The GSN Chat App is an application designed to showcase the use of Meta Transaction powered smart contract backed applications. Unlike traditional Ethereum powered smart contract applications, when using Meta Transactions users are not required to have ETH or even have an Ethereum wallet to interact with smart contracts. 
 
-##Background: 
+## Background: 
 
 To learn more about Meta Transactions and the Gas Stations Network: 
 
@@ -12,7 +12,7 @@ To learn more about Meta Transactions and the Gas Stations Network:
 [Ethereum Meta Transactions](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84)
 [How Meta Transactions will Scale Ethereum](https://medium.com/hackernoon/how-meta-transactions-will-scale-ethereum-e98c848f7719)
 
-#Get started
+# Get started
 
 **Requirements:**
 
