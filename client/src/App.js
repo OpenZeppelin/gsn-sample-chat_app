@@ -33,7 +33,7 @@ const App = () => {
 
   let web3Context = null; //
 
-  if (window.ethereum) {
+  if (window.ethereum && typeof(window.ethereum)) {
     web3Context = useWeb3Injected({
       gsn: { signKey, ...relay_client_config }
     });
@@ -102,7 +102,7 @@ const App = () => {
   const renderLoader = () => {
     return (
       <div className={styles.loader}>
-        <Loader size="80px" color="red" />
+        <Loader size="80px" color="blue" />
         <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
       </div>
     );
