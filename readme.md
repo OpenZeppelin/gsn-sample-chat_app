@@ -39,10 +39,12 @@ In a new Terminal Window, top of project:
 `npx gsn-dock-relay-ganache`
 
 This runs the docker instance which runs it's own copy of [Ganache-cli](https://www.trufflesuite.com/ganache)
- 
+
 **Deploy ChatApp**
 
-In a new terminal window, top of project: 
+In a new terminal window, top of project:
+
+`oz compile`
 
 `oz create`
 
