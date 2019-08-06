@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   useWeb3Injected,
   useEphemeralKey,
-  useWeb3Network
+  useWeb3Network, Web3Context
 } from "@openzeppelin/network";
 
 import { Loader } from "rimble-ui";
@@ -21,7 +21,8 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 
 let ChatApp = require("../../build/contracts/ChatApp.json");
 
-const App = () => {
+const App = (props) => {
+  const {refresh, toggleRefresh} = props;
   const signKey = useEphemeralKey();
   const gasPrice = 22000000001;
   let relay_client_config = {
@@ -33,7 +34,7 @@ const App = () => {
     verbose: true
   };
 
-  let web3Context = null; //
+  let web3Context = null;
 
   if (typeof window.ethereum && window.ethereum && !isMobile) {
     web3Context = useWeb3Injected({
