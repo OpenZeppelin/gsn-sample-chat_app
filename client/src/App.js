@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   useWeb3Injected,
   useEphemeralKey,
-  useWeb3Network, Web3Context
+  useWeb3Network,
+  Web3Context
 } from "@openzeppelin/network";
 
 import { Loader } from "rimble-ui";
@@ -21,8 +22,7 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 
 let ChatApp = require("../../build/contracts/ChatApp.json");
 
-const App = (props) => {
-  const {refresh, toggleRefresh} = props;
+const App = () => {
   const signKey = useEphemeralKey();
   const gasPrice = 22000000001;
   let relay_client_config = {
@@ -73,6 +73,8 @@ const App = (props) => {
     setFetchState({ fetching: value });
   };
 
+  const forceUpdate = useCallback(() => setFetchState({ fetching: true }));
+
   useEffect(() => {
     const { lib, networkId } = web3Context;
     const load = async () => {
@@ -96,12 +98,15 @@ const App = (props) => {
       }
       setState({ ...state, chatAppInstance, appReady: true, signKey });
       setFetchState({ fetching: false });
+
     };
 
     if (web3Context.connected) {
       load();
     }
   }, [web3Context.connected]);
+
+
 
   const renderLoader = () => {
     return (
@@ -123,6 +128,10 @@ const App = (props) => {
   };
 
   const renderApp = () => {
+    web3Context.on(Web3Context.NetworkIdChangedEventName, (networkId, networkName) => {
+      forceUpdate();
+    });
+    
     return (
       <div className={styles.App}>
         <div>
