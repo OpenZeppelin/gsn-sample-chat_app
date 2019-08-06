@@ -10,24 +10,37 @@
   justify-content: flex-end;
   text-align: left;
   background: #f6f8fa;
-  max-height: 250px;
+  max-height: 260px;
   vertical-align: top;
   display: block;
   padding: 0;
   height: 95vh;
-  overflow: auto;
+  // overflow: auto;
   box-sizing: border-box;
   background-color: #eee;
+  overflow: scroll;
 
   .singleMessage {
     margin: 10px;
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
+  .singleMessageText { margin-left: 3px}
+
+  .mined {
+    color: black;
+  }
+
+  .pending {
+    color: red;
+  }
   .blockie {
     border-radius: 25px;
     margin: 5px;
+    min-width: 25px;
+    min-height: 31px;
   }
 
   h3 {

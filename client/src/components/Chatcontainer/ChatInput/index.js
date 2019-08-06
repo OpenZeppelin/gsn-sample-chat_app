@@ -1,93 +1,118 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "rimble-ui";
 import styles from "./ChatInput.module.scss";
 import { Loader, Flash } from "rimble-ui";
 
-export default class ChatInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { validated: false, value: "", message: "Send", error: false };
-    this.instance = this.props.instance.methods;
-    this.accounts = this.props.accounts;
-  }
+const ChatInput = props => {
+  const {
+    web3Context,
+    addSingleMessage,
+    chatAppInstance,
+    getAllMsg,
+    fetchState,
+    setFetchState,
+    signKey
+  } = props;
 
-  handleSubmit = async e => {
+  const { lib, accounts } = web3Context;
+  const from = signKey ? signKey.address : accounts[0];
+  const defaultState = {
+    validated: false,
+    value: "",
+    buttonMessage: "Send",
+    error: false
+  };
+  const [state, setState] = useState(defaultState);
+
+  let newBlock = null;
+
+  useEffect(() => {
+    if (newBlock) {
+      return () => newBlock.unsubscribe();
+    }
+  }, [newBlock]);
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    const { signingAccount, instance, fetching, setFetchStatus } = this.props;
-    if (!fetching) {
-      setFetchStatus(true);
-      try {
-        const tx = await instance.methods
-        .postMessage(this.state.value)
-        .send({ from: signingAccount });
+    setFetchState(true);
+    try {
+      addSingleMessage(state.value);
+      const tx = await chatAppInstance.methods
+        .postMessage(state.value)
+        .send({ from });
       const txHash = tx.transactionHash;
-      this.pollfortx(txHash);
-      this.setState({ validated: false, value: "" });
-      } catch (error) {
-        console.log("THE ERROR: ", error)
-        this.setState({error: true})
-        setFetchStatus(false);
-      }
- 
+
+      pollfortx(txHash);
+      setState({ ...state, validated: false, value: "" });
+    } catch (error) {
+      console.log("THE ERROR: ", error);
+      setState({ ...state, error: true });
+      getAllMsg();
+      setFetchState(false);
     }
   };
 
-  pollfortx = async tx => {
-    const { web3, setFetchStatus } = this.props;
-    let newBlock;
-    let currentBlock = await web3.eth.getBlockNumber();
+  const pollfortx = async tx => {
+    let currentBlock = await lib.eth.getBlockNumber();
 
     const checkBlock = async () => {
-      const included = await web3.eth.getTransaction(tx);
+      const included = await lib.eth.getTransaction(tx);
       if (included) {
         newBlock.unsubscribe();
-        setFetchStatus(false);
+        getAllMsg();
+        setFetchState(false);
       } else {
-        const blockNumber = await web3.eth.getBlockNumber();
+        const blockNumber = await lib.eth.getBlockNumber();
         if (blockNumber - currentBlock > 5) {
           newBlock.unsubscribe();
-          setFetchStatus(false);
-          this.setState({ message: "ERROR" });
-          
+          setFetchState(false);
+          setState({ message: "ERROR" });
+          console.error("Transaction not found in the past five blocks");
         }
       }
     };
 
-    newBlock = web3.eth.subscribe("newBlockHeaders");
-    newBlock.on("data", checkBlock());
+    newBlock = lib.eth.subscribe("newBlockHeaders");
+    newBlock.on("data", checkBlock);
   };
 
-  handleValidation = e => {
-    this.setState({ validated: true, value: e.target.value });
+  const handleValidation = e => {
+    setState({ ...state, validated: true, value: e.target.value });
   };
 
-  render() {
-    return (
-      <div className={styles.chatInput}>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field
-            label="Chat Message"
+  return (
+    <div className={styles.chatInput}>
+      <Form onSubmit={handleSubmit}>
+        <Form.Field label="Chat Message" width={1} validated={state.validated}>
+          <Form.Input
+            type="text"
+            required
             width={1}
-            validated={this.state.validated}
-          >
-            <Form.Input
-              type="text"
-              required
-              width={1}
-              value={this.state.value}
-              onChange={this.handleValidation}
-            />
-          </Form.Field>
-          <Button type="submit" width={1}>
-            {this.props.fetching ? <Loader color="white" /> : this.state.message}
-          </Button>
-        </Form>
-        <div>
-          {this.state.error ? <div><Flash my={3} variant="danger" onClick={()=> this.setState({error: false})}>
-Error: Check console for details. Click to dismiss. 
-</Flash></div> : <div></div>}
-        </div>
+            value={state.value}
+            onChange={handleValidation}
+          />
+        </Form.Field>
+        <Button type="submit" width={1}>
+          {fetchState.fetching ? <Loader color="white" /> : state.buttonMessage}
+        </Button>
+      </Form>
+      <div>
+        {state.error ? (
+          <div>
+            <Flash
+              my={3}
+              variant="danger"
+              onClick={() => setState({ ...state, error: false })}
+            >
+              Error: Check console for details. Click to dismiss.
+            </Flash>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default ChatInput;

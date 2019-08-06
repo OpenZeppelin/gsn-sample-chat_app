@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@openzeppelin/gsn-provider": "^0.1.2",
+    "@openzeppelin/network": "github:frangio/openzeppelin-network.js#bea57de3c8933e80d7d1d2c4abd065c756b3fdd6",
     "bad-words": "^3.0.2",
     "browser-cookies": "^1.2.0",
     "classnames": "^2.2.6",
@@ -11,6 +13,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.0",
+    "react-device-detect": "^1.7.5",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.3",
     "rimble-ui": "^0.7.0",

@@ -69,5 +69,6 @@ build
 .zos.session
 
 .openzeppelin/.session
+.openzeppelin/dev-*.json
 
 db/
