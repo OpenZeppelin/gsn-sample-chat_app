@@ -7,7 +7,7 @@ import { Loader } from "rimble-ui";
 const ChatWindow = props => {
   const { messages } = props;
   const filter = new Filter();
-  const listMsg = messages.slice(0, 5).map(msg => {
+  const listMsg = messages.slice(0, 20).map(msg => {
     msg.message = filter.clean(msg.message);
     return (
       <div className={styles.singleMessage} key={msg.uuid}>
