@@ -39,6 +39,7 @@ const App = () => {
     web3Context = useWeb3Injected({
       gsn: { signKey, ...relay_client_config }
     });
+    console.log("Injected")
   } else if (isMobile) {
     web3Context = useWeb3Network(
       "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d",
@@ -46,15 +47,21 @@ const App = () => {
         gsn: { signKey, ...relay_client_config }
       }
     );
+    console.log("mobile")
+
   } else {
     if (NODE_ENV === "production") {
       web3Context = useWeb3Network(REACT_APP_NETWORK, {
         gsn: { signKey, ...relay_client_config }
       });
+    console.log("Production")
+
     } else {
       web3Context = useWeb3Network("ws://127.0.0.1:8545", {
         gsn: { signKey, ...relay_client_config }
       });
+    console.log("Local")
+
     }
   }
 
@@ -107,13 +114,10 @@ const App = () => {
       <div className={styles.loader}>
         <Loader size="80px" color="blue" />
         <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
-        {web3Context.networkName !== "Rinkeby" &&
-        !web3Context.networkName !== "" ? null : (
-          <div>
+        {web3Context.networkName !== "Rinkeby" ?  <div>
             Your network is: {web3Context.networkName}, please switch to
             Rinkeby.
-          </div>
-        )}
+          </div> : null }
         {web3Context.networkName === "Private" &&
         state.chatAppInstance === {} ? (
           <div>Please check that the contracts are deployed.</div>
