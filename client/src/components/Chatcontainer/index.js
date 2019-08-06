@@ -8,7 +8,7 @@ import RelayContainer from "../RelayContainer";
 const ChatContainer = props => {
   const { web3Context, chatAppInstance, setFetchState } = props;
   const { lib } = web3Context;
-  const blockCount = 400;
+  const blockCount = 100;
 
   const defaultState = { messages: [] };
   let unsubscribe = null;

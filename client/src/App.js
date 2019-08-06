@@ -42,7 +42,7 @@ const App = () => {
     console.log("Injected")
   } else if (isMobile) {
     web3Context = useWeb3Network(
-      "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d",
+      "wss://rinkeby.infura.io/ws/v3/d6760e62b67f4937ba1ea2691046f06d",
       {
         gsn: { signKey, ...relay_client_config }
       }
