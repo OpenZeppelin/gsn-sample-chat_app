@@ -55,7 +55,7 @@ const App = () => {
     web3Context: web3Context,
     chatAppInstance: null,
     appReady: false,
-    signKey: signKey
+    signKey: signKey,
   };
 
   const [state, setState] = useState(defaultState);
@@ -68,7 +68,7 @@ const App = () => {
   useEffect(() => {
     const { lib, networkId } = web3Context;
     const load = async () => {
-      let chatAppInstance = {};
+      let chatAppInstance = null;
       let chatAppAddress = null;
       let deployedNetwork = null;
 
@@ -100,6 +100,8 @@ const App = () => {
       <div className={styles.loader}>
         <Loader size="80px" color="blue" />
         <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
+        {state.chatAppInstance ? null : <div>Your network is: {web3Context.networkName}, please switch to Rinkeby.</div>}
+        {web3Context.networkName === "Private" ? <div>Please check that the contracts are deployed.</div>: null }
       </div>
     );
   };
@@ -120,7 +122,7 @@ const App = () => {
     );
   };
 
-  if (!state.appReady) {
+  if (!state.chatAppInstance) {
     return renderLoader();
   } else {
     return renderApp();

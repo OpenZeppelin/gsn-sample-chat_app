@@ -13,14 +13,13 @@ const ChatContainer = props => {
   let unsubscribe = null;
 
   const [state, setState] = useState(defaultState);
-
+console.log("Props", props)
   useEffect(() => {
     const load = async () => {
       await getAllMsg();
       unsubscribe = await subscribeLogEvent(chatAppInstance, "message");
     };
-
-    load();
+    if(chatAppInstance) load();
     if (unsubscribe) {
       return () => unsubscribe.unsubscribe();
     }
