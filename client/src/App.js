@@ -9,6 +9,7 @@ import { Loader } from "rimble-ui";
 import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
+import { isMobile } from "react-device-detect";
 
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
 const REACT_APP_NETWORK =
@@ -22,7 +23,6 @@ let ChatApp = require("../../build/contracts/ChatApp.json");
 
 const App = () => {
   const signKey = useEphemeralKey();
-
   const gasPrice = 22000000001;
   let relay_client_config = {
     txfee: REACT_APP_TX_FEE,
@@ -35,10 +35,17 @@ const App = () => {
 
   let web3Context = null; //
 
-  if (typeof window.ethereum && window.ethereum) {
+  if (typeof window.ethereum && window.ethereum && !isMobile) {
     web3Context = useWeb3Injected({
       gsn: { signKey, ...relay_client_config }
     });
+  } else if (isMobile) {
+    web3Context = useWeb3Network(
+      "https://rinkeby.infura.io/v3/d6760e62b67f4937ba1ea2691046f06d",
+      {
+        gsn: { signKey, ...relay_client_config }
+      }
+    );
   } else {
     if (NODE_ENV === "production") {
       web3Context = useWeb3Network(REACT_APP_NETWORK, {
@@ -55,7 +62,7 @@ const App = () => {
     web3Context: web3Context,
     chatAppInstance: null,
     appReady: false,
-    signKey: signKey,
+    signKey: signKey
   };
 
   const [state, setState] = useState(defaultState);
@@ -100,8 +107,17 @@ const App = () => {
       <div className={styles.loader}>
         <Loader size="80px" color="blue" />
         <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
-        {state.chatAppInstance ? null : <div>Your network is: {web3Context.networkName}, please switch to Rinkeby.</div>}
-        {web3Context.networkName === "Private" ? <div>Please check that the contracts are deployed.</div>: null }
+        {web3Context.networkName !== "Rinkeby" &&
+        !web3Context.networkName !== "" ? null : (
+          <div>
+            Your network is: {web3Context.networkName}, please switch to
+            Rinkeby.
+          </div>
+        )}
+        {web3Context.networkName === "Private" &&
+        state.chatAppInstance === {} ? (
+          <div>Please check that the contracts are deployed.</div>
+        ) : null}
       </div>
     );
   };

@@ -4,6 +4,7 @@ import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
 import RelayContainer from "../RelayContainer";
 
+
 const ChatContainer = props => {
   const { web3Context, chatAppInstance, setFetchState } = props;
   const { lib } = web3Context;
@@ -13,13 +14,12 @@ const ChatContainer = props => {
   let unsubscribe = null;
 
   const [state, setState] = useState(defaultState);
-console.log("Props", props)
   useEffect(() => {
     const load = async () => {
       await getAllMsg();
       unsubscribe = await subscribeLogEvent(chatAppInstance, "message");
     };
-    if(chatAppInstance) load();
+    if (chatAppInstance) load();
     if (unsubscribe) {
       return () => unsubscribe.unsubscribe();
     }
@@ -77,7 +77,6 @@ console.log("Props", props)
       return { messages: messages };
     });
     setFetchState(false);
-
   };
 
   const addSingleMessage = async message => {
@@ -94,13 +93,17 @@ console.log("Props", props)
   return (
     <div className={styles.chatContainer}>
       <ChatWindow messages={state.messages} {...props} />
-      
+
       <ChatInput
         {...props}
         addSingleMessage={addSingleMessage}
         getAllMsg={getAllMsg}
       />
-      {web3Context.networkName ? <div className={styles.networkName}>Network: {web3Context.networkName}</div> : null}
+      {web3Context.networkName ? (
+        <div className={styles.networkName}>
+          Network: {web3Context.networkName}
+        </div>
+      ) : null}
       {/* <GSNContainer {...props} /> */}
       <RelayContainer {...props} />
     </div>
