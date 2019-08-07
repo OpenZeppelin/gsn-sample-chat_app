@@ -20,32 +20,29 @@ const GSNContainer = props => {
   useEffect(() => {
     let instance = null;
     if (injected) {
-      console.log("Accounts", injected);
       instance = new injected.lib.eth.Contract(
         ChatAppAbi.abi,
         props.chatAppInstance._address
       );
     }
-    console.log("Instance: ", instance);
+
     setState({ instance });
   }, [injected]);
 
   const donate = async () => {
-    let tx;
     console.log("here");
     if (state.instance) {
       try {
-        tx = await state.instance.methods
+        await state.instance.methods
           .deposit()
           .send({ from: injected.accounts[0], value: "500000000000000000" });
-        console.log(tx);
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  if (state) {
+  if (toggleState) {
     return (
       <div>
         <Button
