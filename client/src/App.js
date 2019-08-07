@@ -113,6 +113,7 @@ const App = () => {
     web3Context: web3Context,
     infuraContext: infuraContext,
     localContext: localContext,
+    ChatAppAbi: null,
     chatAppInstance: null,
     infuraAppInstance: null,
     appReady: false,
@@ -145,7 +146,7 @@ const App = () => {
         console.error("Chat app address not found");
       }
 
-      setState({ ...state, chatAppInstance, appReady: true, signKey });
+      setState({ ...state, chatAppInstance, ChatAppAbi: ChatApp, appReady: true, signKey });
       setFetchState({ fetching: false });
     };
 
@@ -174,12 +175,12 @@ const App = () => {
   };
 
   const renderApp = () => {
-    web3Context.on(
-      Web3Context.NetworkIdChangedEventName,
-      (networkId, networkName) => {
-        forceUpdate();
-      }
-    );
+    // web3Context.on(
+    //   Web3Context.NetworkIdChangedEventName,
+    //   (networkId, networkName) => {
+    //     forceUpdate();
+    //   }
+    // );
 
     const setContext = provider => {
       setState({ ...state, web3Context: provider });
