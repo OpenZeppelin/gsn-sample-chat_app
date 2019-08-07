@@ -25,7 +25,7 @@ const GSNContainer = props => {
   } else {
     return (
       <div className={styles.small} onClick={() => setState(!state)}>
-        Advanced Options...
+        Additional Info:
       </div>
     );
   }
