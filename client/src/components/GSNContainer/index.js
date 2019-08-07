@@ -6,31 +6,36 @@ import { useWeb3Injected } from "@openzeppelin/network";
 const GSNContainer = props => {
   const { web3Context, chatAppInstance, ChatAppAbi } = props;
   const [toggleState, setToggleState] = useState(false);
-  console.log(web3Context);
 
   let injected = null;
-  injected = useWeb3Injected();
-  console.log("injected", injected.accounts);
+  try {
+    injected = useWeb3Injected();
+    injected.requestAuth();
+  } catch (error) {
+    console.log(error);
+  }
 
   const [state, setState] = useState({ instance: null });
 
   useEffect(() => {
     let instance = null;
-    if (injected.connected) {
+    if (injected) {
+      console.log("Accounts", injected);
       instance = new injected.lib.eth.Contract(
         ChatAppAbi.abi,
         props.chatAppInstance._address
       );
     }
+    console.log("Instance: ", instance);
     setState({ instance });
-  }, [injected.connected]);
+  }, [injected]);
 
   const donate = async () => {
     let tx;
     console.log("here");
     if (state.instance) {
       try {
-        tx = state.instance.methods
+        tx = await state.instance.methods
           .deposit()
           .send({ from: injected.accounts[0], value: "500000000000000000" });
         console.log(tx);
