@@ -30,6 +30,10 @@ const GSNContainer = props => {
     setState({ instance });
   }, [injected]);
 
+  useEffect(() => {
+    //axios
+  })
+
   const donate = async () => {
     console.log("here");
     if (state.instance) {
