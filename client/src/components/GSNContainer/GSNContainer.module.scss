@@ -10,8 +10,6 @@
     margin: 2px;
   }
 
- 
-
   h3 {
     border-bottom: 1px dotted #ffbe44;
     padding-bottom: 5px;
@@ -36,4 +34,17 @@
 
 .small {
   font-size: small;
+}
+
+.smallBold {
+  font-size: small;
+  font-weight: 900;
+}
+.advanced {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(180, 214, 255, 0.42);
 }

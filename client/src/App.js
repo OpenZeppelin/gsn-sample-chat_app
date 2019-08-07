@@ -34,44 +34,84 @@ const App = () => {
     verbose: true
   };
 
+  const [fetchState, setFetchState] = useState({
+    fetching: false,
+    error: false
+  });
+
+  const setFetching = value => {
+    setFetchState({ fetching: value });
+  };
+
   let web3Context = null;
+  let infuraContext = null;
+  let localContext = null;
 
   if (typeof window.ethereum && window.ethereum && !isMobile) {
-    web3Context = useWeb3Injected({
-      gsn: { signKey, ...relay_client_config }
-    });
+    try {
+      web3Context = useWeb3Injected({
+        gsn: { signKey, ...relay_client_config }
+      });
+    } catch (error) {
+      console.log(error);
+      setFetchState({ fetching: false, error });
+    }
   } else if (isMobile) {
-    web3Context = useWeb3Network(
+    try {
+      web3Context = useWeb3Network(
+        "wss://rinkeby.infura.io/ws/v3/d6760e62b67f4937ba1ea2691046f06d",
+        {
+          gsn: { signKey, ...relay_client_config }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      setFetchState({ fetching: false, error });
+    }
+  } else {
+    if (NODE_ENV === "production") {
+      try {
+        web3Context = useWeb3Network(REACT_APP_NETWORK, {
+          gsn: { signKey, ...relay_client_config }
+        });
+      } catch (error) {
+        console.log(error);
+        setFetchState({ fetching: false, error });
+      }
+    } else {
+      try {
+        web3Context = useWeb3Network("ws://127.0.0.1:8545", {
+          gsn: { signKey, ...relay_client_config }
+        });
+      } catch (error) {
+        console.log(error);
+        setFetchState({ fetching: false, error });
+      }
+    }
+  }
+
+  try {
+    infuraContext = useWeb3Network(
       "wss://rinkeby.infura.io/ws/v3/d6760e62b67f4937ba1ea2691046f06d",
       {
         gsn: { signKey, ...relay_client_config }
       }
     );
-  } else {
-    if (NODE_ENV === "production") {
-      web3Context = useWeb3Network(REACT_APP_NETWORK, {
-        gsn: { signKey, ...relay_client_config }
-      });
-    } else {
-      web3Context = useWeb3Network("ws://127.0.0.1:8545", {
-        gsn: { signKey, ...relay_client_config }
-      });
-    }
+  } catch (error) {
+    console.log(error)
+    setFetchState({ fetching: false, error });
   }
 
   const defaultState = {
     web3Context: web3Context,
+    infuraContext: infuraContext,
     chatAppInstance: null,
+    infuraAppInstance: null,
     appReady: false,
     signKey: signKey
   };
 
   const [state, setState] = useState(defaultState);
-  const [fetchState, setFetchState] = useState({ fetching: false });
-
-  const setFetching = value => {
-    setFetchState({ fetching: value });
-  };
 
   const forceUpdate = useCallback(() => setFetchState({ fetching: true }));
 
@@ -96,17 +136,18 @@ const App = () => {
       } else {
         console.error("Chat app address not found");
       }
+
+      
+
+
       setState({ ...state, chatAppInstance, appReady: true, signKey });
       setFetchState({ fetching: false });
-
     };
 
     if (web3Context.connected) {
       load();
     }
   }, [web3Context.connected]);
-
-
 
   const renderLoader = () => {
     return (
@@ -128,10 +169,13 @@ const App = () => {
   };
 
   const renderApp = () => {
-    web3Context.on(Web3Context.NetworkIdChangedEventName, (networkId, networkName) => {
-      forceUpdate();
-    });
-    
+    web3Context.on(
+      Web3Context.NetworkIdChangedEventName,
+      (networkId, networkName) => {
+        forceUpdate();
+      }
+    );
+
     return (
       <div className={styles.App}>
         <div>
