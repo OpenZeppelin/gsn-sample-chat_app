@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Tooltip } from "rimble-ui";
+import { Button } from "rimble-ui";
 import styles from "./GSNContainer.module.scss";
 
 const GSNContainer = props => {
-  console.log("props", props);
+  //const {web3Context, localContext, infuraContext} = props;
   const [state, setState] = useState(false);
 
   if (state) {

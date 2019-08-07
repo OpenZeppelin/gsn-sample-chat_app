@@ -89,7 +89,6 @@ const App = () => {
       }
     }
   }
-
   try {
     infuraContext = useWeb3Network(
       "wss://rinkeby.infura.io/ws/v3/d6760e62b67f4937ba1ea2691046f06d",
@@ -98,13 +97,22 @@ const App = () => {
       }
     );
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    setFetchState({ fetching: false, error });
+  }
+  try {
+    localContext = useWeb3Network("ws://127.0.0.1:8545", {
+      gsn: { signKey, ...relay_client_config }
+    });
+  } catch (error) {
+    console.log(error);
     setFetchState({ fetching: false, error });
   }
 
   const defaultState = {
     web3Context: web3Context,
     infuraContext: infuraContext,
+    localContext: localContext,
     chatAppInstance: null,
     infuraAppInstance: null,
     appReady: false,
@@ -137,9 +145,6 @@ const App = () => {
         console.error("Chat app address not found");
       }
 
-      
-
-
       setState({ ...state, chatAppInstance, appReady: true, signKey });
       setFetchState({ fetching: false });
     };
@@ -154,10 +159,10 @@ const App = () => {
       <div className={styles.loader}>
         <Loader size="80px" color="blue" />
         <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
-        {web3Context.networkName !== "Rinkeby" ? (
+        {web3Context.networkName !== "Rinkeby" && web3Context.connected? (
           <div>
             Your network is: {web3Context.networkName}, please switch to
-            Rinkeby.
+            Rinkeby and reload.
           </div>
         ) : null}
         {web3Context.networkName === "Private" &&
@@ -176,6 +181,11 @@ const App = () => {
       }
     );
 
+    const setContext = provider => {
+      setState({ ...state, web3Context: provider });
+    };
+
+
     return (
       <div className={styles.App}>
         <div>
@@ -186,6 +196,7 @@ const App = () => {
           {...state}
           fetchState={fetchState}
           setFetchState={setFetching}
+          setContext={setContext}
         />
       </div>
     );
