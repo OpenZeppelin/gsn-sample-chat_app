@@ -4,7 +4,7 @@ import styles from "./GSNContainer.module.scss";
 import { useWeb3Injected } from "@openzeppelin/network";
 
 const GSNContainer = props => {
-  const { web3Context, chatAppInstance, ChatAppAbi } = props;
+  const { ChatAppAbi } = props;
   const [toggleState, setToggleState] = useState(false);
 
   let injected = null;
@@ -12,7 +12,8 @@ const GSNContainer = props => {
     injected = useWeb3Injected();
     injected.requestAuth();
   } catch (error) {
-    console.log(error);
+    //No injected web3
+    injected = null;
   }
 
   const [state, setState] = useState({ instance: null });
@@ -57,9 +58,11 @@ const GSNContainer = props => {
           <div className={styles.small}>{props.signKey.address}</div>
           <div className={styles.smallBold}>Contract Address:</div>{" "}
           <div className={styles.small}>{props.chatAppInstance._address}</div>
-          <Button size="small" onClick={() => donate()}>
-            Donate to Contract
-          </Button>
+          {injected && injected.connected ? (
+            <Button size="small" onClick={() => donate()}>
+              Donate to Contract
+            </Button>
+          ) : null}
         </div>
       </div>
     );
