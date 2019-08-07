@@ -9,23 +9,23 @@ const GSNContainer = props => {
   if (state) {
     return (
       <div>
-        <div className={styles.small} onClick={() => setState(!state)}>
-          Close Options...
-        </div>
+        <Button mainColor="DarkCyan" size="small"  onClick={() => setState(!state)}>
+          Hide Info
+        </Button>
         <div className={styles.advanced}>
           <div className={styles.smallBold}>Browser Public Key: </div>
           <div className={styles.small}>{props.signKey.address}</div>
-          <div className={styles.smallBold}>
-            Contract Address:
-          </div>{" "}
+          <div className={styles.smallBold}>Contract Address:</div>{" "}
           <div className={styles.small}>{props.chatAppInstance._address}</div>
         </div>
       </div>
     );
   } else {
     return (
-      <div className={styles.small} onClick={() => setState(!state)}>
-        Additional Info:
+      <div>
+        <Button size="small"  onClick={() => setState(!state)}>
+          Show Info
+        </Button>
       </div>
     );
   }
