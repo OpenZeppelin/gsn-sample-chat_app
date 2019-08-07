@@ -23,7 +23,6 @@ let ChatApp = require("../../build/contracts/ChatApp.json");
 
 const App = () => {
   const signKey = useEphemeralKey();
-  console.log("Singkey", signKey);
   const gasPrice = 22000000001;
   let relay_client_config = {
     txfee: REACT_APP_TX_FEE,
@@ -52,7 +51,7 @@ const App = () => {
       web3Context = useWeb3Injected({
         gsn: { signKey, ...relay_client_config }
       });
-      web3Context.requestAuth();
+      //web3Context.requestAuth();
     } catch (error) {
       console.log(error);
       setFetchState({ fetching: false, error });
@@ -65,7 +64,7 @@ const App = () => {
           gsn: { signKey, ...relay_client_config }
         }
       );
-      web3Context.requestAuth();
+      //web3Context.requestAuth();
     } catch (error) {
       console.log(error);
       setFetchState({ fetching: false, error });
@@ -76,7 +75,7 @@ const App = () => {
         web3Context = useWeb3Network(REACT_APP_NETWORK, {
           gsn: { signKey, ...relay_client_config }
         });
-        web3Context.requestAuth();
+        //web3Context.requestAuth();
       } catch (error) {
         console.log(error);
         setFetchState({ fetching: false, error });
@@ -86,7 +85,7 @@ const App = () => {
         web3Context = useWeb3Network("ws://127.0.0.1:8545", {
           gsn: { signKey, ...relay_client_config }
         });
-        web3Context.requestAuth();
+        //web3Context.requestAuth();
       } catch (error) {
         console.log(error);
         setFetchState({ fetching: false, error });
