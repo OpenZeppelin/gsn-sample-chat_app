@@ -13,7 +13,7 @@ const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
 const REACT_APP_CHAT_APP_ADDRESS =
   process.env.REACT_APP_CHAT_APP_ADDRESS || null;
 //const NODE_ENV = process.env.NODE_ENV || "development";
-const NODE_ENV = "production";
+const NODE_ENV = "development";
 
 
 
