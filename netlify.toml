@@ -9,7 +9,6 @@ command = "npm run build"
   REACT_APP_NETWORK = "wss://rinkeby.infura.io/ws/v3/cfed977c21914b388137979b1ee79db7"
   REACT_APP_GAS_PRICE = "22000000001"
   REACT_APP_TX_FEE = "81"
-  NODE_ENV = "production"
 
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.

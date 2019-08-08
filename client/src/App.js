@@ -12,8 +12,9 @@ import logo from "../src/images/OZ_logo.png";
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
 const REACT_APP_CHAT_APP_ADDRESS =
   process.env.REACT_APP_CHAT_APP_ADDRESS || null;
-//const NODE_ENV = process.env.NODE_ENV || "development";
-const NODE_ENV = "development";
+let NODE_ENV = process.env.NODE_ENV || "development";
+// NODE_ENV = "production";
+
 
 
 
@@ -84,7 +85,7 @@ const App = () => {
       let chatAppAddress = null;
       let deployedNetwork = null;
 
-      if (REACT_APP_CHAT_APP_ADDRESS && NODE_ENV !== "development") {
+      if (REACT_APP_CHAT_APP_ADDRESS) {
         chatAppAddress = REACT_APP_CHAT_APP_ADDRESS;
       } else if (ChatApp.networks) {
         deployedNetwork = ChatApp.networks[networkId.toString()];
