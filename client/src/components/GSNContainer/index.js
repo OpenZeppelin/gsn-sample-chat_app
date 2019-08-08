@@ -45,17 +45,6 @@ const GSNContainer = props => {
     });
   }, []);
 
-  const donate = async () => {
-    if (state.instance) {
-      try {
-        await state.instance.methods
-          .deposit()
-          .send({ from: injected.accounts[0], value: "500000000000000000" });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   if (toggleState) {
     console.log("Relay info:", relayState);
@@ -90,8 +79,8 @@ const GSNContainer = props => {
           <div className={styles.smallBold}>Contract Address:</div>{" "}
           <div className={styles.small}>{props.chatAppInstance._address}</div>
           {injected && injected.connected ? (
-            <Button size="small" onClick={() => donate()}>
-              Donate to Contract
+            <Button size="small" onClick={() => window.open(`https://gsn.openzeppelin.com/recipients/${props.chatAppInstance._address}`)}>
+              Top up Contract
             </Button>
           ) : null}
         </div>
