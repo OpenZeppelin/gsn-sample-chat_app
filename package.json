@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/OpenZeppelin/starter-kit/blob/stable/README.md",
   "dependencies": {
-    "@openzeppelin/contracts-ethereum-package": "^2.2.1",
+    "@openzeppelin/contracts-ethereum-package": "^2.2.3",
     "@openzeppelin/gsn-helpers": "github:OpenZeppelin/openzeppelin-gsn-helpers",
     "@openzeppelin/upgrades": "^2.5.1",
     "dotenv": "^8.0.0",
