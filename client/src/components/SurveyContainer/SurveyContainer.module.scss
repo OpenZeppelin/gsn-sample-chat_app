@@ -1,0 +1,21 @@
+@import "../../layout/variables.scss";
+
+.colum {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display:flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.bigNumber {
+  font-size: 120px;
+  margin: 20px;
+}
+
+.bigButton {
+  margin: 20px;
+}

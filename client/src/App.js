@@ -5,9 +5,10 @@ import {
 } from "@openzeppelin/network";
 
 import { Loader } from "rimble-ui";
-import ChatContainer from "./components/Chatcontainer/index";
+// import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
+import SurveyContainer from "./components/SurveyContainer";
 
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
 const REACT_APP_CHAT_APP_ADDRESS =
@@ -18,7 +19,7 @@ let NODE_ENV = process.env.NODE_ENV || "development";
 
 
 
-let ChatApp = require("../../build/contracts/ChatApp.json");
+let workshop = require("../../build/contracts/Workshop.json");
 
 const App = () => {
   const signKey = useEphemeralKey();
@@ -69,8 +70,8 @@ const App = () => {
 
   const defaultState = {
     web3Context: web3Context,
-    ChatAppAbi: null,
-    chatAppInstance: null,
+    workshopAbi: null,
+    workshopInstance: null,
     infuraAppInstance: null,
     appReady: false,
     signKey: signKey
@@ -81,29 +82,29 @@ const App = () => {
   useEffect(() => {
     const { lib, networkId } = web3Context;
     const load = async () => {
-      let chatAppInstance = null;
-      let chatAppAddress = null;
+      let workshopInstance = null;
+      let workshopAddress = null;
       let deployedNetwork = null;
 
       if (REACT_APP_CHAT_APP_ADDRESS) {
-        chatAppAddress = REACT_APP_CHAT_APP_ADDRESS;
-      } else if (ChatApp.networks) {
-        deployedNetwork = ChatApp.networks[networkId.toString()];
+        workshopAddress = REACT_APP_CHAT_APP_ADDRESS;
+      } else if (workshop.networks) {
+        deployedNetwork = workshop.networks[networkId.toString()];
         if (deployedNetwork) {
-          chatAppAddress = deployedNetwork && deployedNetwork.address;
+          workshopAddress = deployedNetwork && deployedNetwork.address;
         }
       }
 
-      if (chatAppAddress) {
-        chatAppInstance = new lib.eth.Contract(ChatApp.abi, chatAppAddress);
+      if (workshopAddress) {
+        workshopInstance = new lib.eth.Contract(workshop.abi, workshopAddress);
       } else {
         console.error("Chat app address not found");
       }
 
       setState({
         ...state,
-        chatAppInstance,
-        ChatAppAbi: ChatApp,
+        workshopInstance,
+        workshopAbi: workshop,
         appReady: true,
         signKey
       });
@@ -127,7 +128,7 @@ const App = () => {
           </div>
         ) : null}
         {web3Context.networkName === "Private" &&
-        state.chatAppInstance === {} ? (
+        state.workshopInstance === {} ? (
           <div>Please check that the contracts are deployed.</div>
         ) : null}
       </div>
@@ -144,7 +145,7 @@ const App = () => {
           <img className={styles.logo} src={logo} alt="Logo" />
         </div>
         <h1>GSN Chat APP</h1>
-        <ChatContainer
+        <SurveyContainer
           {...state}
           fetchState={fetchState}
           setFetchState={setFetching}
@@ -154,7 +155,7 @@ const App = () => {
     );
   };
 
-  if (!state.chatAppInstance) {
+  if (!state.workshopInstance) {
     return renderLoader();
   } else {
     return renderApp();
