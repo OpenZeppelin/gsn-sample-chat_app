@@ -1,16 +1,15 @@
 {
   "manifestVersion": "2.2",
   "contracts": {
-    "ChatApp": "ChatApp"
+    "Workshop": "Workshop"
   },
   "dependencies": {},
-  "name": "zepkit",
+  "name": "workshopGSN",
   "version": "1.0.0",
   "compiler": {
-    "manager": "openzeppelin",
+    "manager": "truffle",
     "compilerSettings": {
       "optimizer": {}
-    },
-    "solcVersion": "0.5.10"
+    }
   }
 }

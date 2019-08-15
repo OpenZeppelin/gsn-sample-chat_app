@@ -29,17 +29,8 @@ contract Workshop is GSNRecipient {
         }
     }
 
-    function acceptRelayedCall(
-address relay,
- address from,
- bytes calldata encodedFunction,
- uint256 transactionFee,
- uint256 gasPrice,
- uint256 gasLimit,
- uint256 nonce,
- bytes calldata approvalData,
- uint256 maxPossibleCharge
+    function acceptRelayedCall(address relay, address from, bytes calldata encodedFunction, uint256 transactionFee, uint256 gasPrice, uint256 gasLimit, uint256 nonce, bytes calldata approvalData, uint256 maxPossibleCharge
  ) external view returns (uint256, bytes memory) {
- return _approveRelayedCall();
+  return _approveRelayedCall();
  }
 }
