@@ -64,7 +64,7 @@ typings/
 zos.dev-*
 
 # contracts build
-build
+# build
 
 .zos.session
 
