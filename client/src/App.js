@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  useEphemeralKey,
-  useWeb3Network
-} from "@openzeppelin/network";
+import { useEphemeralKey, useWeb3Network } from "@openzeppelin/network";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { Loader } from "rimble-ui";
 // import ChatContainer from "./components/Chatcontainer/index";
 import styles from "./App.module.scss";
 import logo from "../src/images/OZ_logo.png";
 import SurveyContainer from "./components/SurveyContainer";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
 const REACT_APP_CHAT_APP_ADDRESS =
@@ -16,12 +16,9 @@ const REACT_APP_CHAT_APP_ADDRESS =
 let NODE_ENV = process.env.NODE_ENV || "development";
 // NODE_ENV = "production";
 
-
-
-
 let workshop = require("../../build/contracts/Workshop.json");
 
-const App = () => {
+const App = props => {
   const signKey = useEphemeralKey();
   const gasPrice = 22000000001;
   let relay_client_config = {
@@ -43,7 +40,6 @@ const App = () => {
   };
 
   let web3Context = null;
-
 
   if (NODE_ENV === "development") {
     try {
@@ -118,20 +114,37 @@ const App = () => {
 
   const renderLoader = () => {
     return (
-      <div className={styles.loader}>
-        <Loader size="80px" color="blue" />
-        <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
-        {web3Context.networkName !== "Rinkeby" && web3Context.connected ? (
-          <div>
-            Your network is: {web3Context.networkName}, and are in Development
-            mode.
-          </div>
-        ) : null}
-        {web3Context.networkName === "Private" &&
-        state.workshopInstance === {} ? (
-          <div>Please check that the contracts are deployed.</div>
-        ) : null}
-      </div>
+      <Router history={history}>
+        <div className={styles.loader}>
+          <Loader size="80px" color="blue" />
+          <h3> Loading Web3, accounts, GSN Relay and contract...</h3>
+          {web3Context.networkName !== "Rinkeby" && web3Context.connected ? (
+            <div>
+              Your network is: {web3Context.networkName}, and are in Development
+              mode.
+            </div>
+          ) : null}
+          {web3Context.networkName === "Private" &&
+          state.workshopInstance === {} ? (
+            <div>Please check that the contracts are deployed.</div>
+          ) : null}
+        </div>
+      </Router>
+    );
+  };
+
+  const renderSurvery = props => {
+    const setContext = provider => {
+      setState({ ...state, web3Context: provider });
+    };
+    return (
+      <SurveyContainer
+        {...props}
+        {...state}
+        fetchState={fetchState}
+        setFetchState={setFetching}
+        setContext={setContext}
+      />
     );
   };
 
@@ -140,19 +153,15 @@ const App = () => {
       setState({ ...state, web3Context: provider });
     };
     return (
-      <div className={styles.App}>
-        <div>
-          <img className={styles.logo} src={logo} alt="Logo" />
+      <Router history={history}>
+        <div className={styles.App}>
+          <div>
+            <img className={styles.logo} src={logo} alt="Logo" />
+          </div>
+          <h1>Workshop Survey:</h1>
+          <Route path="/" component={renderSurvery} />
         </div>
-        <h1>Workshop Survey:</h1>
-        
-        <SurveyContainer
-          {...state}
-          fetchState={fetchState}
-          setFetchState={setFetching}
-          setContext={setContext}
-        />
-      </div>
+      </Router>
     );
   };
 

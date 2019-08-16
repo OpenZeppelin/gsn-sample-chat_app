@@ -8,6 +8,7 @@ import GSNContainer from "../GSNContainer";
 
 const ChatContainer = props => {
   const { web3Context, chatAppInstance, setFetchState } = props;
+
   const { lib } = web3Context;
   const blockCount = 400;
 

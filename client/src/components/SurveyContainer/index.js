@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useWeb3Injected, useWeb3Network } from "@openzeppelin/network";
 import { Button } from "rimble-ui";
 import styles from "./SurveyContainer.module.scss";
+import AdminContainer from "../AdminContainer/index.js";
+const queryString = require('query-string');
 
 const SurveyContainer = props => {
-  console.log("props", props);
+  const {location} = props;
+  const parsed = queryString.parse(location.search);
+  console.log("Parsed:", parsed);
   const { web3Context, workshopInstance, signKey } = props;
   const {
     accounts,
@@ -39,16 +43,15 @@ const SurveyContainer = props => {
     let count = defaultState;
     const currentblock = await lib.eth.getBlockNumber();
     const logs = await workshopInstance.getPastEvents("optionSelected", {
+      filter: {myNumber: [12,13]},
       fromBlock: currentblock - previousBlock,
       toBlock: "latest"
     });
 
     logs.forEach(el => {
       const { _option } = el.returnValues;
-      console.log("The  options", _option);
       count = { ...count, [_option]: count[_option] + 1 };
     });
-    console.log("The Count: ", count);
     setSurveyState(count);
   };
 
@@ -118,8 +121,9 @@ const SurveyContainer = props => {
         <div className={styles.buttonBox}>
           <Button className={styles.bigButton} onClick={() => makeSelection(2)}>No</Button>
         </div>
-      </div>
+      </div>  
     </div>
+    <AdminContainer {...props}/>
     </div>
   );
 };
