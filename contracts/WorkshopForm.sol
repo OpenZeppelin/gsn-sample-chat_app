@@ -19,7 +19,7 @@ contract Workshop is GSNRecipient {
 
         }
         if(_option == 4){
-            emit optionSelected(1);
+            emit optionSelected(_option);
 
         }
     }

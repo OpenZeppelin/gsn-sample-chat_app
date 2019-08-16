@@ -25,12 +25,15 @@ const SurveyContainer = props => {
   }, []);
 
   useEffect(() => {
-    let unsubscribe = undefined;
+    
     const subscribeToNewResponses = async () => {
-      unsubscribe = await subscribeLogEvent(workshopInstance, "_option");
+      if (workshopInstance) return await subscribeLogEvent(workshopInstance, "optionSelected");
+      else return null;
     };
-    if (unsubscribe) return () => unsubscribe.unsubscribe();
-  });
+
+    let unsubscribe = subscribeToNewResponses();
+    return () => {unsubscribe.unsubscribe()};
+  }, [workshopInstance]);
 
   const loadSurvey = async () => {
     let count = defaultState;
@@ -50,11 +53,13 @@ const SurveyContainer = props => {
   };
 
   const subscribeLogEvent = async (instance, eventName) => {
+    console.log("The Instance for subscribing: ", instance, " eventName: ", eventName);
     const eventJsonInterface = lib.utils._.find(
       instance._jsonInterface,
       o => o.name === eventName && o.type === "event"
     );
 
+    console.log("EventJsonInterface", eventJsonInterface);
     const subscription = lib.eth.subscribe(
       "logs",
       {
