@@ -10,6 +10,7 @@
   border: dashed;
   border-width: 2px;
   border-color: slategrey;
+  box-shadow: -1px 5px 17px 0px rgba(0,0,0,0.28);
 }
 
 .row {
@@ -23,7 +24,7 @@
 }
 
 .question {
-  background-color: rgba(217, 215, 238, 0.5);
+  background-color: rgba(217, 215, 238, 0.14);
   border-radius: 10px;
   padding: 25px;
   color: #316593;
@@ -36,7 +37,7 @@
   border-radius: 10px;
   border: black;
   align-items: center;
-
+  box-shadow: -1px 5px 20px 9px rgba(0, 0, 0, 0.18);
 }
 
 .bigNumber {
