@@ -103,31 +103,23 @@ const SurveyContainer = props => {
   };
 
   return (
+    <div className={styles.counter}>
+      <h2 className={styles.question}>Have you used Meta Transactions?</h2>
     <div className={styles.row}>
       <div className={styles.colum}>
         <div className={styles.bigNumber}>{surveyState[1]}</div>
-        <div>
-          <Button className={styles.bigButton} onClick={() => makeSelection(1)}>Option One</Button>
+        <div className={styles.buttonBox}>
+          <Button className={styles.bigButton} onClick={() => makeSelection(1)}>Yes</Button>
         </div>
       </div>
+      <div>{" "}</div>
       <div className={styles.colum}>
         <div className={styles.bigNumber}>{surveyState[2]}</div>
-        <div>
-          <Button className={styles.bigButton} onClick={() => makeSelection(2)}>Option Two</Button>
+        <div className={styles.buttonBox}>
+          <Button className={styles.bigButton} onClick={() => makeSelection(2)}>No</Button>
         </div>
       </div>
-      <div className={styles.colum}>
-        <div className={styles.bigNumber}>{surveyState[3]}</div>
-        <div>
-          <Button className={styles.bigButton} onClick={() => makeSelection(3)}>Option Three</Button>
-        </div>
-      </div>
-      <div className={styles.colum}>
-        <div className={styles.bigNumber}>{surveyState[4]}</div>
-        <div>
-          <Button className={styles.bigButton} onClick={() => makeSelection(4)}>Option Four</Button>
-        </div>
-      </div>
+    </div>
     </div>
   );
 };

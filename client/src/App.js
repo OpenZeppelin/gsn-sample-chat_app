@@ -144,7 +144,8 @@ const App = () => {
         <div>
           <img className={styles.logo} src={logo} alt="Logo" />
         </div>
-        <h1>GSN Chat APP</h1>
+        <h1>Workshop Survey:</h1>
+        
         <SurveyContainer
           {...state}
           fetchState={fetchState}

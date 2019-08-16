@@ -3,17 +3,48 @@
 .colum {
   display: flex;
   flex-direction: column;
+  background-color: #7fffd414;
+  border-radius: 10px;
+  padding-top: 30px;
+  margin: 20px;
+  border: dashed;
+  border-width: 2px;
+  border-color: slategrey;
 }
 
 .row {
-  display:flex;
+  display: flex;
   flex-direction: row;
-  margin-top: 20px;
+
+}
+
+.buttonBox {
+  margin-top: 40px;
+}
+
+.question {
+  background-color: rgba(217, 215, 238, 0.5);
+  border-radius: 10px;
+  padding: 25px;
+  color: #316593;
+}
+.counter {
+  display: flex;
+  flex-direction:column;
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  border: black;
+  align-items: center;
+
 }
 
 .bigNumber {
   font-size: 120px;
   margin: 20px;
+  background-color: #0000ff0a;
+  height: fit-content;
+  border-radius: 10px;
 }
 
 .bigButton {
