@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 import "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNRecipient.sol";
 
 contract Workshop is GSNRecipient {
-    event optionSelected(uint _option, uint _poll_number);
+    event optionSelected(uint _option, uint indexed _poll_number);
 
     function selectOption(uint _option, uint _poll_number) public {
         if(_option == 1){
