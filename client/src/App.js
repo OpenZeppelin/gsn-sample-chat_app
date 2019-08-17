@@ -133,7 +133,7 @@ const App = props => {
     );
   };
 
-  const renderSurvery = props => {
+  const renderSurvey = props => {
     const setContext = provider => {
       setState({ ...state, web3Context: provider });
     };
@@ -159,7 +159,7 @@ const App = props => {
             <img className={styles.logo} src={logo} alt="Logo" />
           </div>
           <h1>Workshop Survey:</h1>
-          <Route path="/" component={renderSurvery} />
+          <Route path="/" component={renderSurvey} />
         </div>
       </Router>
     );

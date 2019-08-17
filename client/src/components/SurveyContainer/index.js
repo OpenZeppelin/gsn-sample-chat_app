@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "rimble-ui";
+import { Button, Box } from "rimble-ui";
 import styles from "./SurveyContainer.module.scss";
 const queryString = require('query-string');
 
@@ -16,6 +16,8 @@ const SurveyContainer = props => {
   const [surveyState, setSurveyState] = useState(defaultState);
   const previousBlock = 200;
   const from = signKey ? signKey.address : accounts[0];
+
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     loadSurvey();
@@ -77,6 +79,7 @@ const SurveyContainer = props => {
       await workshopInstance.methods
         .selectOption(option, parsed.poll)
         .send({ from });
+      setState(true);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +89,8 @@ const SurveyContainer = props => {
     <div className={styles.counter}>
       <h2 className={styles.question}>Have you used Meta Transactions?</h2>
     <div className={styles.row}>
+      {!state ? 
+(      <React.Fragment>
       <div className={styles.colum}>
         <div className={styles.bigNumber}>{surveyState[1]}</div>
         <div className={styles.buttonBox}>
@@ -98,7 +103,9 @@ const SurveyContainer = props => {
         <div className={styles.buttonBox}>
           <Button className={styles.bigButton} onClick={() => makeSelection(2)}>No</Button>
         </div>
-      </div>  
+      </div></React.Fragment>) : (<div><Box bg="salmon" color="white" fontSize={4} p={3} width={[1]}>
+  Thank you for your vote!
+</Box></div>)} 
     </div>
     </div>
   );
