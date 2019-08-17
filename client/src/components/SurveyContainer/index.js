@@ -89,12 +89,13 @@ const SurveyContainer = props => {
   };
 
   const makeSelection = async option => {
+    setState(true);
     try {
       await workshopInstance.methods
         .selectOption(option, parsed.poll)
         .send({ from });
         window.localStorage.setItem(`poll-${parsed.poll}`, "true" );
-      setState(true);
+
     } catch (error) {
       console.log(error);
     }
