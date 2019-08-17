@@ -1,11 +1,11 @@
 {
   "contracts": {
     "Workshop": {
-      "address": "0xEF463357C6757AC2b9f25e689bBE369D5788dF11",
-      "constructorCode": "6080604052610cfc806100136000396000f3fe",
-      "bodyBytecodeHash": "9e40ad93b0b89413ef9d27703cfb5a5261ab26a4a038a61582a54fab588c6f00",
-      "localBytecodeHash": "30b3bdb7b03d270036b0efd87ae965a5cfd155f7b8e5b366f28adf3486dfcead",
-      "deployedBytecodeHash": "30b3bdb7b03d270036b0efd87ae965a5cfd155f7b8e5b366f28adf3486dfcead",
+      "address": "0xa2cC8BB500B81042607E61CE9d7999287143c5F1",
+      "constructorCode": "6080604052610e07806100136000396000f3fe",
+      "bodyBytecodeHash": "e6efe2b56698c913742cf35bbd9de6a7c26b20691583689c250f8b984d8fdca8",
+      "localBytecodeHash": "00c660121c6d2e80ef22adc838172289249e8aa2e019df3497c1d4bd1f4e5307",
+      "deployedBytecodeHash": "00c660121c6d2e80ef22adc838172289249e8aa2e019df3497c1d4bd1f4e5307",
       "types": {
         "t_bool": {
           "id": "t_bool",
@@ -30,7 +30,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 816,
+          "astId": 832,
           "type": "t_bool",
           "src": "757:24:7"
         },
@@ -38,7 +38,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 818,
+          "astId": 834,
           "type": "t_bool",
           "src": "876:25:7"
         },
@@ -46,7 +46,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 874,
+          "astId": 890,
           "type": "t_array:50<t_uint256>",
           "src": "1951:29:7"
         }
@@ -56,7 +56,9 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
@@ -66,7 +68,7 @@
       {
         "address": "0x28b3D5c49584208A11BdECB1c4E68c61c451dFaD",
         "version": "1.0.0",
-        "implementation": "0xEF463357C6757AC2b9f25e689bBE369D5788dF11",
+        "implementation": "0xa2cC8BB500B81042607E61CE9d7999287143c5F1",
         "admin": "0xa6E2167E196B75fa5f4C37b38483e6661abb1b50",
         "kind": "Upgradeable"
       }

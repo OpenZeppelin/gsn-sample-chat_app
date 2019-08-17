@@ -167,14 +167,14 @@
     "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNRecipient.sol",
     "exportedSymbols": {
       "GSNRecipient": [
-        358
+        374
       ]
     },
-    "id": 359,
+    "id": 375,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 297,
+        "id": 313,
         "literals": [
           "solidity",
           "^",
@@ -187,10 +187,10 @@
       {
         "absolutePath": "@openzeppelin/upgrades/contracts/Initializable.sol",
         "file": "@openzeppelin/upgrades/contracts/Initializable.sol",
-        "id": 298,
+        "id": 314,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 876,
+        "scope": 375,
+        "sourceUnit": 892,
         "src": "25:60:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -198,10 +198,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/IRelayRecipient.sol",
         "file": "./IRelayRecipient.sol",
-        "id": 299,
+        "id": 315,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 663,
+        "scope": 375,
+        "sourceUnit": 679,
         "src": "86:31:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -209,10 +209,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNContext.sol",
         "file": "./GSNContext.sol",
-        "id": 300,
+        "id": 316,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 296,
+        "scope": 375,
+        "sourceUnit": 312,
         "src": "118:26:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -220,10 +220,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/bouncers/GSNBouncerBase.sol",
         "file": "./bouncers/GSNBouncerBase.sol",
-        "id": 301,
+        "id": 317,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 813,
+        "scope": 375,
+        "sourceUnit": 829,
         "src": "145:39:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -231,10 +231,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/IRelayHub.sol",
         "file": "./IRelayHub.sol",
-        "id": 302,
+        "id": 318,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 612,
+        "scope": 375,
+        "sourceUnit": 628,
         "src": "185:25:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -245,17 +245,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 303,
+              "id": 319,
               "name": "Initializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 875,
+              "referencedDeclaration": 891,
               "src": "428:13:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Initializable_$875",
+                "typeIdentifier": "t_contract$_Initializable_$891",
                 "typeString": "contract Initializable"
               }
             },
-            "id": 304,
+            "id": 320,
             "nodeType": "InheritanceSpecifier",
             "src": "428:13:3"
           },
@@ -263,17 +263,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 305,
+              "id": 321,
               "name": "IRelayRecipient",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 662,
+              "referencedDeclaration": 678,
               "src": "443:15:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRelayRecipient_$662",
+                "typeIdentifier": "t_contract$_IRelayRecipient_$678",
                 "typeString": "contract IRelayRecipient"
               }
             },
-            "id": 306,
+            "id": 322,
             "nodeType": "InheritanceSpecifier",
             "src": "443:15:3"
           },
@@ -281,17 +281,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 307,
+              "id": 323,
               "name": "GSNContext",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 295,
+              "referencedDeclaration": 311,
               "src": "460:10:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_GSNContext_$295",
+                "typeIdentifier": "t_contract$_GSNContext_$311",
                 "typeString": "contract GSNContext"
               }
             },
-            "id": 308,
+            "id": 324,
             "nodeType": "InheritanceSpecifier",
             "src": "460:10:3"
           },
@@ -299,46 +299,46 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 309,
+              "id": 325,
               "name": "GSNBouncerBase",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 812,
+              "referencedDeclaration": 828,
               "src": "472:14:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_GSNBouncerBase_$812",
+                "typeIdentifier": "t_contract$_GSNBouncerBase_$828",
                 "typeString": "contract GSNBouncerBase"
               }
             },
-            "id": 310,
+            "id": 326,
             "nodeType": "InheritanceSpecifier",
             "src": "472:14:3"
           }
         ],
         "contractDependencies": [
-          115,
-          295,
-          662,
-          812,
-          875
+          131,
+          311,
+          678,
+          828,
+          891
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 358,
+        "id": 374,
         "linearizedBaseContracts": [
-          358,
-          812,
-          295,
-          662,
-          115,
-          875
+          374,
+          828,
+          311,
+          678,
+          131,
+          891
         ],
         "name": "GSNRecipient",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 320,
+              "id": 336,
               "nodeType": "Block",
               "src": "534:40:3",
               "statements": [
@@ -350,32 +350,32 @@
                       "argumentTypes": [],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 315,
+                        "id": 331,
                         "name": "GSNContext",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 295,
+                        "referencedDeclaration": 311,
                         "src": "544:10:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_GSNContext_$295_$",
+                          "typeIdentifier": "t_type$_t_contract$_GSNContext_$311_$",
                           "typeString": "type(contract GSNContext)"
                         }
                       },
-                      "id": 317,
+                      "id": 333,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "initialize",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 158,
                       "src": "544:21:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 318,
+                    "id": 334,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -389,27 +389,27 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 319,
+                  "id": 335,
                   "nodeType": "ExpressionStatement",
                   "src": "544:23:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 321,
+            "id": 337,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 313,
+                "id": 329,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 312,
+                  "id": 328,
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 856,
+                  "referencedDeclaration": 872,
                   "src": "522:11:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -423,26 +423,26 @@
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 311,
+              "id": 327,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "512:2:3"
             },
             "returnParameters": {
-              "id": 314,
+              "id": 330,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "534:0:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "493:81:3",
             "stateMutability": "nonpayable",
-            "superFunction": 142,
+            "superFunction": 158,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 329,
+              "id": 345,
               "nodeType": "Block",
               "src": "632:38:3",
               "statements": [
@@ -452,18 +452,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 326,
+                      "id": 342,
                       "name": "_getRelayHub",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 153,
+                      "referencedDeclaration": 169,
                       "src": "649:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
                         "typeString": "function () view returns (address)"
                       }
                     },
-                    "id": 327,
+                    "id": 343,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -477,36 +477,36 @@
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 325,
-                  "id": 328,
+                  "functionReturnParameters": 341,
+                  "id": 344,
                   "nodeType": "Return",
                   "src": "642:21:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 330,
+            "id": 346,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getHubAddr",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 322,
+              "id": 338,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "599:2:3"
             },
             "returnParameters": {
-              "id": 325,
+              "id": 341,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 324,
+                  "id": 340,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 330,
+                  "scope": 346,
                   "src": "623:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -515,7 +515,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 323,
+                    "id": 339,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "623:7:3",
@@ -531,33 +531,33 @@
               ],
               "src": "622:9:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "580:90:3",
             "stateMutability": "view",
-            "superFunction": 618,
+            "superFunction": 634,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 339,
+              "id": 355,
               "nodeType": "Block",
               "src": "847:164:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 335,
+                    "id": 351,
                     "name": "this",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 916,
+                    "referencedDeclaration": 932,
                     "src": "857:4:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_GSNRecipient_$358",
+                      "typeIdentifier": "t_contract$_GSNRecipient_$374",
                       "typeString": "contract GSNRecipient"
                     }
                   },
-                  "id": 336,
+                  "id": 352,
                   "nodeType": "ExpressionStatement",
                   "src": "857:4:3"
                 },
@@ -565,7 +565,7 @@
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "312e302e30",
-                    "id": 337,
+                    "id": 353,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -580,36 +580,36 @@
                     },
                     "value": "1.0.0"
                   },
-                  "functionReturnParameters": 334,
-                  "id": 338,
+                  "functionReturnParameters": 350,
+                  "id": 354,
                   "nodeType": "Return",
                   "src": "990:14:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 340,
+            "id": 356,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "relayHubVersion",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 331,
+              "id": 347,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "808:2:3"
             },
             "returnParameters": {
-              "id": 334,
+              "id": 350,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 333,
+                  "id": 349,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 340,
+                  "scope": 356,
                   "src": "832:13:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -618,7 +618,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 332,
+                    "id": 348,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "832:6:3",
@@ -633,7 +633,7 @@
               ],
               "src": "831:15:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "784:227:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -641,7 +641,7 @@
           },
           {
             "body": {
-              "id": 356,
+              "id": 372,
               "nodeType": "Block",
               "src": "1092:66:3",
               "statements": [
@@ -651,11 +651,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 352,
+                        "id": 368,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 342,
+                        "referencedDeclaration": 358,
                         "src": "1137:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -664,11 +664,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 353,
+                        "id": 369,
                         "name": "payee",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 344,
+                        "referencedDeclaration": 360,
                         "src": "1145:5:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
@@ -695,18 +695,18 @@
                             "arguments": [],
                             "expression": {
                               "argumentTypes": [],
-                              "id": 348,
+                              "id": 364,
                               "name": "_getRelayHub",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 153,
+                              "referencedDeclaration": 169,
                               "src": "1112:12:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
                                 "typeString": "function () view returns (address)"
                               }
                             },
-                            "id": 349,
+                            "id": 365,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -728,18 +728,18 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 347,
+                          "id": 363,
                           "name": "IRelayHub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 611,
+                          "referencedDeclaration": 627,
                           "src": "1102:9:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IRelayHub_$611_$",
+                            "typeIdentifier": "t_type$_t_contract$_IRelayHub_$627_$",
                             "typeString": "type(contract IRelayHub)"
                           }
                         },
-                        "id": 350,
+                        "id": 366,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -749,25 +749,25 @@
                         "nodeType": "FunctionCall",
                         "src": "1102:25:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IRelayHub_$611",
+                          "typeIdentifier": "t_contract$_IRelayHub_$627",
                           "typeString": "contract IRelayHub"
                         }
                       },
-                      "id": 351,
+                      "id": 367,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "withdraw",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 465,
+                      "referencedDeclaration": 481,
                       "src": "1102:34:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_payable_$returns$__$",
                         "typeString": "function (uint256,address payable) external"
                       }
                     },
-                    "id": 354,
+                    "id": 370,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -781,29 +781,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 355,
+                  "id": 371,
                   "nodeType": "ExpressionStatement",
                   "src": "1102:49:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 357,
+            "id": 373,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_withdrawDeposits",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 345,
+              "id": 361,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 342,
+                  "id": 358,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
+                  "scope": 373,
                   "src": "1044:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -812,7 +812,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 341,
+                    "id": 357,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1044:7:3",
@@ -826,10 +826,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 344,
+                  "id": 360,
                   "name": "payee",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
+                  "scope": 373,
                   "src": "1060:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -838,7 +838,7 @@
                     "typeString": "address payable"
                   },
                   "typeName": {
-                    "id": 343,
+                    "id": 359,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1060:15:3",
@@ -855,19 +855,19 @@
               "src": "1043:39:3"
             },
             "returnParameters": {
-              "id": 346,
+              "id": 362,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1092:0:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "1017:141:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 359,
+        "scope": 375,
         "src": "403:757:3"
       }
     ],
@@ -877,14 +877,14 @@
     "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNRecipient.sol",
     "exportedSymbols": {
       "GSNRecipient": [
-        358
+        374
       ]
     },
-    "id": 359,
+    "id": 375,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 297,
+        "id": 313,
         "literals": [
           "solidity",
           "^",
@@ -897,10 +897,10 @@
       {
         "absolutePath": "@openzeppelin/upgrades/contracts/Initializable.sol",
         "file": "@openzeppelin/upgrades/contracts/Initializable.sol",
-        "id": 298,
+        "id": 314,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 876,
+        "scope": 375,
+        "sourceUnit": 892,
         "src": "25:60:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -908,10 +908,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/IRelayRecipient.sol",
         "file": "./IRelayRecipient.sol",
-        "id": 299,
+        "id": 315,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 663,
+        "scope": 375,
+        "sourceUnit": 679,
         "src": "86:31:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -919,10 +919,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/GSNContext.sol",
         "file": "./GSNContext.sol",
-        "id": 300,
+        "id": 316,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 296,
+        "scope": 375,
+        "sourceUnit": 312,
         "src": "118:26:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -930,10 +930,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/bouncers/GSNBouncerBase.sol",
         "file": "./bouncers/GSNBouncerBase.sol",
-        "id": 301,
+        "id": 317,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 813,
+        "scope": 375,
+        "sourceUnit": 829,
         "src": "145:39:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -941,10 +941,10 @@
       {
         "absolutePath": "@openzeppelin/contracts-ethereum-package/contracts/GSN/IRelayHub.sol",
         "file": "./IRelayHub.sol",
-        "id": 302,
+        "id": 318,
         "nodeType": "ImportDirective",
-        "scope": 359,
-        "sourceUnit": 612,
+        "scope": 375,
+        "sourceUnit": 628,
         "src": "185:25:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -955,17 +955,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 303,
+              "id": 319,
               "name": "Initializable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 875,
+              "referencedDeclaration": 891,
               "src": "428:13:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Initializable_$875",
+                "typeIdentifier": "t_contract$_Initializable_$891",
                 "typeString": "contract Initializable"
               }
             },
-            "id": 304,
+            "id": 320,
             "nodeType": "InheritanceSpecifier",
             "src": "428:13:3"
           },
@@ -973,17 +973,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 305,
+              "id": 321,
               "name": "IRelayRecipient",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 662,
+              "referencedDeclaration": 678,
               "src": "443:15:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRelayRecipient_$662",
+                "typeIdentifier": "t_contract$_IRelayRecipient_$678",
                 "typeString": "contract IRelayRecipient"
               }
             },
-            "id": 306,
+            "id": 322,
             "nodeType": "InheritanceSpecifier",
             "src": "443:15:3"
           },
@@ -991,17 +991,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 307,
+              "id": 323,
               "name": "GSNContext",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 295,
+              "referencedDeclaration": 311,
               "src": "460:10:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_GSNContext_$295",
+                "typeIdentifier": "t_contract$_GSNContext_$311",
                 "typeString": "contract GSNContext"
               }
             },
-            "id": 308,
+            "id": 324,
             "nodeType": "InheritanceSpecifier",
             "src": "460:10:3"
           },
@@ -1009,46 +1009,46 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 309,
+              "id": 325,
               "name": "GSNBouncerBase",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 812,
+              "referencedDeclaration": 828,
               "src": "472:14:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_GSNBouncerBase_$812",
+                "typeIdentifier": "t_contract$_GSNBouncerBase_$828",
                 "typeString": "contract GSNBouncerBase"
               }
             },
-            "id": 310,
+            "id": 326,
             "nodeType": "InheritanceSpecifier",
             "src": "472:14:3"
           }
         ],
         "contractDependencies": [
-          115,
-          295,
-          662,
-          812,
-          875
+          131,
+          311,
+          678,
+          828,
+          891
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 358,
+        "id": 374,
         "linearizedBaseContracts": [
-          358,
-          812,
-          295,
-          662,
-          115,
-          875
+          374,
+          828,
+          311,
+          678,
+          131,
+          891
         ],
         "name": "GSNRecipient",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 320,
+              "id": 336,
               "nodeType": "Block",
               "src": "534:40:3",
               "statements": [
@@ -1060,32 +1060,32 @@
                       "argumentTypes": [],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 315,
+                        "id": 331,
                         "name": "GSNContext",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 295,
+                        "referencedDeclaration": 311,
                         "src": "544:10:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_GSNContext_$295_$",
+                          "typeIdentifier": "t_type$_t_contract$_GSNContext_$311_$",
                           "typeString": "type(contract GSNContext)"
                         }
                       },
-                      "id": 317,
+                      "id": 333,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "initialize",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 142,
+                      "referencedDeclaration": 158,
                       "src": "544:21:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
                       }
                     },
-                    "id": 318,
+                    "id": 334,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1099,27 +1099,27 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 319,
+                  "id": 335,
                   "nodeType": "ExpressionStatement",
                   "src": "544:23:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 321,
+            "id": 337,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 313,
+                "id": 329,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 312,
+                  "id": 328,
                   "name": "initializer",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 856,
+                  "referencedDeclaration": 872,
                   "src": "522:11:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -1133,26 +1133,26 @@
             "name": "initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 311,
+              "id": 327,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "512:2:3"
             },
             "returnParameters": {
-              "id": 314,
+              "id": 330,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "534:0:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "493:81:3",
             "stateMutability": "nonpayable",
-            "superFunction": 142,
+            "superFunction": 158,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 329,
+              "id": 345,
               "nodeType": "Block",
               "src": "632:38:3",
               "statements": [
@@ -1162,18 +1162,18 @@
                     "arguments": [],
                     "expression": {
                       "argumentTypes": [],
-                      "id": 326,
+                      "id": 342,
                       "name": "_getRelayHub",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 153,
+                      "referencedDeclaration": 169,
                       "src": "649:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
                         "typeString": "function () view returns (address)"
                       }
                     },
-                    "id": 327,
+                    "id": 343,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1187,36 +1187,36 @@
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 325,
-                  "id": 328,
+                  "functionReturnParameters": 341,
+                  "id": 344,
                   "nodeType": "Return",
                   "src": "642:21:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 330,
+            "id": 346,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getHubAddr",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 322,
+              "id": 338,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "599:2:3"
             },
             "returnParameters": {
-              "id": 325,
+              "id": 341,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 324,
+                  "id": 340,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 330,
+                  "scope": 346,
                   "src": "623:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1225,7 +1225,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 323,
+                    "id": 339,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "623:7:3",
@@ -1241,33 +1241,33 @@
               ],
               "src": "622:9:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "580:90:3",
             "stateMutability": "view",
-            "superFunction": 618,
+            "superFunction": 634,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 339,
+              "id": 355,
               "nodeType": "Block",
               "src": "847:164:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 335,
+                    "id": 351,
                     "name": "this",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 916,
+                    "referencedDeclaration": 932,
                     "src": "857:4:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_GSNRecipient_$358",
+                      "typeIdentifier": "t_contract$_GSNRecipient_$374",
                       "typeString": "contract GSNRecipient"
                     }
                   },
-                  "id": 336,
+                  "id": 352,
                   "nodeType": "ExpressionStatement",
                   "src": "857:4:3"
                 },
@@ -1275,7 +1275,7 @@
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "312e302e30",
-                    "id": 337,
+                    "id": 353,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -1290,36 +1290,36 @@
                     },
                     "value": "1.0.0"
                   },
-                  "functionReturnParameters": 334,
-                  "id": 338,
+                  "functionReturnParameters": 350,
+                  "id": 354,
                   "nodeType": "Return",
                   "src": "990:14:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 340,
+            "id": 356,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "relayHubVersion",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 331,
+              "id": 347,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "808:2:3"
             },
             "returnParameters": {
-              "id": 334,
+              "id": 350,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 333,
+                  "id": 349,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 340,
+                  "scope": 356,
                   "src": "832:13:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1328,7 +1328,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 332,
+                    "id": 348,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "832:6:3",
@@ -1343,7 +1343,7 @@
               ],
               "src": "831:15:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "784:227:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -1351,7 +1351,7 @@
           },
           {
             "body": {
-              "id": 356,
+              "id": 372,
               "nodeType": "Block",
               "src": "1092:66:3",
               "statements": [
@@ -1361,11 +1361,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 352,
+                        "id": 368,
                         "name": "amount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 342,
+                        "referencedDeclaration": 358,
                         "src": "1137:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1374,11 +1374,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 353,
+                        "id": 369,
                         "name": "payee",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 344,
+                        "referencedDeclaration": 360,
                         "src": "1145:5:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
@@ -1405,18 +1405,18 @@
                             "arguments": [],
                             "expression": {
                               "argumentTypes": [],
-                              "id": 348,
+                              "id": 364,
                               "name": "_getRelayHub",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 153,
+                              "referencedDeclaration": 169,
                               "src": "1112:12:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
                                 "typeString": "function () view returns (address)"
                               }
                             },
-                            "id": 349,
+                            "id": 365,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1438,18 +1438,18 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 347,
+                          "id": 363,
                           "name": "IRelayHub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 611,
+                          "referencedDeclaration": 627,
                           "src": "1102:9:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IRelayHub_$611_$",
+                            "typeIdentifier": "t_type$_t_contract$_IRelayHub_$627_$",
                             "typeString": "type(contract IRelayHub)"
                           }
                         },
-                        "id": 350,
+                        "id": 366,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1459,25 +1459,25 @@
                         "nodeType": "FunctionCall",
                         "src": "1102:25:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IRelayHub_$611",
+                          "typeIdentifier": "t_contract$_IRelayHub_$627",
                           "typeString": "contract IRelayHub"
                         }
                       },
-                      "id": 351,
+                      "id": 367,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "withdraw",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 465,
+                      "referencedDeclaration": 481,
                       "src": "1102:34:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_payable_$returns$__$",
                         "typeString": "function (uint256,address payable) external"
                       }
                     },
-                    "id": 354,
+                    "id": 370,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1491,29 +1491,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 355,
+                  "id": 371,
                   "nodeType": "ExpressionStatement",
                   "src": "1102:49:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 357,
+            "id": 373,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_withdrawDeposits",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 345,
+              "id": 361,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 342,
+                  "id": 358,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
+                  "scope": 373,
                   "src": "1044:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1522,7 +1522,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 341,
+                    "id": 357,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1044:7:3",
@@ -1536,10 +1536,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 344,
+                  "id": 360,
                   "name": "payee",
                   "nodeType": "VariableDeclaration",
-                  "scope": 357,
+                  "scope": 373,
                   "src": "1060:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1548,7 +1548,7 @@
                     "typeString": "address payable"
                   },
                   "typeName": {
-                    "id": 343,
+                    "id": 359,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1060:15:3",
@@ -1565,19 +1565,19 @@
               "src": "1043:39:3"
             },
             "returnParameters": {
-              "id": 346,
+              "id": 362,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1092:0:3"
             },
-            "scope": 358,
+            "scope": 374,
             "src": "1017:141:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 359,
+        "scope": 375,
         "src": "403:757:3"
       }
     ],
@@ -1589,7 +1589,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-08-17T08:05:09.980Z",
+  "updatedAt": "2019-08-17T08:24:07.885Z",
   "devdoc": {
     "methods": {
       "postRelayedCall(bytes,bool,uint256,bytes32)": {

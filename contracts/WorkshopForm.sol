@@ -27,4 +27,8 @@ contract Workshop is GSNRecipient {
  ) external view returns (uint256, bytes memory) {
         return _approveRelayedCall();
     }
+
+    function getRecipientBalance() public view returns (uint) {
+          return IRelayHub(getHubAddr()).balanceOf(address(this));
+ }
 }
