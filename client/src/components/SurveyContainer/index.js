@@ -24,6 +24,20 @@ const SurveyContainer = props => {
   }, []);
 
   useEffect(() => {
+    let result = false;
+
+    if(window.localStorage.getItem(`poll-${parsed.poll}`)){
+      result = window.localStorage.getItem(`poll-${parsed.poll}`);
+    }
+
+    result = JSON.parse(result);
+    console.log("result local storage: ", result);
+    if(result){
+      setState(true);
+    }
+  },[])
+
+  useEffect(() => {
     
     const subscribeToNewResponses = async () => {
       if (workshopInstance) return await subscribeLogEvent(workshopInstance, "optionSelected");
@@ -79,6 +93,7 @@ const SurveyContainer = props => {
       await workshopInstance.methods
         .selectOption(option, parsed.poll)
         .send({ from });
+        window.localStorage.setItem(`poll-${parsed.poll}`, "true" );
       setState(true);
     } catch (error) {
       console.log(error);
