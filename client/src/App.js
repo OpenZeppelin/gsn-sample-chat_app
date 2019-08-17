@@ -11,8 +11,8 @@ import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
 const REACT_APP_TX_FEE = process.env.REACT_APP_TX_FEE || 90;
-const REACT_APP_CHAT_APP_ADDRESS =
-  process.env.REACT_APP_CHAT_APP_ADDRESS || null;
+const REACT_APP_WORKSHOP_POLL_ADDRESS =
+  process.env.REACT_APP_WORKSHOP_POLL_ADDRESS || null;
 let NODE_ENV = process.env.NODE_ENV || "development";
 // NODE_ENV = "production";
 
@@ -82,8 +82,8 @@ const App = props => {
       let workshopAddress = null;
       let deployedNetwork = null;
 
-      if (REACT_APP_CHAT_APP_ADDRESS) {
-        workshopAddress = REACT_APP_CHAT_APP_ADDRESS;
+      if (REACT_APP_WORKSHOP_POLL_ADDRESS) {
+        workshopAddress = REACT_APP_WORKSHOP_POLL_ADDRESS;
       } else if (workshop.networks) {
         deployedNetwork = workshop.networks[networkId.toString()];
         if (deployedNetwork) {

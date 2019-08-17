@@ -1,0 +1,80 @@
+{
+  "contracts": {
+    "Workshop": {
+      "address": "0xEF463357C6757AC2b9f25e689bBE369D5788dF11",
+      "constructorCode": "6080604052610cfc806100136000396000f3fe",
+      "bodyBytecodeHash": "9e40ad93b0b89413ef9d27703cfb5a5261ab26a4a038a61582a54fab588c6f00",
+      "localBytecodeHash": "30b3bdb7b03d270036b0efd87ae965a5cfd155f7b8e5b366f28adf3486dfcead",
+      "deployedBytecodeHash": "30b3bdb7b03d270036b0efd87ae965a5cfd155f7b8e5b366f28adf3486dfcead",
+      "types": {
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 816,
+          "type": "t_bool",
+          "src": "757:24:7"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 818,
+          "type": "t_bool",
+          "src": "876:25:7"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 874,
+          "type": "t_array:50<t_uint256>",
+          "src": "1951:29:7"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "workshopGSN/Workshop": [
+      {
+        "address": "0x28b3D5c49584208A11BdECB1c4E68c61c451dFaD",
+        "version": "1.0.0",
+        "implementation": "0xEF463357C6757AC2b9f25e689bBE369D5788dF11",
+        "admin": "0xa6E2167E196B75fa5f4C37b38483e6661abb1b50",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "1.0.0",
+  "proxyAdmin": {
+    "address": "0xa6E2167E196B75fa5f4C37b38483e6661abb1b50"
+  }
+}
