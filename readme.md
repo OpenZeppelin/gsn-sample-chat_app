@@ -1,3 +1,7 @@
+This sample project was not updated to GSN v2.
+
+---
+
 # GSN Chat ChatApp
 
 (Gas Stations Network) Chat ChatApp
